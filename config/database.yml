@@ -1,0 +1,22 @@
+development: &development
+  adapter: postgresql
+  database: keeper_crm_development
+  username:
+  password:
+  host:     localhost
+  port:     5432
+  schema_search_path: public
+  min_messages: warning
+
+test:
+  <<: *development
+  database: keeper_crm_test
+
+production:
+  <<: *development
+  database: keeper_crm_production
+
+staging:
+  <<: *development
+  database: keeper_crm_staging
+

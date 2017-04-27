@@ -1,0 +1,2 @@
+class Company < Account
+end

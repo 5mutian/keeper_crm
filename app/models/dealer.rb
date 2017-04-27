@@ -1,0 +1,2 @@
+class Dealer < Account
+end

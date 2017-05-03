@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
       log_in(user) #SessionsHelper中的方法
       #判断是否要持续性的记住用户的登录状态
       params[:session][:remeber_me] == "1" ? remeber(user) : forget(user)
-      render json: {status: :ok, token: 'current_user_token'}
+      #生成authentication_token用于api用户身份验证
+      token = Token.create(user_id: user.id, t_value: SecureRandom.base64(64))
+      render json: {status: :ok, token: token.t_value}
     else
       flash.now[:danger] = "Invalid login or password."
       render 'new'

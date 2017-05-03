@@ -5,8 +5,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :remeber_digest
       t.string :name
-      t.integer :account_id
       t.string :role
+
+      t.references :account_id, null: false
 
       t.timestamps null: false
     end

@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 	attr_accessor :remeber_token
  	has_secure_password
 
+ 	belongs_to :account
+ 	has_one :token
+
 
   #用来加密remeber_token，然后保存到数据库中的remeber_digest中去
   def self.digest(string)

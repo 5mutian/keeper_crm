@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  # sign_up sign_in
+  # sign_up 
+  post    'sign_up' => "registration#create" 
+  # sign_in
   get 		'login' => 'sessions#new'
   post 		'login' => 'sessions#create'
   delete 	'logout' => 'sessions#destroy'
 
   namespace :admin do
-    resources :products
+    resources :users
   end
 end

@@ -31,4 +31,10 @@ class User < ActiveRecord::Base
     self.update_attribute(:remeber_digest, nil)
   end
 
+  def self.find_by_access_token(t_value)
+  	Token.includes(:user).find_by_t_value(t_value).try(:user)
+  end
+
+  
+
 end

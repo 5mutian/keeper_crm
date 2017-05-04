@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:season/rails_api_doc_generation.git
+  revision: 3ec565b0032f8a2a20ba5245d65a5d7a9b88f4b8
+  branch: master
+  specs:
+    api_doc_generation (0.4.4)
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -144,6 +151,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  api_doc_generation!
   bcrypt
   byebug
   coffee-rails (~> 4.1.0)

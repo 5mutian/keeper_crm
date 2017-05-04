@@ -43,6 +43,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master' # gen api doc
 end
 
 gem 'bcrypt'

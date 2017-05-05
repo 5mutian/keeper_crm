@@ -1,7 +1,7 @@
 # 登录
 class Api::SessionsController < Api::BaseController
 	skip_before_filter :authenticate_user
-	# 说明:
+	# 说明
 	# 	
 	# Params
 	#   login: [String] 用户手机

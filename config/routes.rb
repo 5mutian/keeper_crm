@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
   	resources :registrations, only: [:create]
+  	resources :sessions, only: [:create]
 	  namespace :admin do
 	    resources :users
 	  end

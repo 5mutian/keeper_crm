@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
  	belongs_to :account
  	has_one :token
 
+ 	delegate :t_value, to: :token
+
+ 	after_create :gen_token
+
+ 	def gen_token
+ 		Token.create(user_id: id, t_value: SecureRandom.base64(64))
+ 	end
+
 
   #用来加密remeber_token，然后保存到数据库中的remeber_digest中去
   def self.digest(string)
@@ -35,6 +43,6 @@ class User < ActiveRecord::Base
   	Token.includes(:user).find_by_t_value(t_value).try(:user)
   end
 
-  
+
 
 end

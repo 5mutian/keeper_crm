@@ -43,6 +43,14 @@ class User < ActiveRecord::Base
   	Token.includes(:user).find_by_t_value(t_value).try(:user)
   end
 
-
+  # format
+  def to_hash
+    {
+      id:     id,
+      name:   name,
+      mobile: mobile,
+      role:   role
+    }
+  end
 
 end

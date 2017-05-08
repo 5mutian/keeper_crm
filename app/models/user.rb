@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 	attr_accessor :remeber_token
  	has_secure_password
 
-  validates :role,inclusion:{in:['admin','cs','saler','acct'],message:'不在所选范围之内'} 
+  validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
+  validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct'], message: '不在所选范围之内'} 
 
  	belongs_to :account
  	has_one :token

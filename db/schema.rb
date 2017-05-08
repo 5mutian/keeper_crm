@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 20170503080314) do
     t.string   "password_digest"
     t.string   "remeber_digest"
     t.string   "name"
-    t.integer  "account_id"
     t.string   "role"
+    t.integer  "status"
+    t.string   "open_id"
+    t.integer  "account_id",      null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

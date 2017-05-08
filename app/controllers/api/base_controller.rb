@@ -5,7 +5,7 @@ class Api::BaseController < ApplicationController
 
 	def authenticate_user
 		# @user = User.where(role: 'admin').first
-		@user = User.find_by_access_token(params[:access_token])
+		@current_user = User.find_by_access_token(params[:access_token])
 		raise '用户不存在' unless @user
 		raise '无权限访问' unless params[:controller].split('/')[1] == @user.role
 

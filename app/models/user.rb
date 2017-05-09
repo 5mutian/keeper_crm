@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
  		Token.create(user_id: id, t_value: SecureRandom.base64(64))
  	end
 
+  def is_valid?
+    status == 1 ? true : false
+  end
+
 
   #用来加密remeber_token，然后保存到数据库中的remeber_digest中去
   def self.digest(string)

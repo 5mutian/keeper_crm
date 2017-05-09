@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 	    resources :users
 	  end
 	  namespace :saler do
+	  	resources :clues
 	  end
 	  namespace :acct do
 	  end

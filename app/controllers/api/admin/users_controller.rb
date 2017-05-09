@@ -1,7 +1,7 @@
 # 用户管理
 class Api::Admin::UsersController < Api::BaseController
 	before_filter :get_user, only: [:update, :destroy]
-	# 列表
+	# 用户列表
 	# 
 	# Params
 	# 	access_token: [String] authenication_token
@@ -18,7 +18,7 @@ class Api::Admin::UsersController < Api::BaseController
 		render json: {status: :success, list: users.map(&:to_hash), total: users.count}
 	end
 
-	# 创建
+	# 用户创建
 	#
 	# Params
 	# 	access_token: [String] authenication_token
@@ -44,7 +44,7 @@ class Api::Admin::UsersController < Api::BaseController
 		end
 	end
 
-	# 更新
+	# 用户更新
 	#
 	# Params
 	# 	access_token: [String] authenication_token
@@ -65,7 +65,7 @@ class Api::Admin::UsersController < Api::BaseController
 		end
 	end
 
-	# 删除
+	# 用户删除
 	#
 	# Params
 	# 	access_token: [String] authenication_token

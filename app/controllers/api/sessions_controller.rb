@@ -8,6 +8,7 @@ class Api::SessionsController < Api::BaseController
 	#   password: [String] 用户密码
 	# Return
 	# 	status: [String] success
+	#   current_user: [Hash] current_user infos
 	# 	token: [String] authenication_token
 	# Error
 	# 	status: [String] failed

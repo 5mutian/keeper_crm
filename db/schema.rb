@@ -35,16 +35,16 @@ ActiveRecord::Schema.define(version: 20170503080314) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "mobile"
+    t.string   "mobile",                      null: false
     t.string   "password_digest"
     t.string   "remeber_digest"
-    t.string   "name"
-    t.string   "role"
-    t.integer  "status"
+    t.string   "name",                        null: false
+    t.string   "role",                        null: false
+    t.integer  "status",          default: 1
     t.string   "open_id"
-    t.integer  "account_id",      null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "account_id",                  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

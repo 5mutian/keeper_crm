@@ -9,12 +9,13 @@ class Api::Admin::UsersController < Api::BaseController
 	# Return
 	# 	status: [String] success
 	#   list: [Hash] {{name, mobile, role}...}
+	#   total: [Integer] 总数
 	# Error
 	#   status: [String] failed
 	def index
-		users = @user.account.users.page(params[:page])
+		users = @current_user.account.users.page(params[:page])
 
-		render json: {status: :success, list: users.map(&:to_hash)}
+		render json: {status: :success, list: users.map(&:to_hash), total: users.count}
 	end
 
 	# 创建
@@ -34,7 +35,7 @@ class Api::Admin::UsersController < Api::BaseController
 	def create
 		user = User.new(user_params)
 		user.password = params[:user][:password]
-		user.account = @user.account
+		user.account = @current_user.account
 
 		if user.save
 			render json: {status: :success, msg: '创建成功'}

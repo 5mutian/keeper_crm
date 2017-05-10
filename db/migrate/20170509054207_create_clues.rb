@@ -2,8 +2,9 @@ class CreateClues < ActiveRecord::Migration
   def change
     create_table :clues do |t|
     	t.string :name
-    	t.string :mobile
+    	t.string :mobile, null: false
     	t.string :address
+      t.text   :remark
 
     	t.references :user, null: false
     	t.references :account, null: false

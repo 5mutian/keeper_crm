@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 	  end
 	  namespace :acct do
 	  end
+	  namespace :cs do
+	  	resources :stores
+	  	resources :orders
+	  	resources :customers
+	  end
 	end
 
 end

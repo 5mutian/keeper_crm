@@ -35,7 +35,7 @@ class Api::CluesController < Api::BaseController
 	def create
 		clue = Clue.new(clue_params)
 		clue.user = @current_user
-		clue.account = @current_user.account
+		clue.account_id = @current_user.account_id
 
 		if clue.save
 			render json: {status: :success, msg: '创建成功'}

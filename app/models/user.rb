@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
  	belongs_to :account
  	has_one :token
+  has_many :clues
 
  	delegate :t_value, to: :token
 

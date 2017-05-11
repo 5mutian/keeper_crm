@@ -6,4 +6,8 @@ class Store < ActiveRecord::Base
 		self.code = 'ST' << SecureRandom.hex(2)
 	end
 
+	def proeducts_hash
+		Product.in(id: product_ids).map(&:to_hash)
+	end
+
 end

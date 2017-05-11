@@ -1,6 +1,6 @@
 # 渠道门店管理
 class Api::StoresController < Api::BaseController
-	before_filter :get_store, only: [:update]
+	before_filter :get_store, only: [:update, :update_products]
 	# 门店列表
 	# 
 	# Params
@@ -76,6 +76,25 @@ class Api::StoresController < Api::BaseController
     else
     	render json: {status: :failed, msg: @store.errors.messages.values.first}
 		end
+	end
+
+	# 更新物料库
+	# 
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	product_ids: [Array] 物料ids
+	# Return
+	# 	status: [String] success
+	# 	store:  [Hash] store
+	#   products: [Hash] products_hash
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos
+	def update_products
+		@store.update_attributes(product_ids: params[:product_ids])
+
+		render json: {status: :success, store: @store, products: @store.proeducts_hash, msg: '更新成功'}
 	end
 
 	def destroy

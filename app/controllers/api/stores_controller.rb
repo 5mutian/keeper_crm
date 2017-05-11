@@ -1,5 +1,6 @@
 # 渠道门店管理
 class Api::StoresController < Api::BaseController
+	before_filter :get_store, only: [:update]
 	# 门店列表
 	# 
 	# Params
@@ -26,7 +27,6 @@ class Api::StoresController < Api::BaseController
 	#  	store[contact]: [String] 联系人
 	# 	store[phone]: [String] 电话
 	# 	store[address]: [String] 地址
-	#  	store[product_ids]: [String] 物料
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -39,6 +39,7 @@ class Api::StoresController < Api::BaseController
 		if params[:channel][:name]
 			channel = Channel.create(name: params[:channel][:name], account_id: @current_user.account_id)
 			store.channel = channel
+			store.account = channel.account
 		end
 
 		if store.save
@@ -48,7 +49,33 @@ class Api::StoresController < Api::BaseController
 		end
 	end
 
+	# 更新门店
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	channel[name]: [String] 渠道名称
+	#   store[name]: [String] 门店名称
+	#   store[channel]: [String] 选择渠道
+	#  	store[contact]: [String] 联系人
+	# 	store[phone]: [String] 电话
+	# 	store[address]: [String] 地址
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 创建成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos
 	def update
+		if params[:channel][:name]
+			channel = Channel.create(name: params[:channel][:name], account_id: @current_user.account_id)
+			store_params[:channel_id] = channel.id
+		end
+
+		if @store.update_attributes(store_params)
+			render json: {status: :success, msg: '更新成功'}
+    else
+    	render json: {status: :failed, msg: @store.errors.messages.values.first}
+		end
 	end
 
 	def destroy
@@ -57,7 +84,14 @@ class Api::StoresController < Api::BaseController
 	private
 
 	def store_params
-		params[:store].permit(:name, :contact, :phone, :channel_id, :address, :product_ids)
+		params[:store].permit(:name, :contact, :phone, :channel_id, :address)
+	end
+
+	def get_store
+		@store = @current_user.account.stores.find(params[:id])
+		raise 'not found' unless @store
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 end

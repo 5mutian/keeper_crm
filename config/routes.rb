@@ -9,19 +9,13 @@ Rails.application.routes.draw do
   namespace :api do
   	resources :registrations, only: [:create]
   	resources :sessions, only: [:create]
-	  namespace :admin do
-	    resources :users
-	  end
-	  namespace :saler do
-	  	resources :clues
-	  end
-	  namespace :acct do
-	  end
-	  namespace :cs do
-	  	resources :stores
-	  	resources :orders
-	  	resources :customers
-	  end
+
+	  resources :users # 用户管理
+	  resources :clues # 线索管理
+  	resources :stores # 门店管理
+  	resources :orders # 订单管理
+  	resources :customers # 客户管理
+
 	end
 
 end

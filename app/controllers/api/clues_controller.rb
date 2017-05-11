@@ -86,7 +86,7 @@ class Api::Saler::CluesController < Api::BaseController
 	private
 
 	def clue_params
-		params[:clue].permit(:name, :mobile, :address)
+		params[:clue].permit(:name, :mobile, :address, :remark)
 	end
 
 	def get_clue

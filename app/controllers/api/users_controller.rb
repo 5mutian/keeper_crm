@@ -1,5 +1,5 @@
 # 用户管理
-class Api::Admin::UsersController < Api::BaseController
+class Api::UsersController < Api::BaseController
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 

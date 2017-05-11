@@ -1,5 +1,5 @@
 # 线索管理
-class Api::Saler::CluesController < Api::BaseController
+class Api::CluesController < Api::BaseController
 	before_filter :get_clue, only: [:update, :destroy]
 
 	# 线索列表

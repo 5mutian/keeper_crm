@@ -1,5 +1,5 @@
 # 渠道门店管理
-class Api::Cs::StoresController < Api::BaseController
+class Api::StoresController < Api::BaseController
 	# 门店列表
 	# 
 	# Params
@@ -22,7 +22,6 @@ class Api::Cs::StoresController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	channel[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
-	# 	store[code]: [String] 门店代号
 	#   store[channel]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
 	# 	store[phone]: [String] 电话

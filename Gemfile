@@ -48,4 +48,5 @@ end
 
 gem 'bcrypt'
 gem 'kaminari'
+gem "roo", "~> 2.7.0"
 

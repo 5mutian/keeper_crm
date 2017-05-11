@@ -16,3 +16,4 @@
 !/log/.keep
 /tmp
 /public/api_doc.html
+.DS_Store

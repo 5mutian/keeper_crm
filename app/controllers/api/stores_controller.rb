@@ -13,8 +13,8 @@ class Api::StoresController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		stores = @current_user.stores.include(:channel).page(params[:page])
-		render json: {status: :success, list: stores, total: stores.count}
+		stores = @current_user.account.stores.page(params[:page])
+		render json: {status: :success, list: stores, total: stores.count, channels: @current_user.account.channels}
 	end
 
 	# 创建门店
@@ -23,7 +23,7 @@ class Api::StoresController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	channel[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
-	#   store[channel]: [String] 选择渠道
+	#   store[channel_id]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
 	# 	store[phone]: [String] 电话
 	# 	store[address]: [String] 地址

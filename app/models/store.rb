@@ -13,4 +13,8 @@ class Store < ActiveRecord::Base
 		Product.in(id: product_ids).map(&:to_hash)
 	end
 
+	def to_hash
+		attributes.merge(region_name: region.name)
+	end
+
 end

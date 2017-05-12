@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
  	belongs_to :account
  	has_one :token
   has_many :clues
+  has_many :orders
 
  	delegate :t_value, to: :token
 

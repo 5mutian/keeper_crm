@@ -13,8 +13,8 @@ class Api::StoresController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		stores = @current_user.account.stores.page(params[:page])
-		render json: {status: :success, list: stores, total: stores.count, regions: @current_user.account.regions}
+		stores = @current_user.account.stores.includes(:region).page(params[:page])
+		render json: {status: :success, list: stores.map(&:to_hash), total: stores.count, regions: @current_user.account.regions}
 	end
 
 	# 创建门店
@@ -39,7 +39,7 @@ class Api::StoresController < Api::BaseController
 		if params[:region][:name]
 			region = Region.create(name: params[:region][:name], account_id: @current_user.account_id)
 			store.region = region
-			store.account = channel.account
+			store.account = region.account
 		end
 
 		if store.save
@@ -55,7 +55,7 @@ class Api::StoresController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	region[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
-	#   store[channel]: [String] 选择渠道
+	#   store[region_id]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
 	# 	store[phone]: [String] 电话
 	# 	store[address]: [String] 地址

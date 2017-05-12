@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
 
+	# CGJ serial_number
+
 	STATE = { 
 		'new' 										=> '新订单',
 		'appointed_measurement' 	=> '预约测量', 
@@ -11,7 +13,16 @@ class Order < ActiveRecord::Base
 		'confirm_installed' 			=> '管理员确认安装(*品牌商才有)'
 	}
 
+	belongs_to :user
+	belongs_to :account
+
+	after_create :sync_cgj
 	after_update :execute_strategy
+
+	def sync_cgj
+		res = Cgj.sync({token: user.cgj.token, order: order.attributes.merge(customer.attributes)})
+		# save cgj order id
+	end
 
 	def execute_strategy
 		if completed?

@@ -14,16 +14,16 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	def index
 		stores = @current_user.account.stores.page(params[:page])
-		render json: {status: :success, list: stores, total: stores.count, channels: @current_user.account.channels}
+		render json: {status: :success, list: stores, total: stores.count, regions: @current_user.account.regions}
 	end
 
 	# 创建门店
 	#
 	# Params
 	# 	access_token: [String] authenication_token
-	# 	channel[name]: [String] 渠道名称
+	# 	region[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
-	#   store[channel_id]: [String] 选择渠道
+	#   store[region_id]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
 	# 	store[phone]: [String] 电话
 	# 	store[address]: [String] 地址
@@ -36,9 +36,9 @@ class Api::StoresController < Api::BaseController
 	def create
 		store = Store.new(store_params)
 
-		if params[:channel][:name]
-			channel = Channel.create(name: params[:channel][:name], account_id: @current_user.account_id)
-			store.channel = channel
+		if params[:region][:name]
+			region = Region.create(name: params[:region][:name], account_id: @current_user.account_id)
+			store.region = region
 			store.account = channel.account
 		end
 
@@ -53,7 +53,7 @@ class Api::StoresController < Api::BaseController
 	#
 	# Params
 	# 	access_token: [String] authenication_token
-	# 	channel[name]: [String] 渠道名称
+	# 	region[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
 	#   store[channel]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
@@ -66,9 +66,9 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def update
-		if params[:channel][:name]
-			channel = Channel.create(name: params[:channel][:name], account_id: @current_user.account_id)
-			store_params[:channel_id] = channel.id
+		if params[:region][:name]
+			region = Region.create(name: params[:region][:name], account_id: @current_user.account_id)
+			store_params[:region_id] = region.id
 		end
 
 		if @store.update_attributes(store_params)
@@ -103,7 +103,7 @@ class Api::StoresController < Api::BaseController
 	private
 
 	def store_params
-		params[:store].permit(:name, :contact, :phone, :channel_id, :address)
+		params[:store].permit(:name, :contact, :phone, :region_id, :address)
 	end
 
 	def get_store

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511052039) do
+ActiveRecord::Schema.define(version: 20170512052720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(version: 20170511052039) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "channels", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "code",       null: false
-    t.integer  "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "clues", force: :cascade do |t|
     t.string   "name"
     t.string   "mobile",     null: false
@@ -46,14 +38,75 @@ ActiveRecord::Schema.define(version: 20170511052039) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "code",        null: false
-    t.string   "description"
-    t.string   "color"
-    t.integer  "account_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "customers", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "tel",        null: false
+    t.string   "province"
+    t.string   "city"
+    t.string   "area"
+    t.string   "street"
+    t.string   "address"
+    t.integer  "user_id",    null: false
+    t.integer  "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "uuid",                                         null: false
+    t.integer  "width"
+    t.integer  "height"
+    t.float    "expected_square",                default: 0.0
+    t.datetime "booking_date",                                 null: false
+    t.float    "rate"
+    t.float    "total"
+    t.string   "remark"
+    t.string   "state"
+    t.string   "courier_number"
+    t.datetime "install_date",                                 null: false
+    t.integer  "cgj_company_id"
+    t.integer  "cgj_customer_id"
+    t.integer  "cgj_facilitator_id"
+    t.integer  "cgj_customer_service_id"
+    t.string   "material"
+    t.string   "workflow_state"
+    t.boolean  "public_order"
+    t.float    "square"
+    t.boolean  "mount_order"
+    t.string   "serial_number"
+    t.boolean  "is_company"
+    t.float    "measure_amount"
+    t.float    "install_amount"
+    t.boolean  "manager_confirm"
+    t.string   "region"
+    t.float    "terminal_count"
+    t.float    "amount_total_count"
+    t.integer  "basic_order_tax"
+    t.integer  "measure_amount_after_comment"
+    t.integer  "installed_amount_after_comment"
+    t.integer  "measure_comment"
+    t.float    "measure_raty"
+    t.float    "installed_raty"
+    t.float    "service_measure_amount"
+    t.float    "service_installed_amount"
+    t.float    "basic_tax"
+    t.float    "deduct_installed_cost"
+    t.float    "deduct_measure_cost"
+    t.integer  "sale_commission"
+    t.integer  "intro_commission"
+    t.integer  "user_id",                                      null: false
+    t.integer  "account_id",                                   null: false
+    t.integer  "customer_id"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "code",       null: false
+    t.integer  "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stores", force: :cascade do |t|
@@ -64,7 +117,7 @@ ActiveRecord::Schema.define(version: 20170511052039) do
     t.string   "address"
     t.text     "product_ids", default: [],              array: true
     t.integer  "account_id",               null: false
-    t.integer  "channel_id",               null: false
+    t.integer  "region_id",                null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

@@ -9,7 +9,7 @@ class CreateStores < ActiveRecord::Migration
     	t.text  :product_ids, array: true, default: []
     	
     	t.references :account, null: false
-    	t.references :channel, null: false
+    	t.references :region, null: false
 
       t.timestamps null: false
     end

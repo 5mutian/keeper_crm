@@ -1,5 +1,8 @@
 class Store < ActiveRecord::Base
 
+	belongs_to :account
+	belongs_to :region
+
 	before_create :gen_code
 
 	def gen_code

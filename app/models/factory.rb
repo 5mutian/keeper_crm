@@ -1,3 +1,3 @@
 class Factory < Account
-	has_one :products
+	# has_many :products
 end

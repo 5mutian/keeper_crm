@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.string   "area"
     t.string   "street"
     t.string   "address"
+    t.string   "longitude"
+    t.string   "latitude"
     t.integer  "user_id",    null: false
     t.integer  "account_id", null: false
     t.datetime "created_at", null: false
@@ -137,6 +139,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.string   "role",                        null: false
     t.integer  "status",          default: 1
     t.string   "open_id"
+    t.string   "cgj_token"
     t.integer  "account_id",                  null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

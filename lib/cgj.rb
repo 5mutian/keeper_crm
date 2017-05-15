@@ -8,4 +8,8 @@ module Cgj
 		RestClient.post CGJ_HOST << "", order_hash
 	end
 
+	def auth(mobile)
+		# auth cgj
+	end
+
 end

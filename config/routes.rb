@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   	resources :registrations, only: [:create]
   	resources :sessions, only: [:create]
 
+    namespace :auth do
+      post :cgj
+    end
+    
+    namespace :sync do
+      resources :orders, only: [:create]
+    end
+
 	  resources :users # 用户管理
 	  resources :clues # 线索管理
   	resources :stores do # 门店管理

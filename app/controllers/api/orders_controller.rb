@@ -22,7 +22,7 @@ class Api::OrdersController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	# 	order[expected_square]: [String] 面积
-	# 	order[booking_date]: [:String] 预约测量时间
+	# 	order[booking_date]: [String] 预约测量时间
 	# 	customer[name]: [String] 客户名称
 	# 	customer[tel]: [String] 手机号
 	# 	customer[province]: [String] 省

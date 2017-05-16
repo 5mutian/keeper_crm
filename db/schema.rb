@@ -55,22 +55,23 @@ ActiveRecord::Schema.define(version: 20170512052720) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "uuid",                                         null: false
+    t.string   "uuid",                                           null: false
     t.integer  "width"
     t.integer  "height"
     t.float    "expected_square",                default: 0.0
-    t.datetime "booking_date",                                 null: false
+    t.datetime "booking_date",                                   null: false
     t.float    "rate"
     t.float    "total"
     t.string   "remark"
     t.string   "state"
     t.string   "courier_number"
-    t.datetime "install_date",                                 null: false
+    t.datetime "install_date",                                   null: false
     t.integer  "cgj_company_id"
     t.integer  "cgj_customer_id"
     t.integer  "cgj_facilitator_id"
     t.integer  "cgj_customer_service_id"
     t.string   "material"
+    t.integer  "material_id"
     t.string   "workflow_state"
     t.boolean  "public_order"
     t.float    "square"
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.float    "measure_amount"
     t.float    "install_amount"
     t.boolean  "manager_confirm"
-    t.string   "region"
+    t.string   "region",                         default: "CRM"
     t.float    "terminal_count"
     t.float    "amount_total_count"
     t.integer  "basic_order_tax"
@@ -96,11 +97,11 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.float    "deduct_measure_cost"
     t.integer  "sale_commission"
     t.integer  "intro_commission"
-    t.integer  "user_id",                                      null: false
-    t.integer  "account_id",                                   null: false
+    t.integer  "user_id",                                        null: false
+    t.integer  "account_id",                                     null: false
     t.integer  "customer_id"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "regions", force: :cascade do |t|
@@ -139,7 +140,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.string   "role",                        null: false
     t.integer  "status",          default: 1
     t.string   "open_id"
-    t.string   "cgj_token"
+    t.integer  "cgj_user_id"
     t.integer  "account_id",                  null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

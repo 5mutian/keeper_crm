@@ -29,7 +29,6 @@ class Api::OrdersController < Api::BaseController
 	# 	customer[city]: [String] 市
 	# 	customer[area]: [String] 区
 	# 	customer[street]: [String] 街道
-	# 	customer[address]: [String] 具体地址
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -62,7 +61,7 @@ class Api::OrdersController < Api::BaseController
 	end
 
 	def customer_params
-		params[:customer].permit(:name, :tel, :province, :city, :area, :street, :address)
+		params[:customer].permit(:name, :tel, :province, :city, :area, :street)
 	end
 
 	def owner_params

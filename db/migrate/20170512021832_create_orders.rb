@@ -19,6 +19,7 @@ class CreateOrders < ActiveRecord::Migration
     	t.integer :cgj_customer_service_id # 测量的人
     	######### 窗管家 ############
     	t.string :material # 材质
+        t.integer :material_id # 材质_id
     	t.string :workflow_state # 状态[*]
     	t.boolean :public_order # 是否公开订单, 默认是不公开
     	t.float :square # 面积
@@ -28,7 +29,7 @@ class CreateOrders < ActiveRecord::Migration
     	t.float :measure_amount # 测量费用
     	t.float :install_amount # 安装费用, 这个字段备用, 暂时使用 total
     	t.boolean :manager_confirm # 品牌商管理员是否已经确认
-    	t.string :region # 渠道
+    	t.string :region # 渠道, 来源
     	t.float :terminal_count # 服务费和安装费( 税前)
     	t.float :amount_total_count # 含税价, 服务和安装总价
     	t.integer :basic_order_tax # 税费, 平台服务费
@@ -44,6 +45,8 @@ class CreateOrders < ActiveRecord::Migration
     	t.float :deduct_measure_cost # 评价不好被扣除的测量费
     	t.integer :sale_commission # 销售佣金
     	t.integer :intro_commission # 介绍人佣金
+
+        t.string :_source # 来源 
 
     	t.references :user, null: false # 属于某个saler
     	t.references :account, null: false

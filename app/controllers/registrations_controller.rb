@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
 			# params[:user] = {:name, :mobile, :password}
 			user = User.new(params[:user])
 			user.account = account
-			user.role    = account.company? 'admin' : 'saler'
+			user.role    = account.company? ? 'admin' : 'saler'
 			if user.save
 				render json: {status: :successed, msg: '请登录'}
 			else

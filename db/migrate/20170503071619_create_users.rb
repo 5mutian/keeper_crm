@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :role, null: false
       t.integer :status, default: 1
       t.string :open_id
-      t.string :cgj_token
+      t.integer :cgj_user_id
 
       t.references :account, null: false
 

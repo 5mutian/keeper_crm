@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   	resources :sessions, only: [:create]
 
     namespace :auth do
-      post :cgj
+      get :cgj
     end
     
     namespace :sync do

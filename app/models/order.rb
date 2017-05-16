@@ -15,12 +15,15 @@ class Order < ActiveRecord::Base
 
 	belongs_to :user
 	belongs_to :account
+	belongs_to :customer
+
+	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
 	after_create :sync_cgj
 	after_update :execute_strategy
 
 	def sync_cgj
-		res = Cgj.sync({token: user.cgj.token, order: order.attributes.merge(customer.attributes)})
+		res = Cgj.create_order(cgj_order_hash)
 		# save cgj order id
 	end
 
@@ -31,6 +34,28 @@ class Order < ActiveRecord::Base
 	end
 
 	def completed?
+	end
+
+	def cgj_order_hash
+		{
+			square: 				expected_square,
+			province: 			customer_province,
+			city: 					customer_city,
+			area: 					customer_area,
+			street: 				customer_street,
+			tel: 						customer_tel,
+			name: 					customer_name,
+			booking_date: 	booking_date,
+			mount_order: 		mount_order,
+			total: 					total,
+			measure_amount: measure_amount,
+			company_id: 		company_id,
+			material: 			material,
+			material_id: 		material_id,
+			order_no: 			order_no,
+			customer: 			user_id,
+			region: 				'CRM'
+		}
 	end
 
 end

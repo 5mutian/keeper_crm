@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "uuid",                                           null: false
+    t.string   "uuid"
     t.integer  "width"
     t.integer  "height"
     t.float    "expected_square",                default: 0.0
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.string   "remark"
     t.string   "state"
     t.string   "courier_number"
-    t.datetime "install_date",                                   null: false
+    t.datetime "install_date"
     t.integer  "cgj_company_id"
     t.integer  "cgj_customer_id"
     t.integer  "cgj_facilitator_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170512052720) do
     t.integer  "intro_commission"
     t.integer  "user_id",                                        null: false
     t.integer  "account_id",                                     null: false
-    t.integer  "customer_id"
+    t.integer  "customer_id",                                    null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end

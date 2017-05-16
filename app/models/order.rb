@@ -19,11 +19,11 @@ class Order < ActiveRecord::Base
 
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
-	after_create :sync_cgj
+	# after_create :sync_cgj
 	after_update :execute_strategy
 
 	def sync_cgj
-		res = Cgj.create_order(cgj_order_hash)
+		Cgj.create_order(cgj_hash)
 		# save cgj order id
 	end
 
@@ -36,25 +36,47 @@ class Order < ActiveRecord::Base
 	def completed?
 	end
 
-	def cgj_order_hash
+	def cgj_hash
 		{
 			square: 				expected_square,
-			province: 			customer_province,
-			city: 					customer_city,
-			area: 					customer_area,
-			street: 				customer_street,
-			tel: 						customer_tel,
-			name: 					customer_name,
+			province: 			province,
+			city: 					city,
+			area: 					area,
+			street: 				street,
+			tel: 						tel,
+			name: 					name,
 			booking_date: 	booking_date,
 			mount_order: 		mount_order,
 			total: 					total,
 			measure_amount: measure_amount,
-			company_id: 		company_id,
+			company_id: 		cgj_company_id,
 			material: 			material,
 			material_id: 		material_id,
-			order_no: 			order_no,
+			order_no: 			id,
 			customer: 			user_id,
-			region: 				'CRM'
+			region: 				region
+		}
+	end
+
+	def to_hash
+		{
+			square: 				expected_square,
+			province: 			province,
+			city: 					city,
+			area: 					area,
+			street: 				street,
+			tel: 						tel,
+			name: 					name,
+			booking_date: 	booking_date.strftime("%F %T"),
+			mount_order: 		mount_order,
+			total: 					total,
+			measure_amount: measure_amount,
+			company_id: 		cgj_company_id,
+			material: 			material,
+			material_id: 		material_id,
+			id: 						id,
+			customer: 			user_id,
+			region: 				region
 		}
 	end
 

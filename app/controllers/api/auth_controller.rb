@@ -1,6 +1,6 @@
 # 多方用户验证
 class Api::AuthController < Api::BaseController
-	# skip_before_filter :authenticate_user
+	before_filter :authenticate_user
 	
 	# 窗管家验证用户
 	# Params

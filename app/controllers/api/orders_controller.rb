@@ -12,9 +12,9 @@ class Api::OrdersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		orders = @current_user.orders.page(params[:page])
+		orders = @current_user.orders.includes(:customer).page(params[:page])
 
-		render json: {status: :success, list: orders, total: orders.count}
+		render json: {status: :success, list: orders.map(&:to_hash), total: orders.count}
 	end
 
 	# 订单创建
@@ -23,6 +23,9 @@ class Api::OrdersController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	order[expected_square]: [String] 面积
 	# 	order[booking_date]: [String] 预约测量时间
+	# 	order[cgj_company_id]: [Integer] 品牌商ID
+	# 	order[material]: [String] 材料名称
+	# 	order[material_id]: [Integer] 材料ID
 	# 	customer[name]: [String] 客户名称
 	# 	customer[tel]: [String] 手机号
 	# 	customer[province]: [String] 省
@@ -57,7 +60,7 @@ class Api::OrdersController < Api::BaseController
 	private
 
 	def order_params
-		params[:order].permit(:expected_square, :booking_date)
+		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id)
 	end
 
 	def customer_params

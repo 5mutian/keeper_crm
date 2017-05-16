@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-    	t.string :uuid, null: false, unique: true
+    	t.string :uuid
     	t.integer :width
     	t.integer :height
     	t.float :expected_square, default: 0.0 # 预计面积, CRM这边给
@@ -11,7 +11,7 @@ class CreateOrders < ActiveRecord::Migration
     	t.string :remark
     	t.string :state
     	t.string :courier_number # 单号
-    	t.datetime :install_date, null: false # 预约安装时间
+    	t.datetime :install_date # 预约安装时间
     	######### 窗管家 ############
     	t.integer :cgj_company_id # 品牌的 id
     	t.integer :cgj_customer_id # 客户的 id
@@ -48,7 +48,7 @@ class CreateOrders < ActiveRecord::Migration
 
     	t.references :user, null: false # 属于某个saler
     	t.references :account, null: false
-    	t.references :customer
+    	t.references :customer, null: false
 
       t.timestamps null: false
     end

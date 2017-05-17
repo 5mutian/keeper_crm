@@ -11,7 +11,7 @@ namespace :permissions do
 
 		_hash.each do |k, v|
 			v.each do |k1, v1|
-				Permission.create(name: v1, _controller_action: "#{k}/#{k1}")
+				Permission.find_or_initialize_by(name: v1, _controller_action: "#{k}/#{k1}").save
 			end
 		end
 	end
@@ -26,7 +26,6 @@ namespace :permissions do
 
 		User.all.each do |u|
 			_actions = roles[u.role.to_sym].map {|val| "%#{val}%"}
-			p _actions
 			u.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
 			u.save
 		end

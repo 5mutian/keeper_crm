@@ -43,10 +43,11 @@ module Cgj
 		)
 	end
 
+	private
 	# 将发送的参数转成Hash, 在根据键来字母排序, 在转成字符串, 将token放在字符串首尾进行SHA1加密
 	def self.options_to_sha1(options={})
     string = options.sort.map{|k| k}.join
-    params = "#{APP_CONFIG['cgj_token']}#{string}#{APP_CONFIG['cgj_token']}"
+    params = "#{APP_CONFIG['cgj_token']}{#{string}#{APP_CONFIG['cgj_token']}"
     Digest::SHA1.hexdigest(params).upcase
   end
 

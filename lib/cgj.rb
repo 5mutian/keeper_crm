@@ -39,14 +39,14 @@ module Cgj
 			url: 			APP_CONFIG['cgj_host'] << '/api/orders',
 			method: 	:post,
 			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']},
-			payload: 	order_hash
+			payload: 	{order: order_hash, sign: options_to_sha1(order_hash)}
 		)
 	end
 
 	# 将发送的参数转成Hash, 在根据键来字母排序, 在转成字符串, 将token放在字符串首尾进行SHA1加密
-	def options_to_sha1(options={})
+	def self.options_to_sha1(options={})
     string = options.sort.map{|k| k}.join
-    params = "#{token}{#{string}#{token}"
+    params = "#{APP_CONFIG['cgj_token']}#{string}#{APP_CONFIG['cgj_token']}"
     Digest::SHA1.hexdigest(params).upcase
   end
 

@@ -23,8 +23,24 @@ class Order < ActiveRecord::Base
 	after_update :execute_strategy
 
 	def sync_cgj
-		Cgj.create_order(cgj_hash)
-		# save cgj order id
+		res = Cgj.create_order(cgj_hash)
+		_hash = JSON res.body
+		if _hash["code"] == 200
+			self.update_attributes({
+				uuid: 					_hash["order"]["uuid"],
+				serial_number: 	_hash["order"]["serial_number"],
+				workflow_state: _hash["order"]["workflow_state"],
+				public_order: 	_hash["order"]["public_order"]
+			})
+
+			self.customer.update_attributes({
+				longitude: 	_hash["order"]["longitude"],
+				latitude: 	_hash["order"]["latitude"],
+				address: 		_hash["order"]["address"]
+			})
+		else
+
+		end
 	end
 
 	def execute_strategy
@@ -45,15 +61,14 @@ class Order < ActiveRecord::Base
 			street: 				street,
 			tel: 						tel,
 			name: 					name,
-			booking_date: 	booking_date,
+			booking_date: 	booking_date.to_i,
 			mount_order: 		mount_order,
 			total: 					total,
-			measure_amount: measure_amount,
 			company_id: 		cgj_company_id,
 			material: 			material,
 			material_id: 		material_id,
 			order_no: 			id,
-			customer: 			user_id,
+			customer_id: 		user.cgj_user_id, # 窗管家用户ID
 			region: 				region
 		}
 	end
@@ -70,7 +85,6 @@ class Order < ActiveRecord::Base
 			booking_date: 	booking_date.strftime("%F %T"),
 			mount_order: 		mount_order,
 			total: 					total,
-			measure_amount: measure_amount,
 			company_id: 		cgj_company_id,
 			material: 			material,
 			material_id: 		material_id,

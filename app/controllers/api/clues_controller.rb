@@ -1,6 +1,6 @@
 # 线索管理
 class Api::CluesController < Api::BaseController
-	before_filter :get_clue, only: [:update, :destroy]
+	before_filter :get_clue, only: [:update, :destroy, :create_order]
 
 	# 线索列表
 	# 
@@ -26,6 +26,7 @@ class Api::CluesController < Api::BaseController
 	# 	clue[name]: [String] 姓名
 	# 	clue[mobile]: [String] 手机号
 	# 	clue[address]: [String] 地址
+	# 	clue[remark]: [String] 备注
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -83,10 +84,56 @@ class Api::CluesController < Api::BaseController
 		end
 	end
 
+	# 一键下单
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	id: [integer] clue_id
+	# 	order[expected_square]: [String] 面积
+	# 	order[booking_date]: [String] 预约测量时间
+	# 	order[cgj_company_id]: [Integer] 品牌商ID
+	# 	order[material]: [String] 材料名称
+	# 	order[material_id]: [Integer] 材料ID
+	# 	customer[name]: [String] 客户名称
+	# 	customer[tel]: [String] 手机号
+	# 	customer[province]: [String] 省
+	# 	customer[city]: [String] 市
+	# 	customer[area]: [String] 区
+	# 	customer[street]: [String] 街道
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 创建成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def create_order
+		order = Order.new(order_params.merge(owner_params))
+		customer = Customer.find_or_initialize_by(tel: params[:customer][:tel])
+		customer.attributes = customer.new_record? ? customer_params.merge(owner_params) : customer_params.merge(owner_params).merge(id: customer.id)
+		if customer.save
+			order.customer = customer
+			if order.save
+				render json: {status: :success, msg: '创建成功'}
+			else
+				render json: {status: :failed, msg: order.errors.messages.values.first}
+			end
+		else
+			render json: {status: :failed, msg: customer.errors.messages.values.first}
+		end 
+	end
+
 	private
 
 	def clue_params
 		params[:clue].permit(:name, :mobile, :address, :remark)
+	end
+
+	def order_params
+		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id)
+	end
+
+	def owner_params
+		{user_id: @current_user.id, account_id: @current_user.account_id}
 	end
 
 	def get_clue

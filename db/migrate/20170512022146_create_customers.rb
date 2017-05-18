@@ -10,6 +10,7 @@ class CreateCustomers < ActiveRecord::Migration
     	t.string :address
     	t.string :longitude
     	t.string :latitude
+        t.string :remark
 
     	t.references :user, null: false # 属于某个saler
     	t.references :account, null: false

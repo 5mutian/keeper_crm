@@ -45,6 +45,7 @@ class CreateOrders < ActiveRecord::Migration
     	t.float :deduct_measure_cost # 评价不好被扣除的测量费
     	t.integer :sale_commission # 销售佣金
     	t.integer :intro_commission # 介绍人佣金
+      t.string :remark
 
     	t.references :user, null: false # 属于某个saler
     	t.references :account, null: false

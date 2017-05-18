@@ -17,7 +17,7 @@ class Api::SessionsController < Api::BaseController
 		user = User.find_by_mobile(params[:login])
     #authenticate是has_secure_password引入的一个方法，用来判断user的密码与页面中传过来的密码是否一致
     if user && user.authenticate(params[:password])
-      render json: {status: :success, current_user: user, token: user.t_value}
+      render json: {status: :success, current_user: user, token: user.t_value, menu: APP_CONFIG["#{user.role}_menu"]}
     else
     	render json: {status: :failed, msg: '请输入正确的手机号跟密码'}
     end

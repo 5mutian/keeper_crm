@@ -17,10 +17,11 @@ class Api::OrdersController < Api::BaseController
 		render json: {status: :success, list: orders.map(&:to_hash), total: orders.count}
 	end
 
-	# 订单创建
+	# 订单创建／一键下单
 	#
 	# Params
 	# 	access_token: [String] authenication_token
+	# 	id: [integer] clue_id
 	# 	order[expected_square]: [String] 面积
 	# 	order[booking_date]: [String] 预约测量时间
 	# 	order[cgj_company_id]: [Integer] 品牌商ID

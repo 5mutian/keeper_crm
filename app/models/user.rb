@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
  	has_secure_password
 
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
-  validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct'], message: '不在所选范围之内'} 
+  validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director'], message: '不在所选范围之内'} 
 
  	belongs_to :account
  	has_one :token
@@ -60,6 +60,19 @@ class User < ActiveRecord::Base
       name:   name,
       mobile: mobile,
       role:   role
+    }
+  end
+
+  # menue
+
+  # role menu
+  def right_menu
+    {
+      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店／渠道', users: '用户'},
+      "saler"           => {customers: '客户', clues: '线索', orders: '订单'},
+      "saler_director"  => {customers: '客户', clues: '线索', orders: '订单'},
+      "cs"              => {customers: '客户', orders: '订单', stores: '门店／渠道'},
+      "acct"            => {orders: '订单'}
     }
   end
 

@@ -6,6 +6,7 @@ class Account < ActiveRecord::Base
 	has_many :customers
 	has_many :clues
 	has_one  :admin, -> { where role: 'admin' }, class_name: 'User'
+	has_many :saler_directors , -> { where role: 'saler_director' }, class_name: 'User'
 
 	before_create :gen_code
 

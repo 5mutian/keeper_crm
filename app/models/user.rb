@@ -63,8 +63,6 @@ class User < ActiveRecord::Base
     }
   end
 
-  # menue
-
   # role menu
   def right_menu
     {

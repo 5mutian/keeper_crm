@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     namespace :sync do
       resources :orders, only: [:create]
       resources :customers, only: [:create]
+      resources :accounts, only: [] do
+        collection do
+          get :get_saler_directors
+          post :gen_account_user
+        end
+      end
     end
 
 	  resources :users # 用户管理

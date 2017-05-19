@@ -24,7 +24,8 @@ class Api::UsersController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	user[name]: [String] 用户姓名
 	# 	user[mobile]: [String] 用户手机号
-	# 	user[role]: [String] 用户角色(saler|cs|acct)
+	# 	user[role]: [String] 用户角色(saler_director|saler|cs|acct)
+	# 	user[saler_director_id]: [Integer] 销售主管
 	# 	user[password]: [String] 用户密码
 	# Return
 	# 	status: [String] success
@@ -50,7 +51,8 @@ class Api::UsersController < Api::BaseController
 	# 	access_token: [String] authenication_token
 	# 	user[name]: [String] 用户姓名
 	# 	user[mobile]: [String] 用户手机号
-	# 	user[role]: [String] 用户角色(saler|cs|acct)
+	# 	user[role]: [String] 用户角色(saler_director|saler|cs|acct)
+	# 	user[saler_director_id]: [Integer] 销售主管
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 更新成功
@@ -86,7 +88,7 @@ class Api::UsersController < Api::BaseController
 	private
 
 	def user_params
-	 params[:user].permit(:name, :mobile, :role)
+	 params[:user].permit(:name, :mobile, :role, :saler_director_id)
 	end
 
 	def get_user

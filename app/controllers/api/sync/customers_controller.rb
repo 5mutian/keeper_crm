@@ -1,7 +1,7 @@
 # 客户同步
 class Api::Sync::CustomersController < Api::Sync::BaseController
 	
-	# 创建客户 host: http://10.25.2.113:3000
+	# 创建客户 host: http://10.25.1.121:3000
 	#
 	# Params
 	# 	actoken: [String] *account code
@@ -20,8 +20,8 @@ class Api::Sync::CustomersController < Api::Sync::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def create
-		customer = Customer.new(customer_params)
-		customer.account = @account
+		customer = Customer.find_or_initialize_by(tel: customer_params[:tel], account_id: @account.id)
+		customer.attributes = customer_params
 		customer.user = @account.admin
 
 		if customer.save

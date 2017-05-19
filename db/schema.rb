@@ -29,13 +29,15 @@ ActiveRecord::Schema.define(version: 20170517062207) do
 
   create_table "clues", force: :cascade do |t|
     t.string   "name"
-    t.string   "mobile",     null: false
+    t.string   "mobile",      null: false
     t.string   "address"
     t.text     "remark"
-    t.integer  "user_id",    null: false
-    t.integer  "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",     null: false
+    t.integer  "account_id",  null: false
+    t.integer  "customer_id", null: false
+    t.integer  "clues_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170517062207) do
     t.string   "address"
     t.string   "longitude"
     t.string   "latitude"
+    t.string   "remark"
     t.integer  "user_id",    null: false
     t.integer  "account_id", null: false
     t.datetime "created_at", null: false

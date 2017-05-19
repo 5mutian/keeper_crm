@@ -12,4 +12,8 @@ class Account < ActiveRecord::Base
 	def gen_code
 		self.code = SecureRandom.hex(18).upcase
 	end
+
+	def invit_url
+		"http://10.25.1.126:8081/#/invit?t=#{code}"
+	end
 end

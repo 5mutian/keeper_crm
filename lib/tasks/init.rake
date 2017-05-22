@@ -14,8 +14,4 @@ namespace :init do
 		cs    = User.create(name: 'cs',    mobile: '15802162346', password: '123456', role: 'cs',    account_id: ac.id)
 	end
 
-	task :salers => :environment do
-		
-	end
-
 end

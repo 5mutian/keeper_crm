@@ -52,6 +52,8 @@ group :development do
   gem 'api_doc_generation', git: 'git@github.com:season/rails_api_doc_generation.git', branch: 'master' # gen api doc
 end
 
+gem 'puma'
+
 gem 'kaminari'
 gem "roo", "~> 2.7.0"
 gem 'rest-client'

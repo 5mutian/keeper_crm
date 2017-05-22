@@ -219,6 +219,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   pg
+  puma
   rails (= 4.2.8)
   rest-client
   roo (~> 2.7.0)

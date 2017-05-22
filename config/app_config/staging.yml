@@ -1,0 +1,4 @@
+# Cgj valid
+cgj_host:     'http://192.168.0.164:8080'
+cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiJDUk0iLCJ0b2tlbiI6ImZjZWQ2NjEzZGFmYjQ1NmI4ZDcwMDBlNzI0Yzc2NTU3IiwiZXhwIjoyMTI2MDU5MzEwfQ.NtvCE4BLQ1Ioyum_TIBSg4jyIMk-Y3GumPdlPYg9GuI'
+cgj_token:    'fced6613dafb456b8d7000e724c76557'

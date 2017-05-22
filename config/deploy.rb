@@ -20,7 +20,8 @@ set :puma_workers,    2
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        true
-set :stage,           :production
+# set :stage,           :production
+set :stage,    				:staging
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/srv/www/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"

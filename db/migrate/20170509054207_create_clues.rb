@@ -8,8 +8,7 @@ class CreateClues < ActiveRecord::Migration
 
     	t.references :user, null: false
     	t.references :account, null: false
-      t.references :customer, null: false
-      t.references :clues
+      t.references :customer
       t.timestamps null: false
     end
   end

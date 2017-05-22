@@ -1,0 +1,6498 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+
+    <title></title>
+
+    <link href='http://libs.baidu.com/bootstrap/2.3.2/css/bootstrap.css' rel='stylesheet'>
+    <style type='text/css'>.title {
+  text-align: center;
+  color: blank;
+}
+
+.controller, .list {
+  width: 900px;
+  border: 1px solid;
+  margin: 20px auto 40 auto;
+}
+
+.list {
+  padding-top: 20px;
+}
+
+.list .helpers {
+  padding: 20px;
+}
+
+.controller-title {
+  text-align: center;
+}
+
+.action {
+  margin-top: 40px;
+  padding: 20px 40px 20px 20px;
+}
+
+.about {
+  padding-left: 20px;
+}
+
+.no_print {
+  opacity: 0.4;
+}
+
+.no_opacity {
+  opacity: 1;
+}
+
+@media print {
+  .no_print {
+    display: none;
+  }
+}</style>
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-2.0.3.min.js'></script>
+    <script type='text/javascript'>$(function(){
+  var no_print_class = 'no_print';
+  var iframe = $('.helper_iframe')[0];
+  var idoc = iframe.contentDocument;
+
+
+  // 设置勾选内容的打印及显示
+  // 添加或移除no_print类
+  $('.print_selector').change(function(event){
+    var $this = $(this);
+    var $a = $this.next();
+    var $top = $a.parent();
+    var $target_el = $($a.attr('href'));
+
+    if ($this.is(":checked")) {
+      $top.removeClass(no_print_class)
+      $target_el.removeClass(no_print_class);
+    } else {
+      $top.addClass(no_print_class)
+      $target_el.addClass(no_print_class);
+    }
+  });
+
+  
+  // 下载保存勾选的内容
+  $("a.save_to_file").click(function(event){
+    var head = document.head.innerHTML;
+    idoc.body.innerHTML = document.body.innerHTML;
+
+    $(idoc.body).find("." + no_print_class).remove();
+
+    var html = '<html><head>';
+    html += head + '</head><body>';
+    html += idoc.body.innerHTML + '</body></html>';
+
+    window.open('data:application/octet-stream;charset=utf-8,' + encodeURIComponent(html));
+    return false;
+  });
+
+
+  // 合并文档
+  $("#merge_doc").change(function(event){
+    var fr = new FileReader();
+
+    fr.onloadend = function(e){
+      var $body = $(document.body);
+      idoc.write(this.result);
+
+      var menus = $(idoc.body).find(".list>ul>li");
+      var controllers = $(idoc.body).find(".controller");
+
+      $body.find(".list>ul").append(menus);
+      $body.append(controllers);
+    }
+
+    fr.readAsText(this.files[0]);
+  });
+});
+</script>
+  </head>
+
+  <body>
+    <h1 class='title'></h1>
+    <div class='list'>
+  <strong class='no_print no_opacity about'>* 被勾选的内容才会被打印、保存</strong>
+
+  <div class='helpers'>
+    <label for='merge_doc' class='btn no_print no_opacity'>合并文档...</label>
+    <input type='file' id='merge_doc' style='display:none'/>
+
+    <a href='#' class='no_print no_opacity btn save_to_file'>保存到新文件</a>
+
+    <iframe class='helper_iframe' style='display:none'></iframe>
+  </div>
+
+  <ul>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-9710755c42ac38c175650632ef05297b'>
+          多方用户验证
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-9710755c42ac38c175650632ef05297b-cgj'>
+                窗管家验证用户
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-7e650eccfa2232dde40e8e31acec10d7'>
+          线索管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-7e650eccfa2232dde40e8e31acec10d7-index'>
+                线索列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-7e650eccfa2232dde40e8e31acec10d7-update'>
+                更新线索
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-7e650eccfa2232dde40e8e31acec10d7-create'>
+                创建线索
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-7e650eccfa2232dde40e8e31acec10d7-destroy'>
+                删除线索
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-29e1471812ff9d60ff8484554bc45f8f'>
+          客户管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-29e1471812ff9d60ff8484554bc45f8f-index'>
+                客户列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-29e1471812ff9d60ff8484554bc45f8f-update'>
+                更新客户
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-29e1471812ff9d60ff8484554bc45f8f-create'>
+                创建客户
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-adf7b3391e3f2801e71381e41dc39ae0'>
+          订单管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-adf7b3391e3f2801e71381e41dc39ae0-index'>
+                门店列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-adf7b3391e3f2801e71381e41dc39ae0-create'>
+                订单创建／一键下单
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-4e716da1e41370f7fe481b49b6449058'>
+          注册
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-4e716da1e41370f7fe481b49b6449058-create'>
+                说明
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-64ca335c0226a2cfe5938392f56efb13'>
+          登录
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-64ca335c0226a2cfe5938392f56efb13-create'>
+                说明
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-06b3fe9b6ba3aacd8bbf16d1d5ddb91a'>
+          渠道门店管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-index'>
+                门店列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update'>
+                更新门店
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-create'>
+                创建门店
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update_products'>
+                更新物料库
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-90e2f856c66228f0d33fed3490cd9e31'>
+          获取企业信息
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
+                获取企业销售主管信息
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-90e2f856c66228f0d33fed3490cd9e31-gen_account_user'>
+                生成企业用户
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-563d65cf6d46747a8933737a6d260c19'>
+          客户同步
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-563d65cf6d46747a8933737a6d260c19-create'>
+                创建客户 host: http://192.168.0.164:7200/
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-ad1b417c30ed8f8bfc011497fe998b33'>
+          订单同步
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-ad1b417c30ed8f8bfc011497fe998b33-update_cgj'>
+                同步更新 host: http://192.168.0.164:7200/
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-edd0ba4c04c9ea27e2411f5b53cc0d95'>
+          用户管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-index'>
+                用户列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-update'>
+                用户更新
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-create'>
+                用户创建
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-destroy'>
+                用户删除
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+  </ul>
+</div>
+    
+
+    
+  <div class='controller' id='controller-9710755c42ac38c175650632ef05297b'>
+    <h2 class='controller-title'>多方用户验证</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-9710755c42ac38c175650632ef05297b-cgj'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>窗管家验证用户</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/auth/cgj</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>mobile:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户手机号
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-7e650eccfa2232dde40e8e31acec10d7'>
+    <h2 class='controller-title'>线索管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-7e650eccfa2232dde40e8e31acec10d7-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>线索列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/clues</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>page:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            页码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>list:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            {{name, mobile, role}...}
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>total:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            总数
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-7e650eccfa2232dde40e8e31acec10d7-update'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>更新线索</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/clues/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            更新成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-7e650eccfa2232dde40e8e31acec10d7-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>创建线索</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/clues</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>clue[remark]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            备注
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-7e650eccfa2232dde40e8e31acec10d7-destroy'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>删除线索</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/clues/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>DELETE</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            删除成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-29e1471812ff9d60ff8484554bc45f8f'>
+    <h2 class='controller-title'>客户管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-29e1471812ff9d60ff8484554bc45f8f-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>客户列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/customers</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>page:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            页码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>list:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            customers_hash
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>total:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            总数
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-29e1471812ff9d60ff8484554bc45f8f-update'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>更新客户</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/customers/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[tel]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[province]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            省
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[city]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            市
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[area]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            区
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[street]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            街道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[remark]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            备注
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            更新成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-29e1471812ff9d60ff8484554bc45f8f-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>创建客户</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/customers</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[tel]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[province]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            省
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[city]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            市
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[area]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            区
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[street]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            街道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[remark]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            备注
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-adf7b3391e3f2801e71381e41dc39ae0'>
+    <h2 class='controller-title'>订单管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-adf7b3391e3f2801e71381e41dc39ae0-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>门店列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/orders</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>page:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            页码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>list:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            orders list
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>total:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            总数
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-adf7b3391e3f2801e71381e41dc39ae0-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>订单创建／一键下单</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/orders</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>id:</td>
+          
+            <td>integer</td>
+          
+
+          <td>
+            clue_id
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[expected_square]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            面积
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[booking_date]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            预约测量时间
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[cgj_company_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            品牌商ID
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[material]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            材料名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[material_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            材料ID
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            客户名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[tel]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[province]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            省
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[city]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            市
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[area]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            区
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[street]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            街道
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-4e716da1e41370f7fe481b49b6449058'>
+    <h2 class='controller-title'>注册</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-4e716da1e41370f7fe481b49b6449058-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>说明</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/registrations</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>account[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            企业名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>account[type]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            企业类型
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户手机
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[password]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户密码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            您已成功注册，请登录
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            user.errors | account.errors
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-64ca335c0226a2cfe5938392f56efb13'>
+    <h2 class='controller-title'>登录</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-64ca335c0226a2cfe5938392f56efb13-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>说明</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sessions</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>login:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户手机
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>password:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户密码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>current_user:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            current_user infos
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            请输入正确的手机号跟密码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-06b3fe9b6ba3aacd8bbf16d1d5ddb91a'>
+    <h2 class='controller-title'>渠道门店管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>门店列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/stores</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>page:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            页码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>list:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            {{id, name, code, contact, phone, address}...}
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>total:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            总数
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>更新门店</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/stores/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>region[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            渠道名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            门店名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[region_id]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            选择渠道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[contact]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            联系人
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[phone]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            电话
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>创建门店</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/stores</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>region[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            渠道名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            门店名称
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[region_id]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            选择渠道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[contact]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            联系人
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[phone]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            电话
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update_products'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>更新物料库</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/stores/:store_id/update_products</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>product_ids:</td>
+          
+            <td>Array</td>
+          
+
+          <td>
+            物料ids
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>store:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            store
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>products:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            products_hash
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            更新成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-90e2f856c66228f0d33fed3490cd9e31'>
+    <h2 class='controller-title'>获取企业信息</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>获取企业销售主管信息</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sync/accounts/get_saler_directors</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>actoken:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *account code
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-90e2f856c66228f0d33fed3490cd9e31-gen_account_user'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>生成企业用户</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sync/accounts/gen_account_user</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>actoken:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *account code
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *用户姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *用户手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[role]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *用户角色(saler_director|saler|cs|acct)
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[saler_director_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            销售主管
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[password]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *用户密码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-563d65cf6d46747a8933737a6d260c19'>
+    <h2 class='controller-title'>客户同步</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-563d65cf6d46747a8933737a6d260c19-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>创建客户 host: http://192.168.0.164:7200/</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sync/customers</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>actoken:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *account code
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[tel]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[province]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            省
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[city]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            市
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[area]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            区
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[street]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            街道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[address]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            地址
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>customer[remark]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            备注
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          <h4>创建客户 host</h4>
+          
+            <p>
+              
+                 http://192.168.0.164:7200/
+              
+            </p>
+          
+        
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-ad1b417c30ed8f8bfc011497fe998b33'>
+    <h2 class='controller-title'>订单同步</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-ad1b417c30ed8f8bfc011497fe998b33-update_cgj'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>同步更新 host: http://192.168.0.164:7200/</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sync/orders/update_cgj</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          <h4>同步更新 host</h4>
+          
+            <p>
+              
+                 http://192.168.0.164:7200/
+              
+            </p>
+          
+        
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-edd0ba4c04c9ea27e2411f5b53cc0d95'>
+    <h2 class='controller-title'>用户管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>用户列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>page:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            页码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>list:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            {{name, mobile, role}...}
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>total:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            总数
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-update'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>用户更新</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[role]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户角色(saler_director|saler|cs|acct)
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[saler_director_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            销售主管
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            更新成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-create'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>用户创建</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[mobile]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户手机号
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[role]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户角色(saler_director|saler|cs|acct)
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[saler_director_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            销售主管
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[password]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            用户密码
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-destroy'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>用户删除</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users/:id</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>DELETE</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            删除成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+
+  </body>
+</html>

@@ -1,4 +1,4 @@
-development: &development
+development: &default
   adapter: postgresql
   database: keeper_crm_development
   username:
@@ -9,14 +9,22 @@ development: &development
   min_messages: warning
 
 test:
-  <<: *development
+  <<: *default
   database: keeper_crm_test
 
 production:
-  <<: *development
+  <<: *default
+  host:     192.168.0.164
+  port:     5432
   database: keeper_crm_production
+  username: crm_db
+  password: evan123456
 
 staging:
-  <<: *development
+  <<: *default
+  host:     192.168.0.164
+  port:     5432
   database: keeper_crm_staging
+  username: crm_db
+  password: evan123456
 

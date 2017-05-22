@@ -1,7 +1,7 @@
 # 客户同步
 class Api::Sync::CustomersController < Api::Sync::BaseController
 	
-	# 创建客户 host: http://10.25.1.121:3000
+	# 创建客户 host: http://192.168.0.164:7200/
 	#
 	# Params
 	# 	actoken: [String] *account code

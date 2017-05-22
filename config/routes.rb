@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     end
     
     namespace :sync do
-      resources :orders, only: [:create]
+      resources :orders, only: [] do
+        collection do
+          patch :update_cgj
+        end
+      end
       resources :customers, only: [:create]
       resources :accounts, only: [] do
         collection do
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
     end
   	resources :orders # 订单管理
   	resources :customers # 客户管理
+    resources :strategies # 策略管理
 
 	end
 

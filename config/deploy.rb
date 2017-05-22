@@ -3,6 +3,7 @@ lock "3.8.0"
 
 #server "deploy_local", roles: [:web, :app, :db], primary: true
 server "staging", roles: [:web, :app, :db], primary: true
+# server "production", roles: [:web, :app, :db], primary: true
 set :application, 'keeper-crm'
 #set :application, "dev-chuang"
 #set :repo_url, 'git@192.168.0.164:/srv/repo/api-chuang.git'
@@ -20,8 +21,7 @@ set :puma_workers,    2
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        true
-# set :stage,           :production
-set :stage,    				:staging
+set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/srv/www/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"

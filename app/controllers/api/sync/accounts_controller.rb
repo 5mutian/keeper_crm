@@ -33,7 +33,7 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 	def gen_account_user
 		user = User.new(user_params)
 		user.password = params[:user][:password]
-		user.account = @caccount
+		user.account  = @account
 
 		if user.save
 			render json: {status: :success, msg: '创建成功, 请登录'}

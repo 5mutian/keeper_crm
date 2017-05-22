@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
  	has_one :token
   has_many :clues
   has_many :orders
+  has_many :customers
   has_and_belongs_to_many :permissions
 
  	delegate :t_value, to: :token

@@ -23,9 +23,12 @@ class Api::StrategiesController < Api::BaseController
 	# 
 	# Params
 	# 	access_token: [String] authenication_token
-	#   strategy[start_at]: [DateTime] 
-	#   strategy[end_at]: [DateTime] 
-	#   strategy[rate]: [Float] 
+	#   strategy[title]: [String] 主题
+	#   strategy[start_at]: [DateTime] 开始时间
+	#   strategy[end_at]: [DateTime] 结束时间
+	#   strategy[rate]: [Float] 提成
+	#   strategy[discount]: [Float] 折扣
+	# 	strategy[rebate]: [Float] 返利
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -47,9 +50,12 @@ class Api::StrategiesController < Api::BaseController
 	# 
 	# Params
 	# 	access_token: [String] authenication_token
-	#   strategy[start_at]: [DateTime] 
-	#   strategy[end_at]: [DateTime] 
-	#   strategy[rate]: [Float] 
+	#   strategy[title]: [String] 主题
+	#   strategy[start_at]: [DateTime] 开始时间
+	#   strategy[end_at]: [DateTime] 结束时间
+	#   strategy[rate]: [Float] 提成
+	#   strategy[discount]: [Float] 折扣
+	# 	strategy[rebate]: [Float] 返利
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 更新成功
@@ -90,7 +96,7 @@ class Api::StrategiesController < Api::BaseController
 	end
 
 	def strategy_params
-		params[:strategy].permit(:start_at, :end_at, :rate)
+		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate)
 	end
 
 	def get_strategy

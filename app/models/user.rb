@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   # role menu
   def right_menu
     {
-      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店／渠道', users: '用户'},
+      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店／渠道', users: '用户', strategies: '策略'},
       "saler"           => {customers: '客户', clues: '线索', orders: '订单'},
       "saler_director"  => {customers: '客户', clues: '线索', orders: '订单'},
       "cs"              => {customers: '客户', orders: '订单', stores: '门店／渠道'},

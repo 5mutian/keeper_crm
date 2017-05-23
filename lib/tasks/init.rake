@@ -14,4 +14,11 @@ namespace :init do
 		cs    = User.create(name: 'cs',    mobile: '15802162346', password: '123456', role: 'cs',    account_id: ac.id)
 	end
 
+	task :saler => :environment do
+		sd_1 = User.create(name: '主管_1',  mobile: '15802162301', password: '123456', role: 'saler_director', account_id: Account.first.id)
+		User.create(name: '1_1',  mobile: '15802162302', password: '123456', role: 'saler', account_id: Account.first.id, saler_director_id: sd_1.id)
+		sd_11 = User.create(name: '主管_11',  mobile: '15802162301', password: '123456', role: 'saler_director', account_id: Account.first.id, saler_director_id: sd_1.id)
+		User.create(name: '11_1',  mobile: '15802162303', password: '123456', role: 'saler', account_id: Account.first.id, saler_director_id: sd_11.id)
+	end
+
 end

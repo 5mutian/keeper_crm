@@ -16,7 +16,7 @@ class Api::CluesController < Api::BaseController
 	def index
 		clues = @current_user.clues.page(params[:page])
 
-		render json: {status: :success, list: clues, total: clues.count}
+		render json: {status: :success, list: clues, total: @current_user.clues.count}
 	end
 
 	# 创建线索

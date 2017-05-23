@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :customers
   has_and_belongs_to_many :permissions
 
+  has_many :children, foreign_key: "saler_director_id", class_name: 'User'
+
  	delegate :t_value, to: :token
 
  	after_create :gen_token
@@ -25,7 +27,9 @@ class User < ActiveRecord::Base
     status == 1 ? true : false
   end
 
-
+  def children_list
+    children.map(&:to_hash)
+  end
   #用来加密remeber_token，然后保存到数据库中的remeber_digest中去
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -60,7 +64,8 @@ class User < ActiveRecord::Base
       id:     id,
       name:   name,
       mobile: mobile,
-      role:   role
+      role:   role,
+      children: children_list
     }
   end
 

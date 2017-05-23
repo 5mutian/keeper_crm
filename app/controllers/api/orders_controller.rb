@@ -14,7 +14,7 @@ class Api::OrdersController < Api::BaseController
 	def index
 		orders = @current_user.orders.includes(:customer).page(params[:page])
 
-		render json: {status: :success, list: orders.map(&:to_hash), total: orders.count}
+		render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
 	end
 
 	# 订单创建／一键下单

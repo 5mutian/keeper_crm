@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
  	has_secure_password
 
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
-  validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director'], message: '不在所选范围之内'} 
+  validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director', 'introducer'], message: '不在所选范围之内'} 
 
  	belongs_to :account
  	has_one :token

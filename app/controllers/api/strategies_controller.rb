@@ -64,6 +64,7 @@ class Api::StrategiesController < Api::BaseController
 	#   msg: [String] strategy.errors
 	def update
 		raise 'not update' unless @strategy.state
+		raise 'not update' unless @strategy.start_at
 		raise 'not update' unless DateTime.now > @strategy.start_at
 
 		@strategy.update_attributes(strategy_params)
@@ -96,7 +97,7 @@ class Api::StrategiesController < Api::BaseController
 	end
 
 	def strategy_params
-		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate)
+		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title)
 	end
 
 	def get_strategy

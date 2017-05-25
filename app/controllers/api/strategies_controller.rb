@@ -65,10 +65,11 @@ class Api::StrategiesController < Api::BaseController
 	def update
 		raise 'not update' unless @strategy.state
 		raise 'not update' unless @strategy.start_at
-		raise 'not update' unless DateTime.now > @strategy.start_at
+		raise 'not update' unless DateTime.now < @strategy.start_at
 
 		@strategy.update_attributes(strategy_params)
-
+		
+		render json: {status: :success, msg: '更新成功'}
 		rescue => e
 			render json: {status: :failed, msg: e.message}
 	end
@@ -98,9 +99,6 @@ class Api::StrategiesController < Api::BaseController
 
 	def strategy_params
 		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title)
-	end
-
-	def get_strategy
 	end
 
 end

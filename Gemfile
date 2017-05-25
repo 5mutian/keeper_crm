@@ -57,4 +57,5 @@ gem 'puma'
 gem 'kaminari'
 gem "roo", "~> 2.7.0"
 gem 'rest-client'
+gem 'rack-cors'
 

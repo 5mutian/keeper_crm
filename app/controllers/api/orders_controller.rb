@@ -45,7 +45,6 @@ class Api::OrdersController < Api::BaseController
 		order = Order.new(order_params.merge(owner_params))
 		customer = Customer.find_or_initialize_by(tel: params[:customer][:tel])
 		customer.attributes = customer.new_record? ? customer_params.merge(owner_params) : customer_params.merge(owner_params).merge(id: customer.id)
-		if 
 
 		if customer.save
 			order.customer = customer

@@ -80,4 +80,17 @@ class User < ActiveRecord::Base
     }
   end
 
+  def self.get_or_gen_introducer(mobile, name, account_id)
+    introducer = self.find_or_initialize_by(mobile: mobile)
+
+    if introducer.new_record?
+      introducer.name = name
+      introducer.role = 'introducer'
+      introducer.account_id = account_id
+      introducer.password = 'crm123'
+      introducer.save
+    end
+    introducer
+  end
+
 end

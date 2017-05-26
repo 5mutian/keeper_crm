@@ -27,6 +27,8 @@ class Api::OrdersController < Api::BaseController
 	# 	order[cgj_company_id]: [Integer] 品牌商ID
 	# 	order[material]: [String] 材料名称
 	# 	order[material_id]: [Integer] 材料ID
+	#   order[introducer_name]: [String] 介绍人姓名
+	# 	order[introducer_tel]: [String] 介绍人手机
 	# 	customer[name]: [String] 客户名称
 	# 	customer[tel]: [String] 手机号
 	# 	customer[province]: [String] 省
@@ -43,6 +45,8 @@ class Api::OrdersController < Api::BaseController
 		order = Order.new(order_params.merge(owner_params))
 		customer = Customer.find_or_initialize_by(tel: params[:customer][:tel])
 		customer.attributes = customer.new_record? ? customer_params.merge(owner_params) : customer_params.merge(owner_params).merge(id: customer.id)
+		if 
+
 		if customer.save
 			order.customer = customer
 			if order.save
@@ -61,7 +65,7 @@ class Api::OrdersController < Api::BaseController
 	private
 
 	def order_params
-		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id)
+		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id, :introducer_name, :introducer_tel)
 	end
 
 	def customer_params

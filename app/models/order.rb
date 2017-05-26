@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
 
 	# CGJ serial_number
+	# 介绍人 完成订单生成介绍人，执行策略
 
 	STATE = { 
 		'new' 										=> '新订单',
@@ -17,10 +18,18 @@ class Order < ActiveRecord::Base
 	belongs_to :account
 	belongs_to :customer
 
+	has_one :introducer, foreign_key: "introducer_id", class_name: 'User'
+
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
 	# after_create :sync_cgj
 	after_update :execute_strategy
+
+	before_create :init_attrs
+
+	def init_attrs
+		workflow_state = :new
+	end
 
 	def sync_cgj
 		res = Cgj.create_order(cgj_hash)
@@ -82,7 +91,11 @@ class Order < ActiveRecord::Base
 
 	def execute_strategy
 		if completed?
-			# 执行策略，反利
+			# 介绍人生成，执行介绍人反利，销售提成
+			if introducer_tel
+				introducer = User.get_or_gen_introducer(introducer_tel, introducer_name, account_id)
+				self.update_attributes(introducer_id: introducer.id)
+			end
 
 		end
 	end

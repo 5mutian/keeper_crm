@@ -10,7 +10,10 @@ class Api::AuthController < Api::BaseController
 	def cgj
 		# res = Cgj.auth('15802162343')
 		res = Cgj.access_user(@current_user.mobile)
-		res = Cgj.create_user(@current_user.cgj_hash) unless JSON(res)["user"]["id"]
+		if JSON(res)["user"] && JSON(res)["user"]["id"]
+		else
+			res = Cgj.create_user(@current_user.cgj_hash)
+		end
 
 		@current_user.update_attributes(cgj_user_id: JSON(res)["user"]["id"])
 

@@ -17,7 +17,7 @@ class Api::AuthController < Api::BaseController
 
 		@current_user.update_attributes(cgj_user_id: JSON(res)["user"]["id"])
 
-		render json: {status: :success, msg: '绑定成功', current_user: user, token: user.t_value, menu: user.right_menu[user.role]}
+		render json: {status: :success, msg: '绑定成功', current_user: @current_user, token: @current_user.t_value, menu: @current_user.right_menu[@current_user.role]}
 
 		rescue => e
 			render json: {status: :failed, msg: e.message}

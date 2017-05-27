@@ -1,6 +1,8 @@
 # 登录
 class Api::SessionsController < Api::BaseController
 	skip_before_filter :authenticate_user
+	skip_before_filter :valid_permission
+
 	# 说明
 	# 	
 	# Params

@@ -93,4 +93,14 @@ class User < ActiveRecord::Base
     introducer
   end
 
+  def cgj_hash
+    {
+      tel: mobile,
+      real_name: name,
+      password_digest: password_digest,
+      company_id: account_id,
+      region: 'CRM'
+    }
+  end
+
 end

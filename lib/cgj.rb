@@ -18,7 +18,7 @@ module Cgj
 	# RestClient::Request.execute(url:'https://api.chuanggj.com/api/create_user', method: :post, headers: AUTH_KEY, payload: user_hash)
 	def self.create_user(user_hash={})
 		RestClient::Request.execute(
-			url: 			URI(APP_CONFIG['cgj_host'] << '/api/create_user').to_s,
+			url: 			URI(APP_CONFIG['cgj_host'] + '/api/create_user').to_s,
 			method: 	:post,
 			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']},
 			payload: 	user_hash
@@ -28,7 +28,7 @@ module Cgj
 	# RestClient::Request.execute(url:'https://api.chuanggj.com/api/fetch_company', method: :get, headers: AUTH_KEY)
 	def self.fetch_company
 		RestClient::Request.execute(
-			url: 			URI(APP_CONFIG['cgj_host'] << '/api/fetch_company').to_s,
+			url: 			URI(APP_CONFIG['cgj_host'] + '/api/fetch_company').to_s,
 			method: 	:get,
 			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']}
 		)
@@ -36,7 +36,7 @@ module Cgj
 
 	def self.create_order(order_hash={})
 		RestClient::Request.execute(
-			url: 			URI(APP_CONFIG['cgj_host'] << '/api/orders').to_s,
+			url: 			URI(APP_CONFIG['cgj_host'] + '/api/orders').to_s,
 			method: 	:post,
 			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']},
 			payload: 	{order: order_hash, sign: options_to_sha1(order_hash)}

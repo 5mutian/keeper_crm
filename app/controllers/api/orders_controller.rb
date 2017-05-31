@@ -15,8 +15,8 @@ class Api::OrdersController < Api::BaseController
 		orders = @current_user.orders.includes(:customer).page(params[:page])
 
 		if params[:page].to_i < 2
-			companies = JSON(Cgj.fetch_company)["companies"].collect{|_hash| {id: _hash["id"], name: _hash["name"]}}
-			materials = JSON(Cgj.fetch_material)["libs"].collect{|_hash| {id: _hash["id"], name: _hash["name"]}}
+			companies = ApplicationHelper.select_hash JSON(Cgj.fetch_company)["companies"]
+			materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
 			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count, companies: companies, materials: materials}
 		else
 			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}

@@ -40,7 +40,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 				installed_amount_after_comment: params["order"]["installed_amount_after_comment"],
 				measure_comment: 								params["order"]["measure_comment"],
 				measure_raty: 									params["order"]["measure_raty"],
-				install_raty: 									params["order"]["install_raty"],
+				installed_raty: 								params["order"]["install_raty"],
 				service_measure_amount: 				params["order"]["service_measure_amount"],
 				service_installed_amount: 			params["order"]["service_installed_amount"],
 				basic_tax: 											params["order"]["basic_tax"],

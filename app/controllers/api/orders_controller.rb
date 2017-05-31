@@ -1,6 +1,6 @@
 # 订单管理
 class Api::OrdersController < Api::BaseController
-	# 门店列表
+	# 订单列表
 	# 
 	# Params
 	# 	access_token: [String] authenication_token
@@ -14,7 +14,13 @@ class Api::OrdersController < Api::BaseController
 	def index
 		orders = @current_user.orders.includes(:customer).page(params[:page])
 
-		render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
+		if params[:page].to_i < 2
+			companies = JSON(Cgj.fetch_company)["companies"].collect{|_hash| {id: _hash["id"], name: _hash["name"]}}
+			materials = JSON(Cgj.fetch_material)["libs"].collect{|_hash| {id: _hash["id"], name: _hash["name"]}}
+			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count, companies: companies, materials: materials}
+		else
+			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
+		end
 	end
 
 	# 订单创建／一键下单

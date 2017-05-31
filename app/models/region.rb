@@ -8,4 +8,11 @@ class Region < ActiveRecord::Base
 	def gen_code
 		self.code = 'CH' << SecureRandom.hex(2)
 	end
+
+	def select_hash
+		{
+			id: 	id,
+			name: name
+		}
+	end
 end

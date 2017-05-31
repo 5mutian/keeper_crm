@@ -32,9 +32,15 @@ Rails.application.routes.draw do
 	  resources :users # 用户管理
 	  resources :clues # 线索管理
   	resources :stores do # 门店管理
-      patch :update_products
+      collection do
+        get :get_regions
+      end 
     end
-  	resources :orders # 订单管理
+  	resources :orders do # 订单管理
+      collection do
+        get :get_cgjs
+      end
+    end
   	resources :customers # 客户管理
     resources :strategies # 策略管理
 

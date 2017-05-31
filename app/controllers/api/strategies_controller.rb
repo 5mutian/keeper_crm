@@ -16,7 +16,11 @@ class Api::StrategiesController < Api::BaseController
 	def index
 		clues = @current_user.account.strategies.page(params[:page])
 
-		render json: {status: :success, list: clues, total: clues.count}
+		if params[:page].to_i < 2
+			render json: {status: :success, list: clues, total: clues.count, regions: @current_user.account.regions.map(&:select_hash)}
+		else
+			render json: {status: :success, list: clues, total: clues.count}
+		end
 	end
 
 	# 创建策略
@@ -26,6 +30,10 @@ class Api::StrategiesController < Api::BaseController
 	#   strategy[title]: [String] 主题
 	#   strategy[start_at]: [DateTime] 开始时间
 	#   strategy[end_at]: [DateTime] 结束时间
+	#  	strategy[province]: [String] 省
+	# 	strategy[city]: [String] 市
+	# 	strategy[area]: [String] 区
+	# 	strategy[region_id]: [Integer] 渠道
 	#   strategy[rate]: [Float] 提成
 	#   strategy[discount]: [Float] 折扣
 	# 	strategy[rebate]: [Float] 返利
@@ -98,7 +106,7 @@ class Api::StrategiesController < Api::BaseController
 	end
 
 	def strategy_params
-		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title)
+		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title, :province, :city, :area, :region_id)
 	end
 
 end

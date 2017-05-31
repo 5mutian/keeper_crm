@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
 	def sync_cgj
 		res = Cgj.create_order(cgj_hash)
 		_hash = JSON res.body
-	
+
 		if _hash["code"] == 200
 			self.update_attributes({
 				uuid: 										_hash["order"]["uuid"],
@@ -44,6 +44,9 @@ class Order < ActiveRecord::Base
 				total: 										_hash["order"]["total"],
 				remark: 									_hash["order"]["remark"],
 				state:  									_hash["order"]["state"],
+				province:   							_hash["order"]["province"],
+				city:       							_hash["order"]["city"],
+				area:       							_hash["order"]["area"],
 				courier_number: 					_hash["order"]["courier_number"],
 				install_date:   					Time.at(_hash["order"]["install_date"].to_i),
 				cgj_company_id: 					_hash["order"]["company_id"],
@@ -67,7 +70,7 @@ class Order < ActiveRecord::Base
 				installed_amount_after_comment: _hash["order"]["installed_amount_after_comment"],
 				measure_comment: 								_hash["order"]["measure_comment"],
 				measure_raty: 									_hash["order"]["measure_raty"],
-				installed_raty: 									_hash["order"]["install_raty"],
+				installed_raty: 								_hash["order"]["installed_raty"],
 				service_measure_amount: 				_hash["order"]["service_measure_amount"],
 				service_installed_amount: 			_hash["order"]["service_installed_amount"],
 				basic_tax: 											_hash["order"]["basic_tax"],

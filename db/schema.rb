@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525092724) do
+ActiveRecord::Schema.define(version: 20170531070843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,9 @@ ActiveRecord::Schema.define(version: 20170525092724) do
     t.string   "introducer_name"
     t.string   "introducer_tel"
     t.integer  "introducer_id"
+    t.string   "province"
+    t.string   "city"
+    t.string   "area"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -160,6 +163,10 @@ ActiveRecord::Schema.define(version: 20170525092724) do
     t.string   "title"
     t.float    "discount"
     t.float    "rebate"
+    t.string   "province"
+    t.string   "city"
+    t.string   "area"
+    t.integer  "region_id"
   end
 
   create_table "tokens", force: :cascade do |t|

@@ -26,7 +26,7 @@ namespace :permissions do
 			saler_director: %w(orders)
 		}
 
-		User.all.each do |u|
+		User.where.not(role: 'introducer').each do |u|
 			_actions = roles[u.role.to_sym].map {|val| "%#{val}%"}
 			u.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
 			u.save

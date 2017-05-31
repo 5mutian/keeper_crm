@@ -34,6 +34,14 @@ module Cgj
 		)
 	end
 
+	def self.fetch_material
+		RestClient::Request.execute(
+			url: 			URI(APP_CONFIG['cgj_host'] + '/api/fetch_material').to_s,
+			method: 	:get,
+			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']}
+		)
+	end
+
 	def self.create_order(order_hash={})
 		RestClient::Request.execute(
 			url: 			URI(APP_CONFIG['cgj_host'] + '/api/orders').to_s,

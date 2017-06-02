@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531070843) do
+ActiveRecord::Schema.define(version: 20170602022440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,20 @@ ActiveRecord::Schema.define(version: 20170531070843) do
     t.integer  "region_id"
   end
 
+  create_table "strategy_results", force: :cascade do |t|
+    t.integer  "saler_id"
+    t.float    "saler_rate_amount"
+    t.integer  "customer_id"
+    t.float    "customer_discount_amount"
+    t.integer  "introducer_id"
+    t.float    "introducer_rebate_amount"
+    t.string   "remark"
+    t.integer  "order_id",                 null: false
+    t.integer  "strategy_id",              null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "tokens", force: :cascade do |t|
     t.string   "t_value"
     t.integer  "user_id",    null: false
@@ -190,6 +204,19 @@ ActiveRecord::Schema.define(version: 20170531070843) do
     t.datetime "updated_at",                    null: false
     t.integer  "saler_director_id"
     t.integer  "parent_id"
+  end
+
+  create_table "wallet_logs", force: :cascade do |t|
+    t.integer  "transfer",           null: false
+    t.integer  "state",              null: false
+    t.string   "trade_type"
+    t.string   "charge_id"
+    t.float    "amount"
+    t.float    "total"
+    t.integer  "strategy_result_id"
+    t.integer  "user_id",            null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

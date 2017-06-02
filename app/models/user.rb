@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :customers
   has_and_belongs_to_many :permissions
+  has_many :wallet_logs
 
   has_many :children, foreign_key: "saler_director_id", class_name: 'User'
 
@@ -102,5 +103,27 @@ class User < ActiveRecord::Base
       region: 'CRM'
     }
   end
+
+  # wallet
+  def wallet
+    {
+      amount: wallet_total,
+      income: income,
+      expend: expend
+    }
+  end
+
+  def wallet_total
+    wallet_logs.where(state: 1).last.try(:total).to_f
+  end
+
+  def income
+    wallet_logs.where(state: 1, transfer: 2).map(&:amount).sum.to_f.round(2)
+  end
+
+  def expend
+    wallet_logs.where(state: 1, transfer: 1).map(&:amount).sum.to_f.round(2)
+  end
+  # ###########################
 
 end

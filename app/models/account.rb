@@ -18,4 +18,11 @@ class Account < ActiveRecord::Base
 	def invit_url
 		"http://10.25.1.126:8081/#/invit?t=#{code}"
 	end
+
+
+	# 获取有效的策略信息
+	def get_valid_strategy(province, city, area)
+		strategies.where(province: province, city: city, area: area).first
+	end
+	
 end

@@ -2,6 +2,8 @@ class Order < ActiveRecord::Base
 
 	# CGJ serial_number
 	# 介绍人 完成订单生成介绍人，执行策略
+	# 	terminal_count: 税前总价				
+	# 	amount_total_count: 税后总价
 
 	STATE = { 
 		'new' 										=> '新订单',
@@ -94,15 +96,30 @@ class Order < ActiveRecord::Base
 	end
 
 	def execute_strategy
-		if completed?
-			# 介绍人生成，执行介绍人反利，销售提成
-			if introducer_tel
-				introducer = User.get_or_gen_introducer(introducer_tel, introducer_name, account_id)
-				self.update_attributes(introducer_id: introducer.id)
-			end
+		# 介绍人生成，执行介绍人反利，销售提成
+		gen_introducer if introducer_tel
+		# 获取策略
+		strategy = account.get_valid_strategy(province, city, area)
 
+		if strategy
+			StrategyResult.create(
+				saler_id: user_id,
+				saler_rate_amount: terminal_count * rate,
+				customer_id: customer_id,
+				customer_discount_amount: terminal_count * discount,
+				introducer_id: introducer_id,
+				introducer_rebate_amount: terminal_count * rebate,
+				order_id: id,
+				strategy_id: strategy.id
+			)
 		end
 	end
+
+	def gen_introducer
+		introducer = User.get_or_gen_introducer(introducer_tel, introducer_name, account_id)
+		self.update_attributes(introducer_id: introducer.id)
+	end
+
 
 	def completed?
 		workflow_state == 'completed'

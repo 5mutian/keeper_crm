@@ -17,4 +17,11 @@ class Store < ActiveRecord::Base
 		attributes.merge(region_name: region.name)
 	end
 
+	def select_hash
+		{
+			id: id,
+			name: name
+		}
+	end
+
 end

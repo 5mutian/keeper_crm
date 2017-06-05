@@ -250,7 +250,7 @@
             <li>
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-adf7b3391e3f2801e71381e41dc39ae0-index'>
-                门店列表
+                订单列表
               </a>
             </li>
           
@@ -341,15 +341,6 @@
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-create'>
                 创建门店
-              </a>
-            </li>
-          
-            
-
-            <li>
-              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
-              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-get_regions'>
-                渠道列表
               </a>
             </li>
           
@@ -2477,7 +2468,7 @@
           id='action-adf7b3391e3f2801e71381e41dc39ae0-index'>
 
         <h4>功能说明</h4>
-        <p class='about text-info'>门店列表</p>
+        <p class='about text-info'>订单列表</p>
 
         <h4>请求地址</h4>
         <p class='about text-info'>/api/orders</p>
@@ -2864,6 +2855,44 @@
 
           <td>
             介绍人手机
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[region_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            所属渠道
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>order[store_id]:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            所属门店
 
             
           </td>
@@ -4440,170 +4469,6 @@
       
 
       <div class='action action-odd'
-          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-get_regions'>
-
-        <h4>功能说明</h4>
-        <p class='about text-info'>渠道列表</p>
-
-        <h4>请求地址</h4>
-        <p class='about text-info'>/api/stores/get_regions</p>
-
-        <h4>请求方法</h4>
-        <p class='about text-info'>GET</p>
-
-        <h4>参数说明</h4>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>access_token:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            authenication_token
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        <h4>正常返回信息</h4>
-        <p class='about text-info'>正常完成时response.status 为 200.</p>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>status:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            success
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>list:</td>
-          
-            <td>Hash</td>
-          
-
-          <td>
-            {...}
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        <h4>出错误时信息</h4>
-        <p class='about text-info'>出错时response.status 为 400.</p>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>status:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            failed
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        
-          
-          
-          
-          
-          
-          
-          
-          <h4>Level</h4>
-          
-            <p>
-              
-                
-              
-            </p>
-          
-        
-          
-        <br /><hr />
-      </div>
-    
-      
-
-      <div class='action action-even'
           id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update_products'>
 
         <h4>功能说明</h4>

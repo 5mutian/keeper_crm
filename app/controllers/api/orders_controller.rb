@@ -17,7 +17,7 @@ class Api::OrdersController < Api::BaseController
 		if params[:page].to_i < 2
 			companies = ApplicationHelper.select_hash JSON(Cgj.fetch_company)["companies"]
 			materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
-			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count, companies: companies, materials: materials}
+			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count, companies: companies, materials: materials, stores_tree: @current_user.account.stores_tree}
 		else
 			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
 		end
@@ -35,6 +35,8 @@ class Api::OrdersController < Api::BaseController
 	# 	order[material_id]: [Integer] 材料ID
 	#   order[introducer_name]: [String] 介绍人姓名
 	# 	order[introducer_tel]: [String] 介绍人手机
+	# 	order[region_id]: [Integer] 所属渠道
+	# 	order[store_id]: [Integer] 所属门店
 	# 	customer[name]: [String] 客户名称
 	# 	customer[tel]: [String] 手机号
 	# 	customer[province]: [String] 省
@@ -70,7 +72,7 @@ class Api::OrdersController < Api::BaseController
 	private
 
 	def order_params
-		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id, :introducer_name, :introducer_tel)
+		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id, :introducer_name, :introducer_tel, :region_id, :store_id)
 	end
 
 	def customer_params

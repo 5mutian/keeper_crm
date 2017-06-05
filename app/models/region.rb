@@ -12,7 +12,8 @@ class Region < ActiveRecord::Base
 	def select_hash
 		{
 			id: 	id,
-			name: name
+			name: name,
+			children: stores.map(&:select_hash)
 		}
 	end
 end

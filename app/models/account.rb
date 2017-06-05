@@ -24,5 +24,9 @@ class Account < ActiveRecord::Base
 	def get_valid_strategy(province, city, area)
 		strategies.where(province: province, city: city, area: area).first
 	end
-	
+
+
+	def stores_tree
+		regions.map(&:select_hash)
+	end
 end

@@ -7,3 +7,7 @@ cgj_token:    'fced6613dafb456b8d7000e724c76557'
 # cgj_host: 'https://api.chuanggj.com'
 # cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiIiLCJ0b2tlbiI6ImU1ZmE1YTIyNDMxNzQ0ZGFhZDhlNDljZjE4NzhlYzA2IiwiZXhwIjoyMTI1OTg0NDgwfQ.yEW0TPjRr6DaGerX-BDA7YmsEFR5HpuSIuPJjBIXBe4'
 # cgj_token: 'e5fa5a22431744daad8e49cf1878ec06'
+
+# qiniu
+qiniu_ak: 'D2HoWxWkb2MHhZVO5J5902DyeGNA05csQJOomlg0'
+qiniu_sk: 'TmrvwiSTzBO9snZ2dg8JOYuCQA19IetyN-gZpZT8'

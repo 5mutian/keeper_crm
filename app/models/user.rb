@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 	attr_accessor :remeber_token
  	has_secure_password
 
+  mount_uploader :avatar, AvatarUploader
+
   validates_uniqueness_of :mobile, message: '手机号已被使用'
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
   validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director', 'introducer'], message: '不在所选范围之内'} 

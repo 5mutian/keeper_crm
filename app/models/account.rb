@@ -1,5 +1,7 @@
 class Account < ActiveRecord::Base
 
+	mount_uploader :logo, LogoUploader
+
 	validates_uniqueness_of :name, message: '每条订单最终只能执行一条策略的结果'
 	# type: account, company, dealer 一个account可能有多个company
 	# account

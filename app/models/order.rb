@@ -96,22 +96,24 @@ class Order < ActiveRecord::Base
 	end
 
 	def execute_strategy
-		# 介绍人生成，执行介绍人反利，销售提成
-		gen_introducer if introducer_tel
-		# 获取策略
-		strategy = account.get_valid_strategy(province, city, area)
+		if completed?
+			# 介绍人生成，执行介绍人反利，销售提成
+			gen_introducer if introducer_tel
+			# 获取策略
+			strategy = account.get_valid_strategy(province, city, area)
 
-		if strategy
-			StrategyResult.create(
-				saler_id: user_id,
-				saler_rate_amount: terminal_count * rate,
-				customer_id: customer_id,
-				customer_discount_amount: terminal_count * discount,
-				introducer_id: introducer_id,
-				introducer_rebate_amount: terminal_count * rebate,
-				order_id: id,
-				strategy_id: strategy.id
-			)
+			if strategy
+				StrategyResult.create(
+					saler_id: user_id,
+					saler_rate_amount: terminal_count * rate,
+					customer_id: customer_id,
+					customer_discount_amount: terminal_count * discount,
+					introducer_id: introducer_id,
+					introducer_rebate_amount: terminal_count * rebate,
+					order_id: id,
+					strategy_id: strategy.id
+				)
+			end
 		end
 	end
 

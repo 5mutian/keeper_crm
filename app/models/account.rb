@@ -1,4 +1,8 @@
 class Account < ActiveRecord::Base
+	# type: account, company, dealer 一个account可能有多个company
+	# account
+	has_many :children, foreign_key: "parent_id", class_name: 'Company'
+
 	has_many :users
 	has_many :regions
 	has_many :stores
@@ -17,6 +21,11 @@ class Account < ActiveRecord::Base
 
 	def invit_url
 		"http://10.25.1.126:8081/#/invit?t=#{code}"
+	end
+
+	# dealer
+	def co_companies
+		Account.where(id: company_ids)
 	end
 
 

@@ -22,6 +22,7 @@ class Api::AccountsController < Api::BaseController
   #   company[name]: [String] 品牌名
   # 	company[logo]: [String] 品牌logo
   #   admin_id:      [Integer] 管理员id
+  #   admin[name]:   [String] 管理员姓名
   #   admin[mobile]: [String] 管理员手机号
   #   admin[password]: [String] 管理员密码
 	# Return
@@ -45,6 +46,7 @@ class Api::AccountsController < Api::BaseController
 
 		if company.save
 			if user.new_record?
+				user.name = admin_params[:name]
 				user.password = admin_params[:password]
 				user.role = 'admin'
 				user.account_id = company.id
@@ -97,7 +99,7 @@ class Api::AccountsController < Api::BaseController
 	end
 
 	def admin_params
-		params[:admin].permit(:mobile, :password)
+		params[:admin].permit(:name, :mobile, :password)
 	end
 
 end

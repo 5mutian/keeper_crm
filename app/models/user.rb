@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	attr_accessor :remeber_token
  	has_secure_password
 
+  validates_uniqueness_of :mobile, message: '手机号已被使用'
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
   validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director', 'introducer'], message: '不在所选范围之内'} 
 
@@ -73,7 +74,7 @@ class User < ActiveRecord::Base
   # role menu
   def right_menu
     {
-      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店／渠道', users: '用户', strategies: '策略'},
+      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店／渠道', users: '用户', strategies: '策略', accounts: '品牌'},
       "saler"           => {customers: '客户', clues: '线索', orders: '订单'},
       "saler_director"  => {customers: '客户', clues: '线索', orders: '订单'},
       "cs"              => {customers: '客户', orders: '订单', stores: '门店／渠道'},

@@ -43,15 +43,11 @@ Rails.application.routes.draw do
     end
   	resources :customers # 客户管理
     resources :strategies # 策略管理
-    resources :dealers, only: [] do
-      collection do
-        post :apply_co_companies
-      end
-    end
     resources :accounts do
-      member do
+      collection do
         get :companies
         post :add_company
+        post :apply_co_companies
       end
     end
 	end

@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+
+	validates_uniqueness_of :name, message: '每条订单最终只能执行一条策略的结果'
 	# type: account, company, dealer 一个account可能有多个company
 	# account
 	has_many :children, foreign_key: "parent_id", class_name: 'Company'
@@ -46,5 +48,13 @@ class Account < ActiveRecord::Base
 			admin_name: 	admin.name,
 			admin_mobile: admin.mobile
 		}
+	end
+
+	def account_hash
+		children.map(&:list_hash)
+	end
+
+	def dealer_hash
+		co_companies.map(&:list_hash)
 	end
 end

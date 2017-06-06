@@ -19,12 +19,12 @@ class Api::RegistrationsController < Api::BaseController
 	#   msg: [String] user.errors | account.errors
 	def create
 		raise '企业类型错误' unless ['Account', 'Dealer'].include?(params[:account][:type])
-		# params[:account] = {:type, :name}
-		account = Account.new(params[:account])
+		raise '手机号已被使用' unless User.where(mobile: user_params[:mobile]).empty?
+
+		account = Account.new(account_params)
 
 		if account.save
-			# params[:user] = {:name, :mobile, :password}
-			user = User.new(params[:user])
+			user = User.new(user_params)
 			user.account = account
 			user.role    = 'admin'
 			if user.save
@@ -38,6 +38,16 @@ class Api::RegistrationsController < Api::BaseController
 
 		rescue => e
 			render json: {status: :failed, msg: e.message}
+	end
+
+	private
+
+	def account_params
+		params[:account].permit(:name, :type)
+	end
+
+	def user_params
+		params[:user].permit(:name, :mobile, :password)
 	end
 
 end

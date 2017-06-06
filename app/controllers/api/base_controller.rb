@@ -10,6 +10,8 @@ class Api::BaseController < ApplicationController
 		raise '用户不存在' unless @current_user
 		raise '用户已禁用' unless @current_user.is_valid?
 
+		@account = @current_user.account
+		
 		rescue => e
 			render json: {status: :failed, msg: e.message}
 	end

@@ -38,4 +38,13 @@ class Account < ActiveRecord::Base
 	def stores_tree
 		regions.map(&:select_hash)
 	end
+
+	def list_hash
+		{
+			id: 					id,
+			name: 				name,
+			admin_name: 	admin.name,
+			admin_mobile: admin.mobile
+		}
+	end
 end

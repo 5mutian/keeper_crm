@@ -131,6 +131,36 @@
     
       <li>
         <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-101a96c16f61117d77e2f8080a168de1'>
+          企业管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-101a96c16f61117d77e2f8080a168de1-companies'>
+                品牌列表
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-101a96c16f61117d77e2f8080a168de1-add_company'>
+                添加品牌
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
         <a href='#controller-9710755c42ac38c175650632ef05297b'>
           多方用户验证
         </a>
@@ -230,6 +260,27 @@
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-29e1471812ff9d60ff8484554bc45f8f-create'>
                 创建客户
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-ab51555969b346b9f2c59ceb19c11d08'>
+          经销商管理
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-ab51555969b346b9f2c59ceb19c11d08-apply_co_companies'>
+                申请品牌合作
               </a>
             </li>
           
@@ -530,6 +581,385 @@
     
 
     
+  <div class='controller' id='controller-101a96c16f61117d77e2f8080a168de1'>
+    <h2 class='controller-title'>企业管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-101a96c16f61117d77e2f8080a168de1-companies'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>品牌列表</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/accounts/:id/companies</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            请求成功，等待审核
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-101a96c16f61117d77e2f8080a168de1-add_company'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>添加品牌</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/accounts/:id/add_company</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            请求成功，等待审核
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
   <div class='controller' id='controller-9710755c42ac38c175650632ef05297b'>
     <h2 class='controller-title'>多方用户验证</h2>
 
@@ -2452,6 +2882,221 @@
 
   </div>
 
+  <div class='controller' id='controller-ab51555969b346b9f2c59ceb19c11d08'>
+    <h2 class='controller-title'>经销商管理</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-ab51555969b346b9f2c59ceb19c11d08-apply_co_companies'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>申请品牌合作</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/dealers/apply_co_companies</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>company_ids:</td>
+          
+            <td>Array</td>
+          
+
+          <td>
+            品牌商数组
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            请求成功，等待审核
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
   <div class='controller' id='controller-adf7b3391e3f2801e71381e41dc39ae0'>
     <h2 class='controller-title'>订单管理</h2>
 
@@ -3221,7 +3866,7 @@
           
 
           <td>
-            企业类型
+            企业类型(Account|Dealer)
 
             
           </td>

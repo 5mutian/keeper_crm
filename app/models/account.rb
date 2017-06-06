@@ -45,8 +45,8 @@ class Account < ActiveRecord::Base
 		{
 			id: 					id,
 			name: 				name,
-			admin_name: 	admin.name,
-			admin_mobile: admin.mobile
+			admin_name: 	admin.try(:name),
+			admin_mobile: admin.try(:mobile)
 		}
 	end
 

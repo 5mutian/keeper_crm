@@ -27,6 +27,12 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def add_company
+		raise '无权操作' if @account.type != 'Account'
+
+		
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 申请品牌合作
@@ -41,6 +47,7 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def apply_co_companies
+		raise '无权操作' if @account.type != 'Dealer'
 		raise 'not found' if params[:company_ids].empty?
 
 		Account.where(type: 'Company', id: params[:company_ids]).each do |c|

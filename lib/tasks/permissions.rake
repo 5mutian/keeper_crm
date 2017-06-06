@@ -20,7 +20,7 @@ namespace :permissions do
 
 	task :sets => :environment do
 		roles = {
-			admin: %w(customers clues orders stores users strategies, accounts),
+			admin: %w(customers clues orders stores users strategies accounts),
 			saler: %w(clues orders customers),
 			cs: %w(orders customers stores),
 			acct: %w(orders),

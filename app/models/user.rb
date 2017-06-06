@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :children, foreign_key: "saler_director_id", class_name: 'User'
 
  	delegate :t_value, to: :token
+  delegate :type, to: :account
 
  	after_create :gen_token
 

@@ -20,7 +20,7 @@ class Api::AccountsController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
   #   company[name]: [String] 品牌名
-  # 	company[logo]: [String] 品牌logo
+  # 	company[logo]: [File] 品牌logo
   #   admin_id:      [Integer] 管理员id
   #   admin[name]:   [String] 管理员姓名
   #   admin[mobile]: [String] 管理员手机号

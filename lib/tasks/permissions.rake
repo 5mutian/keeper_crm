@@ -8,7 +8,7 @@ namespace :permissions do
 			'api/stores' 		=> {index: '查看门店', create: '创建门店', update: '更新门店', destroy: '删除门店'},
 			'api/users' 		=> {index: '查看用户', create: '创建用户', update: '更新用户', destroy: '删除用户'},
 			'api/strategies' => {index: '查看策略', create: '创建策略', update: '更新策略', show: '查看单个策略'},
-			'api/accounts' => {companies: '品牌列表', add_company: '添加品牌', apply_co_companies: '申请品牌合作'}
+			'api/accounts' => {companies: '品牌列表', add_company: '添加品牌', apply_co_companies: '申请品牌合作', update_apply: '更新申请状态'}
 		}
 
 		_hash.each do |k, v|

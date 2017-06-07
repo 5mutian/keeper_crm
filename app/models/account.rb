@@ -61,6 +61,6 @@ class Account < ActiveRecord::Base
 	end
 
 	def company_hash
-		list_hash
+		[list_hash]
 	end
 end

@@ -15,6 +15,8 @@ class Api::AccountsController < Api::BaseController
 		case @account.type
 		when 'Dealer'
 			render json: {status: :success, list: @account.dealer_hash, select_list: @account.unco_companies}
+		when 'Company'
+			render json: {status: :success, list: @account.co_applies}
 		else
 			render json: {status: :success, list: @account.send("#{@account.type.downcase}_hash".to_sym)}
 		end
@@ -87,7 +89,7 @@ class Api::AccountsController < Api::BaseController
 		raise '无权操作' if @account.type != 'Dealer'
 		raise 'not found' if params[:company_ids].empty?
 
-		Account.where(type: 'Company', id: params[:company_ids]).each do |c|
+		Company.where(id: params[:company_ids]).each do |c|
 			Apply.create(
 				user_id: @current_user.id,
 				target_user_id: c.admin.id,
@@ -100,6 +102,40 @@ class Api::AccountsController < Api::BaseController
 		rescue => e
 			render json: {status: :failed, msg: e.message}
 	end
+
+	# 更新申请状态
+	# 
+	# Params
+	# 	access_token: [String] authenication_token
+	#   apply_id: [Integer] 合作请求的id
+	# 	state: [Integer] 状态(1|-1)
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos
+	def update_apply
+		raise '参数出错' unless [1, -1].include?(params[:state].to_i)
+		apply = Apply.find params[:apply_id]
+		raise '未找到请求' unless apply
+		raise '无权操作' if apply.target_user != @current_user
+
+		if apply.update_attributes(state: params[:state].to_i)
+			if apply.state == 1
+				co_dealer = apply.user.account
+				co_dealer.company_ids = Array(co_dealer.company_ids) << apply.resource_id
+				co_dealer.save
+			end
+			render json: {status: :success, msg: '更新成功'}
+		else
+			render json: {status: :failed, msg: company.errors}
+		end
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
+	end
+
 
 	private
 

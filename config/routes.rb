@@ -49,6 +49,7 @@ Rails.application.routes.draw do
         get :companies
         post :add_company
         post :apply_co_companies
+        patch :update_apply
       end
     end
 	end

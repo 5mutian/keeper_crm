@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.8.0"
+lock "3.8.1"
 
 #server "deploy_local", roles: [:web, :app, :db], primary: true
 server "staging", roles: [:web, :app, :db], primary: true

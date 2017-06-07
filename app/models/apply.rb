@@ -3,7 +3,7 @@ class Apply < ActiveRecord::Base
 	belongs_to :user
 
 	STATE = {
-						0  => '新请求',
+						0  => '等待审核',
 						1  => '通过',
 						-1 => '拒绝'
 					}
@@ -21,6 +21,20 @@ class Apply < ActiveRecord::Base
 			dealer_name: user.account.name,
 			dealer_admin: user.name,
 			dealer_mobile: user.mobile,
+			state: STATE[state]
+		}
+	end
+
+	def resource
+		Company.find resource_id
+	end
+
+	def wait_hash
+		{
+			id: 					resource_id,
+			name: 				resource.name,
+			admin_name: 	resource.admin.try(:name),
+			admin_mobile: resource.admin.try(:mobile),
 			state: STATE[state]
 		}
 	end

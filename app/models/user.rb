@@ -5,6 +5,14 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  ROLES = {
+      admin: %w(customers clues orders stores users strategies accounts),
+      saler: %w(clues orders customers),
+      cs: %w(orders customers stores),
+      acct: %w(orders),
+      saler_director: %w(orders)
+    }
+
   validates_uniqueness_of :mobile, message: '手机号已被使用'
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
   validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director', 'introducer'], message: '不在所选范围之内'} 
@@ -23,11 +31,17 @@ class User < ActiveRecord::Base
  	delegate :t_value, to: :token
   delegate :type, to: :account
 
- 	after_create :gen_token
+ 	after_create :gen_token, :set_permissions
 
  	def gen_token
  		Token.create(user_id: id, t_value: SecureRandom.base64(64))
  	end
+
+  def set_permissions
+    _actions = ROLES[self.role.to_sym].map {|val| "%#{val}%"}
+    self.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
+    self.save
+  end
 
   def is_valid?
     status == 1 ? true : false

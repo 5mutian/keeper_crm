@@ -18,7 +18,7 @@ class Api::AccountsController < Api::BaseController
 		when 'Company'
 			render json: {status: :success, list: @account.co_applies}
 		else
-			render json: {status: :success, list: @account.send("#{@account.type.downcase}_hash".to_sym)}
+			render json: {status: :success, list: @account.account_hash}
 		end
 	end
 
@@ -63,7 +63,7 @@ class Api::AccountsController < Api::BaseController
 				user.account_id = company.id
 				user.save
 			else
-				user.update_attributes(role: admin, account_id: company.id)
+				user.update_attributes(role: 'admin', account_id: company.id)
 			end
 			render json: {status: :success, msg: '创建成功'}
 		else
@@ -90,13 +90,9 @@ class Api::AccountsController < Api::BaseController
 		raise 'not found' if params[:company_ids].empty?
 
 		Company.where(id: params[:company_ids]).each do |c|
-			Apply.create(
-				user_id: @current_user.id,
-				target_user_id: c.admin.id,
-				resource_name: 'Company',
-				resource_id: c.id,
-				_action: 'cooperate'
-			)
+			a = Apply.find_or_initialize_by(user_id: @current_user.id, resource_name: 'Company', resource_id: c.id, _action: 'cooperate', state: 0)
+			a.target_user_id = c.admin.id
+			a.save
 		end
 		render json: {status: :success, msg: '请求已发出，等待品牌商回应'}
 		rescue => e

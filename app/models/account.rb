@@ -48,7 +48,8 @@ class Account < ActiveRecord::Base
 			id: 					id,
 			name: 				name,
 			admin_name: 	admin.try(:name),
-			admin_mobile: admin.try(:mobile)
+			admin_mobile: admin.try(:mobile),
+			state:        '通过'
 		}
 	end
 
@@ -57,7 +58,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def dealer_hash
-		co_companies.map(&:list_hash)
+		wait_valid + co_companies.map(&:list_hash)
 	end
 
 	def company_hash

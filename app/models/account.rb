@@ -2,7 +2,7 @@ class Account < ActiveRecord::Base
 
 	mount_uploader :logo, LogoUploader
 
-	validates_uniqueness_of :name, message: '每条订单最终只能执行一条策略的结果'
+	validates_uniqueness_of :name, message: '企业名称已被占用'
 	# type: account, company, dealer 一个account可能有多个company
 	# account
 	has_many :children, foreign_key: "parent_id", class_name: 'Company'

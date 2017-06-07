@@ -30,10 +30,10 @@ class Api::RegistrationsController < Api::BaseController
 			if user.save
 				render json: {status: :success, msg: '您已成功注册，请登录'}
 			else
-				render json: {status: :failed, msg: user.errors}
+				render json: {status: :failed, msg: user.errors.first.last}
 			end
 		else
-			render json: {status: :failed, msg: account.errors}
+			render json: {status: :failed, msg: account.errors.first.last}
 		end
 
 		rescue => e

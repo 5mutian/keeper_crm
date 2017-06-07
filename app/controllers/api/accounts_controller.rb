@@ -12,7 +12,12 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def companies
-		render json: {status: :success, list: @account.send("#{@account.type.downcase}_hash".to_sym)}
+		case @account.type
+		when 'Dealer'
+			render json: {status: :success, list: @account.dealer_hash, select_list: @account.unco_companies}
+		else
+			render json: {status: :success, list: @account.send("#{@account.type.downcase}_hash".to_sym)}
+		end
 	end
 
 	# 添加品牌
@@ -36,9 +41,13 @@ class Api::AccountsController < Api::BaseController
 		
 		if admin_params[:mobile]
 			user = User.find_or_initialize_by(mobile: admin_params[:mobile])
-			raise '此号码已被占用' if user && user.account != @account
+			logger.info "*" * 10
+			logger.info user.attributes
+			raise '此号码已被占用' if !user.new_record? && user.account != @account
 		else
 			user = @account.users.find(params[:admin_id])
+			logger.info "^" * 10
+			logger.info user.attributes
 			raise '此号码已被占用' unless user
 		end
 

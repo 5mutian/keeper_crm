@@ -456,6 +456,15 @@
 
             <li>
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-90e2f856c66228f0d33fed3490cd9e31-update_cgj'>
+                同步更新品牌 host: http://192.168.0.164:7200/
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
                 获取企业销售主管信息
               </a>
@@ -6524,6 +6533,134 @@
       
 
       <div class='action action-even'
+          id='action-90e2f856c66228f0d33fed3490cd9e31-update_cgj'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>同步更新品牌 host: http://192.168.0.164:7200/</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/sync/accounts/update_cgj</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          <h4>同步更新品牌 host</h4>
+          
+            <p>
+              
+                 http://192.168.0.164:7200/
+              
+            </p>
+          
+        
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
           id='action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
 
         <h4>功能说明</h4>
@@ -6706,7 +6843,7 @@
     
       
 
-      <div class='action action-odd'
+      <div class='action action-even'
           id='action-90e2f856c66228f0d33fed3490cd9e31-gen_account_user'>
 
         <h4>功能说明</h4>

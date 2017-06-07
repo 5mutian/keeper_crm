@@ -59,4 +59,8 @@ class Account < ActiveRecord::Base
 	def dealer_hash
 		co_companies.map(&:list_hash)
 	end
+
+	def company_hash
+		list_hash
+	end
 end

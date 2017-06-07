@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         collection do
           get :get_saler_directors
           post :gen_account_user
+          post :update_cgj
         end
       end
     end

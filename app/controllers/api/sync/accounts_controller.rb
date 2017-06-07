@@ -42,6 +42,14 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 		end
 	end
 
+	# 同步更新品牌 host: http://192.168.0.164:7200/
+	# Params
+	# Return
+	# Error
+	def update_cgj
+		account = Account.find_or_initialize_by(cgj_id: params)
+	end
+
 	private
 
 	def user_params

@@ -47,7 +47,11 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 	# Return
 	# Error
 	def update_cgj
-		account = Account.find_or_initialize_by(cgj_id: params)
+		logger_info "*" * 10
+		logger_info params
+		logger_info "*" * 10
+		# account = Account.find_or_initialize_by(cgj_id: params)
+		render json: {msg: :ok, code: 200} 
 	end
 
 	private

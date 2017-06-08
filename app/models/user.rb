@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
       "saler_director"  => {customers: '客户', clues: '线索', orders: '订单'},
       "cs"              => {customers: '客户', orders: '订单', stores: '门店／渠道'},
       "acct"            => {orders: '订单'}
-    }
+    }[role]
   end
 
   def self.get_or_gen_introducer(mobile, name, account_id)
@@ -144,5 +144,9 @@ class User < ActiveRecord::Base
     wallet_logs.where(state: 1, transfer: 1).map(&:amount).sum.to_f.round(2)
   end
   # ###########################
+  # 登录后给到所有的用户信息
+  def infos
+    attributes.merge(account_type: type, wallet: wallet)
+  end
 
 end

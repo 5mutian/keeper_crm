@@ -46,12 +46,53 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 	# Params
 	# Return
 	# Error
+	# 
 	def update_cgj
-		logger_info "*" * 10
-		logger_info params
-		logger_info "*" * 10
-		# account = Account.find_or_initialize_by(cgj_id: params)
-		render json: {msg: :ok, code: 200} 
+		account_info = params[:customer][:account_info]
+		account = Account.find_or_initialize_by(cgj_id: account_info[:id])
+		account.name = account_info[:name]
+		account.reg_address = account_info[:address]
+		account.save
+		
+		account_manager = params[:customer][:account_manager]
+
+		if account_manager
+			aadmin = User.find_or_initialize_by(mobile: account_manager[:tel])
+			if aadmin.new_record?
+				aadmin.password_digest = account_manager[:password_digest]
+				aadmin.name = account_manager[:name]
+			end
+			aadmin.cgj_id = account_manager[:id]
+			aadmin.role = 'admin'
+			aadmin.account = account_info
+			aaadmin.save
+		end
+
+		company = Company.find_or_initialize_by(cgj_id: params[:customer][:id])
+		company.name = params[:customer][:name]
+		company.address = params[:customer][:address]
+		company.parent_id = account.id
+		c.save
+
+		manager_info = params[:customer][:manager_info]
+		if manager_info
+			cadmin = User.find_or_initialize_by(mobile: manager_info[:tel])
+			if cadmin.new_record?
+				cadmin.password_digest = manager_info[:manager_info]
+				cadmin.name = manager_info[:real_name]
+			end
+			cadmin.cgj_id = manager_info[:id]
+			cadmin.role = 'admin'
+			cadmin.account = company
+			cadmin.save
+		end
+
+		unless account.admin
+			cadmin.account = account
+			cadmin.save
+		end
+
+		render json: {msg: :ok, code: 200}
 	end
 
 	private

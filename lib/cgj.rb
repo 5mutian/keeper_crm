@@ -25,6 +25,16 @@ module Cgj
 		)
 	end
 
+	def self.create_company(account_hash={})
+		RestClient::Request.execute(
+			url: 			URI(APP_CONFIG['cgj_host'] + '/api/create_company').to_s,
+			method: 	:post,
+			headers: 	{Authorization: APP_CONFIG['cgj_auth_key']},
+			payload: 	account_hash
+		)
+	end
+	end
+
 	# RestClient::Request.execute(url:'https://api.chuanggj.com/api/fetch_company', method: :get, headers: AUTH_KEY)
 	def self.fetch_company
 		RestClient::Request.execute(

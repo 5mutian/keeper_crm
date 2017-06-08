@@ -6,6 +6,7 @@ class Api::StoresController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	#   page: [Integer] 页码
+	#   per: [Integer] 每页显示数
 	# Return
 	# 	status: [String] success
 	#   list: [Hash] {{id, name, code, contact, phone, address}...}
@@ -13,8 +14,8 @@ class Api::StoresController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		stores = @current_user.account.stores.includes(:region).page(params[:page])
-		render json: {status: :success, list: stores.map(&:to_hash), total: stores.count, regions: @current_user.account.regions}
+		stores = @current_user.account.stores.includes(:region).page(params[:page]).per(params[:per])
+		render json: {status: :success, list: stores.map(&:to_hash), total: stores.total_count, regions: @current_user.account.regions}
 	end
 
 	# 创建门店

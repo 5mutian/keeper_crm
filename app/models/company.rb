@@ -1,5 +1,7 @@
 class Company < Account
 
+  belongs_to :parent, class_name: 'Account'
+
 	def co_applies
 		Apply.where(resource_name: 'Company', resource_id: id, _action: "cooperate").map(&:cooperate_hash)
 	end

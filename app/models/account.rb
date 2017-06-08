@@ -2,9 +2,10 @@ class Account < ActiveRecord::Base
 
 	mount_uploader :logo, LogoUploader
 
-	validates_uniqueness_of :name, message: '企业名称已被占用'
+	# validates_uniqueness_of :name, message: '企业名称已被占用'
 	# type: account, company, dealer 一个account可能有多个company
 	# account
+	# account， dealer必须有管理员，但company不一定有管理员。account_admin可以管理所有旗下的companies
 	has_many :children, foreign_key: "parent_id", class_name: 'Company'
 
 	has_many :users
@@ -63,5 +64,18 @@ class Account < ActiveRecord::Base
 
 	def company_hash
 		[list_hash]
+	end
+
+	def cgj_hash
+		{
+			id: cgj_id,
+			name: name,
+			address: address,
+			account_id: type == 'Company' ? parent.cgj_id : nil,
+			logo: logo.url,
+			user: admin.cgj_hash,
+			account: type == 'Company' ? parent.try(:cgj_hash) : nil,
+			account_user: type == 'Company' ? parent.try(:admin).try(:cgj_hash) : nil
+		}
 	end
 end

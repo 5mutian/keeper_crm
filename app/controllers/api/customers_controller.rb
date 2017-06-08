@@ -6,6 +6,7 @@ class Api::CustomersController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	#   page: [Integer] 页码
+	#   per: [Integer] 每页显示数
 	# Return
 	# 	status: [String] success
 	#   list: [Hash] customers_hash
@@ -13,7 +14,7 @@ class Api::CustomersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		customers = @current_user.customers.page(params[:page])
+		customers = @current_user.customers.page(params[:page]).per(params[:per])
 
 		render json: {status: :success, list: customers, total: @current_user.customers.count}
 	end

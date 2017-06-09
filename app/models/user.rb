@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
       tel: mobile,
       real_name: name,
       password_digest: password_digest,
-      company_id: account_id,
+      company_id: account.cgj_id,
       region: 'CRM'
     }
   end

@@ -21,6 +21,7 @@ class Company < Account
       manager_info = params[:customer][:manager_info]
       self.admin.update_attributes(cgj_user_id: manager_info[:id]) if manager_info
     end
+  end
 
 	def co_applies
 		Apply.where(resource_name: 'Company', resource_id: id, _action: "cooperate").map(&:cooperate_hash)

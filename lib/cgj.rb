@@ -33,7 +33,6 @@ module Cgj
 			payload: 	account_hash
 		)
 	end
-	end
 
 	# RestClient::Request.execute(url:'https://api.chuanggj.com/api/fetch_company', method: :get, headers: AUTH_KEY)
 	def self.fetch_company

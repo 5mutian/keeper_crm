@@ -58,6 +58,8 @@ class Api::AccountsController < Api::BaseController
 		user.account_id = company.id
 		user.save
 		
+		company.sync_cgj
+		
 		render json: {status: :success, msg: '创建成功'}
 
 		# rescue => e

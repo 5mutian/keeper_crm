@@ -2,7 +2,7 @@ class Company < Account
 
   belongs_to :parent, class_name: 'Account'
 
-  after_save :sync_cgj
+  # after_save :sync_cgj
 
   def sync_cgj
     res = Cgj.create_company(cgj_hash)

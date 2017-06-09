@@ -115,12 +115,12 @@ class User < ActiveRecord::Base
 
   def cgj_hash
     {
-      id: cgj_user_id,
-      tel: mobile,
-      real_name: name,
-      password_digest: password_digest,
-      company_id: account.cgj_id,
-      region: 'CRM'
+      id:               cgj_user_id,
+      tel:              mobile,
+      real_name:        name,
+      password_digest:  password_digest,
+      company_id:       account.cgj_id,
+      region:           'CRM'
     }
   end
 

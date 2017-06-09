@@ -33,5 +33,18 @@ class Company < Account
   		logo: logo.try(:url)
   	}
   end
+
+  def cgj_hash
+    {
+      id:           cgj_id,
+      name:         name,
+      address:      address,
+      account_id:   parent.cgj_id,
+      logo:         logo.url,
+      user:         admin.cgj_hash,
+      account:      parent.try(:cgj_hash),
+      account_user: parent.try(:admin).try(:cgj_hash)
+    }
+  end
 	
 end

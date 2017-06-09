@@ -66,16 +66,4 @@ class Account < ActiveRecord::Base
 		[list_hash]
 	end
 
-	def cgj_hash
-		{
-			id: cgj_id,
-			name: name,
-			address: address,
-			account_id: type == 'Company' ? parent.cgj_id : nil,
-			logo: logo.url,
-			user: admin.cgj_hash,
-			account: type == 'Company' ? parent.try(:cgj_hash) : nil,
-			account_user: type == 'Company' ? parent.try(:admin).try(:cgj_hash) : nil
-		}
-	end
 end

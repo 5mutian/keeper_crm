@@ -62,7 +62,7 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 				aadmin.password_digest = account_manager[:password_digest]
 				aadmin.name = account_manager[:name]
 			end
-			aadmin.cgj_id = account_manager[:id]
+			aadmin.cgj_user_id = account_manager[:id]
 			aadmin.role = 'admin'
 			aadmin.account = account_info
 			aaadmin.save
@@ -81,7 +81,7 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 				cadmin.password_digest = manager_info[:manager_info]
 				cadmin.name = manager_info[:real_name]
 			end
-			cadmin.cgj_id = manager_info[:id]
+			cadmin.cgj_user_id = manager_info[:id]
 			cadmin.role = 'admin'
 			cadmin.account = company
 			cadmin.save

@@ -28,7 +28,6 @@ class Api::AccountsController < Api::BaseController
 	# 	access_token: [String] authenication_token
   #   company[name]: [String] 品牌名
   # 	company[logo]: [File] 品牌logo
-  #   admin_id:      [Integer] 管理员id
   #   admin[name]:   [String] 管理员姓名
   #   admin[mobile]: [String] 管理员手机号
   #   admin[password]: [String] 管理员密码
@@ -39,39 +38,30 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def add_company
-		raise '无权操作' if @account.type != 'Account'
+		raise '无权操作'      unless @account.type == 'Account'
+		raise '请输入手机号码' unless admin_params[:mobile]
+
+		user    = User.find_or_initialize_by(mobile: admin_params[:mobile])
+		company = Company.find_or_initialize_by(name: company_params[:name], parent_id: @account.id)
+
+		company.logo = company_params[:logo]
+		company.save
+
+		if user.new_record?
+		else
+			raise '手机号已被占用' if user.account != @account
+		end
+
+		user.name = admin_params[:name]
+		user.password = admin_params[:password]
+		user.role = 'admin'
+		user.account_id = company.id
+		user.save
 		
-		if admin_params[:mobile]
-			user = User.find_or_initialize_by(mobile: admin_params[:mobile])
-			logger.info "*" * 10
-			logger.info user.attributes
-			raise '此号码已被占用' if !user.new_record? && user.account != @account
-		else
-			user = @account.users.find(params[:admin_id])
-			logger.info "^" * 10
-			logger.info user.attributes
-			raise '此号码已被占用' unless user
-		end
+		render json: {status: :success, msg: '创建成功'}
 
-		company = Company.new(company_params.merge(parent_id: @account.id, type: 'Company'))
-
-		if company.save
-			if user.new_record?
-				user.name = admin_params[:name]
-				user.password = admin_params[:password]
-				user.role = 'admin'
-				user.account_id = company.id
-				user.save
-			else
-				user.update_attributes(role: 'admin', account_id: company.id)
-			end
-			render json: {status: :success, msg: '创建成功'}
-		else
-			render json: {status: :failed, msg: company.errors}
-		end
-
-		rescue => e
-			render json: {status: :failed, msg: e.message}
+		# rescue => e
+		# 	render json: {status: :failed, msg: e.message}
 	end
 
 	# 申请品牌合作

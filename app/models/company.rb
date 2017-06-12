@@ -9,13 +9,6 @@ class Company < Account
     _hash = JSON res.body
 
     if _hash["code"] == 200
-
-      account_info = _hash[:customer][:account_info]
-      self.parent.update_attributes(cgj_id: account_info[:id]) if account_info
-      
-      account_manager = params[:customer][:account_manager]
-      self.parent.admin.update_attributes(cgj_user_id: account_manager[:id]) if account_manager
-
       self.update_attributes(cgj_id: params[:customer][:id])
 
       manager_info = params[:customer][:manager_info]
@@ -42,9 +35,7 @@ class Company < Account
       address:      address,
       account_id:   parent.cgj_id,
       logo:         logo.url,
-      user:         admin.cgj_hash,
-      account:      parent.try(:cgj_hash),
-      account_user: parent.try(:admin).try(:cgj_hash)
+      user:         admin.cgj_hash
     }
   end
 	

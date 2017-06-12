@@ -60,5 +60,6 @@ gem 'rest-client'
 gem 'rack-cors'
 
 gem 'carrierwave'
+gem 'carrierwave-base64'
 gem 'carrierwave-qiniu', '~> 1.1.0'
 gem 'qiniu-rs'

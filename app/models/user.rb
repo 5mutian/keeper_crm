@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	attr_accessor :remeber_token
  	has_secure_password
 
-  mount_uploader :avatar, AvatarUploader
+  mount_base64_uploader :avatar, AvatarUploader
 
   ROLES = {
       admin: %w(customers clues orders stores users strategies accounts),

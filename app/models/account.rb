@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
 
-	mount_uploader :logo, LogoUploader
+	mount_base64_uploader :logo, LogoUploader
 
 	validates_uniqueness_of :name, message: '企业名称已被占用'
 	# type: account, company, dealer 一个account可能有多个company

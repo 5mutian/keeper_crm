@@ -28,21 +28,27 @@ class Account < ActiveRecord::Base
 		"http://10.25.1.126:8081/#/invit?t=#{code}"
 	end
 
-	# dealer
-	def co_companies
-		Account.where(id: company_ids)
+	def select_companies
+		children.map(&:select_hash)
 	end
-
 
 	# 获取有效的策略信息
 	def get_valid_strategy(province, city, area)
 		strategies.where(province: province, city: city, area: area).first
 	end
 
-
 	def stores_tree
 		regions.map(&:select_hash)
 	end
+
+	def select_hash
+  	{
+  		id: id,
+  		name: name,
+  		logo: logo.try(:url),
+  		cgj_id: cgj_id
+  	}
+  end
 
 	def list_hash
 		{
@@ -71,7 +77,8 @@ class Account < ActiveRecord::Base
       id:           cgj_id,
       name:         name,
       address:      address,
-      logo:         logo.url
+      logo:         logo.url,
+      cgj_id: 			cgj_id
     }
   end
 

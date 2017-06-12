@@ -20,14 +20,6 @@ class Company < Account
 		Apply.where(resource_name: 'Company', resource_id: id, _action: "cooperate").map(&:cooperate_hash)
 	end
 
-	def select_hash
-  	{
-  		id: id,
-  		name: name,
-  		logo: logo.try(:url)
-  	}
-  end
-
   def cgj_hash
     {
       id:           cgj_id,
@@ -37,6 +29,10 @@ class Company < Account
       logo:         logo.url,
       user:         admin.cgj_hash
     }
+  end
+
+  def select_companies
+    [self.select_hash]
   end
 	
 end

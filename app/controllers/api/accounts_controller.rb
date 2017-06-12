@@ -62,8 +62,8 @@ class Api::AccountsController < Api::BaseController
 		
 		render json: {status: :success, msg: '创建成功'}
 
-		# rescue => e
-		# 	render json: {status: :failed, msg: e.message}
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 申请品牌合作

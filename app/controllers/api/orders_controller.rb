@@ -14,13 +14,7 @@ class Api::OrdersController < Api::BaseController
 	def index
 		orders = @current_user.orders.includes(:customer).page(params[:page])
 
-		if params[:page].to_i < 2
-			companies = ApplicationHelper.select_hash JSON(Cgj.fetch_company)["companies"]
-			materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
-			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count, companies: companies, materials: materials, stores_tree: @current_user.account.stores_tree}
-		else
-			render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
-		end
+		render json: {status: :success, list: orders.map(&:to_hash), total: @current_user.orders.count}
 	end
 
 	# 订单创建／一键下单

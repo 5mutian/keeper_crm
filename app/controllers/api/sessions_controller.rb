@@ -25,9 +25,9 @@ class Api::SessionsController < Api::BaseController
       	current_user: user.infos, 
       	token: user.t_value, 
       	menu: user.right_menu, 
-      	companies: @account.select_companies, 
+      	companies: user.account.select_companies, 
       	materials: materials,
-      	stores_tree: @account.stores_tree
+      	stores_tree: user.account.stores_tree
       }
     else
     	render json: {status: :failed, msg: '请输入正确的手机号跟密码'}

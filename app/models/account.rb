@@ -45,7 +45,7 @@ class Account < ActiveRecord::Base
   	{
   		id: id,
   		name: name,
-  		logo: logo.try(:url),
+  		logo: logo_url,
   		cgj_id: cgj_id
   	}
   end

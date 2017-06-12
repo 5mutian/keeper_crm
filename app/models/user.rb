@@ -147,7 +147,7 @@ class User < ActiveRecord::Base
   # ###########################
   # 登录后给到所有的用户信息
   def infos
-    attributes.merge(account_type: type, wallet: wallet)
+    attributes.merge(account_type: type, wallet: wallet, avatar_url: avatar_url)
   end
 
 end

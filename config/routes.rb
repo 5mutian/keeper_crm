@@ -30,7 +30,11 @@ Rails.application.routes.draw do
       end
     end
 
-	  resources :users # 用户管理
+	  resources :users do # 用户管理
+      collection do
+        patch :update_me
+      end
+    end
 	  resources :clues # 线索管理
   	resources :stores do # 门店管理
       collection do

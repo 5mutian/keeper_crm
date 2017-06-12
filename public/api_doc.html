@@ -578,6 +578,15 @@
               </a>
             </li>
           
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-update_me'>
+                更新我的基本资料
+              </a>
+            </li>
+          
         </ul>
 
       </li>
@@ -857,25 +866,6 @@
 
           <td>
             品牌logo
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>admin_id:</td>
-          
-            <td>Integer</td>
-          
-
-          <td>
-            管理员id
 
             
           </td>
@@ -2620,7 +2610,7 @@
 
         <tr>
           
-            <td>per_page:</td>
+            <td>per:</td>
           
             <td>Integer</td>
           
@@ -4720,6 +4710,25 @@
 
           <td>
             页码
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>per:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            每页显示数
 
             
           </td>
@@ -8714,6 +8723,227 @@
 
           <td>
             删除成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-update_me'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>更新我的基本资料</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users/update_me</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>PATCH</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[name]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            姓名
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>user[avatar]:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            头像
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            更新成功
 
             
           </td>

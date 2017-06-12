@@ -26,7 +26,7 @@ class Company < Account
       name:         name,
       address:      address,
       account_id:   parent.cgj_id,
-      logo:         logo.url,
+      logo:         logo_url,
       user:         admin.cgj_hash
     }
   end

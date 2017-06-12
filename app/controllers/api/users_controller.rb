@@ -67,6 +67,26 @@ class Api::UsersController < Api::BaseController
 		end
 	end
 
+	# 更新我的基本资料
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	user[name]: [String] 姓名
+	# 	user[avatar]: [String] 头像
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def update_me
+		if @current_user.update_attributes(my_params)
+			render json: {status: :success, msg: '更新成功'}
+    else
+    	render json: {status: :failed, msg: @current_user.errors.messages.values.first}
+		end
+	end
+
 	# 用户删除
 	#
 	# Params
@@ -89,6 +109,10 @@ class Api::UsersController < Api::BaseController
 
 	def user_params
 	 params[:user].permit(:name, :mobile, :role, :saler_director_id)
+	end
+
+	def my_params
+		params[:user].permit(:name, :avatar)
 	end
 
 	def get_user

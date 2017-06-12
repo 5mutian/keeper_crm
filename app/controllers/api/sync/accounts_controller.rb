@@ -48,20 +48,20 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 	# Error
 	# 
 	def update_cgj
-		company = Company.find_or_initialize_by(cgj_id: params[:customer][:id])
-		company.name = params[:customer][:name]
-		company.address = params[:customer][:address]
+		company = Company.find_or_initialize_by(cgj_id: params[:result][:id])
+		company.name = params[:result][:name]
+		company.address = params[:result][:address]
 		company.parent_id = account.id
 		c.save
 
-		manager_info = params[:customer][:manager_info]
-		if manager_info
-			cadmin = User.find_or_initialize_by(mobile: manager_info[:tel])
+		manager = params[:result][:manager]
+		if manager
+			cadmin = User.find_or_initialize_by(mobile: manager[:tel])
 			if cadmin.new_record?
-				cadmin.password_digest = manager_info[:manager_info]
-				cadmin.name = manager_info[:real_name]
+				cadmin.password_digest = manager[:manager_info]
+				cadmin.name = manager[:real_name]
 			end
-			cadmin.cgj_user_id = manager_info[:id]
+			cadmin.cgj_user_id = manager[:id]
 			cadmin.role = 'admin'
 			cadmin.account = company
 			cadmin.save

@@ -5,14 +5,14 @@ class Company < Account
   # after_save :sync_cgj
 
   def sync_cgj
-    res = Cgj.create_company(cgj_hash)
+    res = Cgj.create_company(c.cgj_hash)
     _hash = JSON res.body
 
     if _hash["code"] == 200
-      self.update_attributes(cgj_id: params[:customer][:id])
+      self.update_attributes(cgj_id: params[:result][:id])
 
-      manager_info = params[:customer][:manager_info]
-      self.admin.update_attributes(cgj_user_id: manager_info[:id]) if manager_info
+      manager = params[:result][:manager]
+      self.admin.update_attributes(cgj_user_id: manager[:id]) if manager
     end
   end
 

@@ -134,7 +134,7 @@ class User < ActiveRecord::Base
   end
 
   def wallet_total
-    wallet_logs.where(state: 1).last.try(:total).to_f
+    wallet_logs.where(state: 1).last.try(:total).to_f.round(2)
   end
 
   def income

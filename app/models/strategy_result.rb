@@ -8,7 +8,9 @@ class StrategyResult < ActiveRecord::Base
 		# 销售提成
 		WalletLog.create(transfer: 2, state: 1, amount: saler_rate_amount, total: saler.wallet_total + saler_rate_amount, user_id: saler.id)
 		# 介绍人返利
+		WalletLog.create(transfer: 2, state: 1, amount: introducer_rebate_amount, total: introducer.wallet_total + introducer_rebate_amount, user_id: introducer.id)
 		# 客户扣折
+		# WalletLog.create(transfer: 2, state: 1, amount: saler_rate_amount, total: saler.wallet_total + saler_rate_amount, user_id: saler.id)
 	end
 
 	def saler

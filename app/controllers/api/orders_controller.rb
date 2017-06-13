@@ -51,6 +51,7 @@ class Api::OrdersController < Api::BaseController
 		if customer.save
 			order.customer = customer
 			if order.save
+				order.sync_cgj
 				render json: {status: :success, msg: '创建成功'}
 			else
 				render json: {status: :failed, msg: order.errors.messages.values.first}

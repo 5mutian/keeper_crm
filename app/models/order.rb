@@ -24,7 +24,7 @@ class Order < ActiveRecord::Base
 
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
-	after_create :sync_cgj
+	# after_create :sync_cgj
 	after_update :execute_strategy
 
 	before_create :init_attrs

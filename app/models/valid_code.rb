@@ -1,7 +1,7 @@
 class ValidCode < ActiveRecord::Base
 
 	TYPES = {
-		1: '注册验证',
+		1 => '注册验证',
 	}
 
 	before_create :gen_code

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607023521) do
+ActiveRecord::Schema.define(version: 20170613041248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,15 @@ ActiveRecord::Schema.define(version: 20170607023521) do
     t.integer  "saler_director_id"
     t.integer  "parent_id"
     t.string   "avatar"
+  end
+
+  create_table "valid_codes", force: :cascade do |t|
+    t.string   "mobile",                    null: false
+    t.string   "code",                      null: false
+    t.boolean  "state",      default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "_type"
   end
 
   create_table "wallet_logs", force: :cascade do |t|

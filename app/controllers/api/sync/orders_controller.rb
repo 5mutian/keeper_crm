@@ -31,17 +31,10 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 
 		if customer.new_record?
 
-			%w(province city area street address longitude latitude).each do |ele|
-				customer.attributes[ele] = params["results"][ele]
+			%w(name province city area street address longitude latitude).each do |ele|
+				customer.send("#{ele}=", params["results"][ele])
 			end
-			customer.name 			= params["results"]["real_name"]
-			# customer.province 	= params["results"]["province"],
-			# customer.city  			= params["results"]["city"],
-			# customer.area 			= params["results"]["area"],
-			# customer.street 		=	params["results"]["street"]
-			# customer.address 		= params["results"]["address"]
-			# customer.longitude 	= params["results"]["longitude"]
-			# customer.latitude 	= params["results"]["latitude"]
+			
 			customer.user_id 		= user.id
 			customer.account_id = @account.id
 			customer.save
@@ -51,7 +44,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		order = Order.find_or_initialize_by(serial_number: params["results"]["serial_number"])
 
 		(order.attributes.keys & params["results"].keys).each do |ele|
-			order.attributes[ele] = params["results"][ele]
+			order.send("#{ele}=", params["results"][ele]) 
 		end
 
 		order.install_date 						= Time.at(params["results"]["install_date"].to_i)
@@ -66,7 +59,8 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		order.save
 
 		render json: {status: :success, msg: 'updated successfully'}
-		
+		# rescue => e
+		# 	render json: {status: :failed, msg: e.message}
 	end
 
 end

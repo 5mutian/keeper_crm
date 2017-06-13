@@ -31,10 +31,10 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 
 		if customer.new_record?
 
-			%w(name province city area street address longitude latitude).each do |ele|
+			%w(province city area street address longitude latitude).each do |ele|
 				customer.attributes[ele] = params["results"][ele]
 			end
-			# customer.name 			= params["results"]["name"]
+			customer.name 			= params["results"]["real_name"]
 			# customer.province 	= params["results"]["province"],
 			# customer.city  			= params["results"]["city"],
 			# customer.area 			= params["results"]["area"],

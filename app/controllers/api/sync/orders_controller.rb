@@ -34,7 +34,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 			%w(name province city area street address longitude latitude).each do |ele|
 				customer.send("#{ele}=", params["results"][ele])
 			end
-			
+
 			customer.user_id 		= user.id
 			customer.account_id = @account.id
 			customer.save
@@ -46,7 +46,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		(order.attributes.keys & params["results"].keys).each do |ele|
 			order.send("#{ele}=", params["results"][ele]) 
 		end
-
+		order.booking_date 						= Time.at(params["results"]["booking_date"].to_i)
 		order.install_date 						= Time.at(params["results"]["install_date"].to_i)
 		order.cgj_company_id 					= params["results"]["company_id"]
 		order.cgj_facilitator_id 			= params["results"]["facilitator_id"]

@@ -7,6 +7,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 	# Error
 	def update_cgj
 		_user = params["results"].delete("customer_info")
+		user  = User.find_or_initialize_by(mobile: _user["tel"])
 
 		unless user
 			company = Company.find_by_cgj_id(_user["company_id"])
@@ -17,8 +18,6 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 				company.cgj_id 		= _user["company_id"]
 				company.save
 			end
-
-			user = User.find_or_initialize_by(mobile: _user["tel"])
 
 			user.name   			= _user["real_name"]
 			user.password 		= 'CRM123'

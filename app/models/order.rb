@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
 		'installed' 							=> '已安装', 
 		'completed' 							=> '完成交易', 
 		'canceled'								=> '已取消', 
-		'confirm_installed' 			=> '管理员确认安装(*品牌商才有)'
+		'confirm_installed' 			=> '管理员确认安装'
 	}
 
 	belongs_to :user
@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
 	before_create :init_attrs
 
 def init_attrs
-		workflow_state = :new
+		workflow_state = 'new'
 	end
 
 	def sync_cgj

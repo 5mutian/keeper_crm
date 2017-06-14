@@ -35,16 +35,16 @@ def init_attrs
 	def sync_cgj
 		res = Cgj.create_order(cgj_hash)
 		_hash = JSON res.body
-		_hash.delete("id")
 		if _hash["code"] == 200
-			(self.attributes.keys & _hash["orders"].keys).each do |ele|
-				order.send("#{ele}=", _hash["orders"][ele]) 
+			_hash["order"].delete("id")
+			(attributes.keys & _hash["order"].keys).each do |ele|
+				self.send("#{ele}=", _hash["order"][ele]) 
 			end
-			self.booking_date 						= Time.at(_hash["booking_date"].to_i)
-			self.install_date 						= Time.at(_hash["install_date"].to_i)
-			self.cgj_company_id 					= _hash["company_id"]
-			self.cgj_facilitator_id 			= _hash["facilitator_id"]
-			self.cgj_customer_service_id  = _hash["customer_service_id"]
+			self.booking_date 						= Time.at(_hash["order"]["booking_date"].to_i)
+			self.install_date 						= Time.at(_hash["order"]["install_date"].to_i)
+			self.cgj_company_id 					= _hash["order"]["company_id"]
+			self.cgj_facilitator_id 			= _hash["order"]["facilitator_id"]
+			self.cgj_customer_service_id  = _hash["order"]["customer_service_id"]
 			self.save
 		end
 	end

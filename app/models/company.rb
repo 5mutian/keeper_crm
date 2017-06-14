@@ -15,7 +15,7 @@ class Company < Account
   end
 
 	def co_applies
-		Apply.where(resource_name: 'Company', resource_id: id, _action: "cooperate").map(&:cooperate_hash)
+		Apply.where(resource_name: 'Company', resource_id: id, _action: "cooperate", state: 0).map(&:cooperate_hash)
 	end
 
   def cgj_hash

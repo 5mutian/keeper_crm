@@ -46,6 +46,17 @@ def init_attrs
 			self.cgj_facilitator_id 			= _hash["order"]["facilitator_id"]
 			self.cgj_customer_service_id  = _hash["order"]["customer_service_id"]
 			self.save
+
+			self.customer.update_attributes({
+				longitude: 	_hash["order"]["longitude"],
+				latitude: 	_hash["order"]["latitude"],
+				address: 		_hash["order"]["address"],
+				tel:        _hash["order"]["tel"],
+				province:   _hash["order"]["province"],
+				city:       _hash["order"]["city"],
+				area:       _hash["order"]["area"],
+				street:  		_hash["order"]["street"]
+			})
 		end
 	end
 

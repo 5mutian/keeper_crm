@@ -34,7 +34,8 @@ class Account < ActiveRecord::Base
 
 	# 获取有效的策略信息
 	def get_valid_strategy(province, city, area)
-		strategies.where(province: province, city: city, area: area).first
+		valid_s = strategies.where(province: province, city: city, area: area).first
+		valid_s ? valid_s : strategies.first
 	end
 
 	def stores_tree

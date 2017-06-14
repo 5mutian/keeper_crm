@@ -71,11 +71,11 @@ def init_attrs
 			if strategy
 				StrategyResult.create(
 					saler_id: user_id,
-					saler_rate_amount: terminal_count * rate,
+					saler_rate_amount: terminal_count * strategy.rate,
 					customer_id: customer_id,
-					customer_discount_amount: terminal_count * discount,
+					customer_discount_amount: terminal_count * strategy.discount,
 					introducer_id: introducer_id,
-					introducer_rebate_amount: terminal_count * rebate,
+					introducer_rebate_amount: terminal_count * strategy.rebate,
 					order_id: id,
 					strategy_id: strategy.id
 				)

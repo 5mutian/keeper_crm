@@ -43,14 +43,16 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 
 		order = Order.find_or_initialize_by(serial_number: params["results"]["serial_number"])
 
-		(order.attributes.keys & params["results"].keys).each do |ele|
-			order.send("#{ele}=", params["results"][ele]) 
+		_order = params["results"].except("id", "created_at", "updated_at", "customer_id")
+
+		(order.attributes.keys & _order.keys).each do |ele|
+			order.send("#{ele}=", _order[ele]) 
 		end
-		order.booking_date 						= Time.at(params["results"]["booking_date"].to_i)
-		order.install_date 						= Time.at(params["results"]["install_date"].to_i)
-		order.cgj_company_id 					= params["results"]["company_id"]
-		order.cgj_facilitator_id 			= params["results"]["facilitator_id"]
-		order.cgj_customer_service_id = params["results"]["customer_service_id"]
+		order.booking_date 						= Time.at(_order["booking_date"].to_i)
+		order.install_date 						= Time.at(_order["install_date"].to_i)
+		order.cgj_company_id 					= _order["company_id"]
+		order.cgj_facilitator_id 			= _order["facilitator_id"]
+		order.cgj_customer_service_id = _order["customer_service_id"]
 
 		order.user_id 		= user.id
 		order.account_id 	= @account.id

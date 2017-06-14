@@ -124,6 +124,7 @@ def init_attrs
 			tel: 						tel,
 			name: 					name,
 			booking_date: 	booking_date.strftime("%F %T"),
+			workflow_state: STATE[workflow_state],
 			mount_order: 		mount_order,
 			total: 					total,
 			company_id: 		cgj_company_id,

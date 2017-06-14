@@ -33,10 +33,10 @@ def init_attrs
 	end
 
 	def sync_cgj
-		res = Cgj.create_order(order.cgj_hash)
+		res = Cgj.create_order(cgj_hash)
 		_hash = JSON res.body
 		if _hash["code"] == 200
-			_order = _hash["order"].except("id", "created_at", "updated_at")
+			_order = _hash["order"].except("id", "created_at", "updated_at", "customer_id")
 			(attributes.keys & _order.keys).each do |ele|
 				self.send("#{ele}=", _order[ele]) 
 			end
@@ -55,7 +55,8 @@ def init_attrs
 				province:   _order["province"],
 				city:       _order["city"],
 				area:       _order["area"],
-				street:  		_order["street"]
+				street:  		_order["street"],
+				user_id: 		self.user_id
 			})
 		end
 	end

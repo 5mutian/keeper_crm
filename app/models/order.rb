@@ -24,74 +24,28 @@ class Order < ActiveRecord::Base
 
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
-	# after_create :sync_cgj
 	after_update :execute_strategy
 
 	before_create :init_attrs
 
-	def init_attrs
+def init_attrs
 		workflow_state = :new
 	end
 
 	def sync_cgj
 		res = Cgj.create_order(cgj_hash)
 		_hash = JSON res.body
-
+		_hash.delete("id")
 		if _hash["code"] == 200
-			self.update_attributes({
-				uuid: 										_hash["order"]["uuid"],
-				width: 										_hash["order"]["width"],
-				height:         					_hash["order"]["height"],
-				rate:  										_hash["order"]["rate"],
-				total: 										_hash["order"]["total"],
-				remark: 									_hash["order"]["remark"],
-				state:  									_hash["order"]["state"],
-				province:   							_hash["order"]["province"],
-				city:       							_hash["order"]["city"],
-				area:       							_hash["order"]["area"],
-				courier_number: 					_hash["order"]["courier_number"],
-				install_date:   					Time.at(_hash["order"]["install_date"].to_i),
-				cgj_company_id: 					_hash["order"]["company_id"],
-				cgj_facilitator_id: 			_hash["order"]["facilitator_id"],
-				cgj_customer_service_id: 	_hash["order"]["customer_service_id"],
-				material: 								_hash["order"]["material"],
-				material_id: 							_hash["order"]["material_id"],
-				workflow_state: 					_hash["order"]["workflow_state"],
-				public_order: 						_hash["order"]["public_order"],
-				square: 									_hash["order"]["square"],
-				mount_order:  						_hash["order"]["mount_order"],
-				serial_number: 						_hash["order"]["serial_number"],
-				is_company: 							_hash["order"]["is_company"],
-				measure_amount: 					_hash["order"]["measure_amount"],
-				install_amount:     			_hash["order"]["install_amount"],
-				manager_confirm: 					_hash["order"]["manager_confirm"],
-				terminal_count: 					_hash["order"]["terminal_count"],
-				amount_total_count: 			_hash["order"]["amount_total_count"],
-				basic_order_tax: 					_hash["order"]["basic_order_tax"],
-				measure_amount_after_comment: 	_hash["order"]["measure_amount_after_comment"],
-				installed_amount_after_comment: _hash["order"]["installed_amount_after_comment"],
-				measure_comment: 								_hash["order"]["measure_comment"],
-				measure_raty: 									_hash["order"]["measure_raty"],
-				installed_raty: 								_hash["order"]["installed_raty"],
-				service_measure_amount: 				_hash["order"]["service_measure_amount"],
-				service_installed_amount: 			_hash["order"]["service_installed_amount"],
-				basic_tax: 											_hash["order"]["basic_tax"],
-				deduct_installed_cost: 					_hash["order"]["deduct_installed_cost"],
-				deduct_measure_cost: 						_hash["order"]["deduct_measure_cost"],
-				sale_commission: 								_hash["order"]["sale_commission"],
-				intro_commission: 							_hash["order"]["intro_commission"],
-			})
-
-			self.customer.update_attributes({
-				longitude: 	_hash["order"]["longitude"],
-				latitude: 	_hash["order"]["latitude"],
-				address: 		_hash["order"]["address"],
-				tel:        _hash["order"]["tel"],
-				province:   _hash["order"]["province"],
-				city:       _hash["order"]["city"],
-				area:       _hash["order"]["area"],
-				street:  		_hash["order"]["street"]
-			})
+			(self.attributes.keys & _hash["orders"].keys).each do |ele|
+				order.send("#{ele}=", _hash["orders"][ele]) 
+			end
+			self.booking_date 						= Time.at(_hash["booking_date"].to_i)
+			self.install_date 						= Time.at(_hash["install_date"].to_i)
+			self.cgj_company_id 					= _hash["company_id"]
+			self.cgj_facilitator_id 			= _hash["facilitator_id"]
+			self.cgj_customer_service_id  = _hash["customer_service_id"]
+			self.save
 		end
 	end
 

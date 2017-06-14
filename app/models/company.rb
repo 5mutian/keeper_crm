@@ -2,8 +2,6 @@ class Company < Account
 
   belongs_to :parent, class_name: 'Account'
 
-  # after_save :sync_cgj
-
   def sync_cgj
     res = Cgj.create_company(cgj_hash)
     _hash = JSON res.body

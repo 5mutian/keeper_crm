@@ -34,7 +34,7 @@ class Api::Sync::CustomersController < Api::Sync::BaseController
 	private
 
 	def customer_params
-		params[:customer].permit(:name, :tel, :province, :city, :area, :street, :address, :remark)
+		params[:results].permit(:name, :tel, :province, :city, :area, :street, :address, :remark)
 	end
 
 end

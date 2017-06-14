@@ -33,29 +33,29 @@ def init_attrs
 	end
 
 	def sync_cgj
-		res = Cgj.create_order(cgj_hash)
+		res = Cgj.create_order(order.cgj_hash)
 		_hash = JSON res.body
 		if _hash["code"] == 200
-			_hash["order"].delete("id")
-			(attributes.keys & _hash["order"].keys).each do |ele|
-				self.send("#{ele}=", _hash["order"][ele]) 
+			_order = _hash["order"].except("id", "created_at", "updated_at")
+			(attributes.keys & _order.keys).each do |ele|
+				self.send("#{ele}=", _order[ele]) 
 			end
-			self.booking_date 						= Time.at(_hash["order"]["booking_date"].to_i)
-			self.install_date 						= Time.at(_hash["order"]["install_date"].to_i)
-			self.cgj_company_id 					= _hash["order"]["company_id"]
-			self.cgj_facilitator_id 			= _hash["order"]["facilitator_id"]
-			self.cgj_customer_service_id  = _hash["order"]["customer_service_id"]
+			self.booking_date 						= Time.at(_order["booking_date"].to_i)
+			self.install_date 						= Time.at(_order["install_date"].to_i)
+			self.cgj_company_id 					= _order["company_id"]
+			self.cgj_facilitator_id 			= _order["facilitator_id"]
+			self.cgj_customer_service_id  = _order["customer_service_id"]
 			self.save
 
 			self.customer.update_attributes({
-				longitude: 	_hash["order"]["longitude"],
-				latitude: 	_hash["order"]["latitude"],
-				address: 		_hash["order"]["address"],
-				tel:        _hash["order"]["tel"],
-				province:   _hash["order"]["province"],
-				city:       _hash["order"]["city"],
-				area:       _hash["order"]["area"],
-				street:  		_hash["order"]["street"]
+				longitude: 	_order["longitude"],
+				latitude: 	_order["latitude"],
+				address: 		_order["address"],
+				tel:        _order["tel"],
+				province:   _order["province"],
+				city:       _order["city"],
+				area:       _order["area"],
+				street:  		_order["street"]
 			})
 		end
 	end

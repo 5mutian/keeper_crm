@@ -1,4 +1,5 @@
 class WalletLog < ActiveRecord::Base
+  include Pingppable
 
 	# trade_type: alipay, wx
 

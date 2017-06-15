@@ -13,9 +13,9 @@ class ValidCode < ActiveRecord::Base
 
 	def sms_hash
 		{
-			to: mobile,
-			project: APP_CONFIG['submail_valid_code'],
-			vars: {code: code}
+			to: 			mobile,
+			project: 	ENV['submail_valid_code'],
+			vars: 		{code: code}
 		}
 	end
 

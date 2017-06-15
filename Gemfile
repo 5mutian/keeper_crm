@@ -63,3 +63,7 @@ gem 'carrierwave'
 gem 'carrierwave-base64'
 gem 'carrierwave-qiniu', '~> 1.1.0'
 gem 'qiniu-rs'
+
+gem 'figaro'
+
+gem 'pingpp'

@@ -2,7 +2,7 @@ require 'rest-client'
 
 module Submail
 
-	OPTS = {appid: APP_CONFIG['submail_appid'], signature: APP_CONFIG['submail_signature']}
+	OPTS = {appid: ENV['submail_appid'], signature: ENV['submail_signature']}
 
   def self.send(sub={}, project="code")
   	options = OPTS.merge(sub)

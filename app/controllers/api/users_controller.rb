@@ -81,7 +81,7 @@ class Api::UsersController < Api::BaseController
 	#   msg: [String] msg_infos	
 	def update_me
 		if @current_user.update_attributes(my_params)
-			render json: {status: :success, msg: '更新成功'}
+			render json: {status: :success, current_user: @current_user.infos, msg: '更新成功'}
     else
     	render json: {status: :failed, msg: @current_user.errors.messages.values.first}
 		end

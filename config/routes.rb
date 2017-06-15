@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 	  resources :clues # 线索管理
   	resources :stores do # 门店管理
       collection do
+        post :add_region
         get :get_regions
       end 
     end

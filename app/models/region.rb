@@ -16,4 +16,11 @@ class Region < ActiveRecord::Base
 			children: stores.map(&:select_hash)
 		}
 	end
+
+	def to_hash
+		{
+			id: id,
+			name: name
+		}
+	end
 end

@@ -1,4 +1,4 @@
-# 渠道门店管理
+# 门店管理
 class Api::StoresController < Api::BaseController
 	before_filter :get_store, only: [:update, :update_products]
 	# 门店列表
@@ -96,6 +96,27 @@ class Api::StoresController < Api::BaseController
 		@store.update_attributes(product_ids: params[:product_ids])
 
 		render json: {status: :success, store: @store, products: @store.proeducts_hash, msg: '更新成功'}
+	end
+
+	# 添加新渠道
+	# 
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	region_name: [String] 渠道名称
+	# Return
+	# 	status: [String] success
+	# 	data: {id: , :name}
+	# 	msg: [String] 创健成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos
+	def add_region
+		region = @account.regions.create(name: params[:region_name])
+
+		render json: {status: :success, data: region.to_hash, mesg: '创健成功'}
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	def destroy

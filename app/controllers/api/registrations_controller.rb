@@ -11,6 +11,7 @@ class Api::RegistrationsController < Api::BaseController
 	#   user[name]: [String] 用户姓名
 	#   user[mobile]: [String] 用户手机
 	#   user[password]: [String] 用户密码
+	# 	valid_code: [String] 注册码证码
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 您已成功注册，请登录 
@@ -20,6 +21,12 @@ class Api::RegistrationsController < Api::BaseController
 	def create
 		raise '企业类型错误' unless ['Account', 'Dealer'].include?(params[:account][:type])
 		raise '手机号已被使用' unless User.where(mobile: user_params[:mobile]).empty?
+
+		vcode = ValidCode.where(mobile: user_params[:mobile], code: params[:valid_code]).last
+
+		raise '请输入正确的验证码' unless vcode.try(:state)
+
+		vcode.update_attributes(state: false)
 
 		account = Account.new(account_params)
 

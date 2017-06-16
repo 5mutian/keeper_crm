@@ -19,6 +19,8 @@ class Api::ValidCodesController < Api::BaseController
 		
 		ValidCode.create(mobile: params[:mobile], _type: 1)
 
+		render json: {status: :success, msg: '发送成功'}
+
 		rescue => e
 			render json: {status: :failed, msg: e.message}
 	end

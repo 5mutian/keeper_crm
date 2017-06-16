@@ -144,10 +144,14 @@ class User < ActiveRecord::Base
   def expend
     wallet_logs.where(state: 1, transfer: 1).map(&:amount).sum.to_f.round(2)
   end
+
+  def _avatar
+    avatar_url ? avatar_url + "?#{Time.now.to_i}" : nil
+  end
   # ###########################
   # 登录后给到所有的用户信息
   def infos
-    attributes.merge(account_type: type, wallet: wallet, avatar_url: avatar_url + "?#{Time.now.to_i}")
+    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar)
   end
 
 end

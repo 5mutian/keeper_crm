@@ -22,7 +22,6 @@ class Api::StoresController < Api::BaseController
 	#
 	# Params
 	# 	access_token: [String] authenication_token
-	# 	region[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
 	#   store[region_id]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
@@ -37,12 +36,6 @@ class Api::StoresController < Api::BaseController
 	def create
 		store = Store.new(store_params)
 
-		if params[:region][:name]
-			region = Region.create(name: params[:region][:name], account_id: @current_user.account_id)
-			store.region = region
-			store.account = region.account
-		end
-
 		if store.save
 			render json: {status: :success, msg: '创建成功'}
     else
@@ -54,7 +47,6 @@ class Api::StoresController < Api::BaseController
 	#
 	# Params
 	# 	access_token: [String] authenication_token
-	# 	region[name]: [String] 渠道名称
 	#   store[name]: [String] 门店名称
 	#   store[region_id]: [String] 选择渠道
 	#  	store[contact]: [String] 联系人
@@ -67,11 +59,6 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def update
-		if params[:region][:name]
-			region = Region.create(name: params[:region][:name], account_id: @current_user.account_id)
-			store_params[:region_id] = region.id
-		end
-
 		if @store.update_attributes(store_params)
 			render json: {status: :success, msg: '更新成功'}
     else

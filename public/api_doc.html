@@ -360,7 +360,7 @@
       <li>
         <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
         <a href='#controller-06b3fe9b6ba3aacd8bbf16d1d5ddb91a'>
-          渠道门店管理
+          门店管理
         </a>
 
         <ul class='ul-controller'>
@@ -389,6 +389,15 @@
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-create'>
                 创建门店
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-add_region'>
+                添加新渠道
               </a>
             </li>
           
@@ -4673,7 +4682,7 @@
   </div>
 
   <div class='controller' id='controller-06b3fe9b6ba3aacd8bbf16d1d5ddb91a'>
-    <h2 class='controller-title'>渠道门店管理</h2>
+    <h2 class='controller-title'>门店管理</h2>
 
     <div class='action'>
       
@@ -4942,25 +4951,6 @@
 
           <td>
             authenication_token
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>region[name]:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            渠道名称
 
             
           </td>
@@ -5251,25 +5241,6 @@
 
         <tr>
           
-            <td>region[name]:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            渠道名称
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
             <td>store[name]:</td>
           
             <td>String</td>
@@ -5500,6 +5471,227 @@
       
 
       <div class='action action-odd'
+          id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-add_region'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>添加新渠道</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/stores/add_region</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>region_name:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            渠道名称
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>data: {id: , :</td>
+          
+            <td></td>
+          
+
+          <td>
+            name}
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            创健成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
           id='action-06b3fe9b6ba3aacd8bbf16d1d5ddb91a-update_products'>
 
         <h4>功能说明</h4>

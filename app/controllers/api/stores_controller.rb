@@ -14,8 +14,8 @@ class Api::StoresController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		stores = @current_user.account.stores.includes(:region).page(params[:page]).per(params[:per])
-		render json: {status: :success, list: stores.map(&:to_hash), total: stores.total_count, regions: @current_user.account.regions}
+		stores = @account.stores.includes(:region).page(params[:page]).per(params[:per])
+		render json: {status: :success, list: stores.map(&:to_hash), total: stores.total_count}
 	end
 
 	# 创建门店
@@ -34,7 +34,7 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def create
-		store = Store.new(store_params)
+		store = @account.stores.new(store_params)
 
 		if store.save
 			render json: {status: :success, msg: '创建成功'}

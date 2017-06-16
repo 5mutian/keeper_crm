@@ -317,6 +317,27 @@
     
       <li>
         <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-5e9fa7442c47382e6e582ddb75dcf502'>
+          预备信息
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-5e9fa7442c47382e6e582ddb75dcf502-index'>
+                获取
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
         <a href='#controller-4e716da1e41370f7fe481b49b6449058'>
           注册
         </a>
@@ -4084,6 +4105,240 @@
 
           <td>
             创建成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-5e9fa7442c47382e6e582ddb75dcf502'>
+    <h2 class='controller-title'>预备信息</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-5e9fa7442c47382e6e582ddb75dcf502-index'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>获取</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/pres</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>stores_tree:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            stores_tree
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>regions:</td>
+          
+            <td>Hash</td>
+          
+
+          <td>
+            regions
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            成功
 
             
           </td>

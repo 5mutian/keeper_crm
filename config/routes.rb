@@ -62,6 +62,7 @@ Rails.application.routes.draw do
         patch :update_apply
       end
     end
+    resources :pres, only: [:index]
 	end
 
 end

@@ -14,7 +14,7 @@ class Api::StrategiesController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		clues = @current_user.account.strategies.page(params[:page])
+		clues = @current_user.account.strategies.order(pound: :desc, updated_at: :desc).page(params[:page])
 
 		if params[:page].to_i < 2
 			render json: {status: :success, list: clues, total: clues.count, regions: @current_user.account.regions.map(&:select_hash)}
@@ -37,6 +37,7 @@ class Api::StrategiesController < Api::BaseController
 	#   strategy[rate]: [Float] 提成
 	#   strategy[discount]: [Float] 折扣
 	# 	strategy[rebate]: [Float] 返利
+	# 	strategy[pound]: [Integer] 镑值
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -106,7 +107,7 @@ class Api::StrategiesController < Api::BaseController
 	end
 
 	def strategy_params
-		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title, :province, :city, :area, :region_id)
+		params[:strategy].permit(:start_at, :end_at, :rate, :discount, :rebate, :title, :province, :city, :area, :region_id, :pound)
 	end
 
 end

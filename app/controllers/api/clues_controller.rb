@@ -14,7 +14,7 @@ class Api::CluesController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		clues = @current_user.clues.page(params[:page])
+		clues = @current_user.clues.order(updated_at: :desc).page(params[:page])
 
 		render json: {status: :success, list: clues, total: @current_user.clues.count}
 	end

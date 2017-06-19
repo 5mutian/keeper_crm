@@ -34,8 +34,12 @@ class Account < ActiveRecord::Base
 
 	# 获取有效的策略信息
 	def get_valid_strategy(province, city, area)
-		valid_s = strategies.where(province: province, city: city, area: area).first
-		valid_s ? valid_s : strategies.first
+		valid_s = strategies.valid.where(province: province, city: city, area: area).order(pound: :desc, updated_at: :desc).first
+		valid_s ? valid_s : common_strategy
+	end
+
+	def common_strategy
+		strategies.valid.order(pound: :desc, updated_at: :desc).first
 	end
 
 	def stores_tree

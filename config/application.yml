@@ -1,3 +1,5 @@
+my_host: 'http://www.salesgj.com'
+
 # qiniu 文件服务
 qiniu_ak: 'D2HoWxWkb2MHhZVO5J5902DyeGNA05csQJOomlg0'
 qiniu_sk: 'TmrvwiSTzBO9snZ2dg8JOYuCQA19IetyN-gZpZT8'

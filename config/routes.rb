@@ -65,4 +65,10 @@ Rails.application.routes.draw do
     resources :pres, only: [:index]
 	end
 
+  resources :payments, only: [] do
+    collection do
+      get :callback
+    end
+  end
+
 end

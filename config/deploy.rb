@@ -2,8 +2,8 @@
 lock "3.8.1"
 
 #server "deploy_local", roles: [:web, :app, :db], primary: true
-server "staging", roles: [:web, :app, :db], primary: true
-# server "production", roles: [:web, :app, :db], primary: true
+# server "staging", roles: [:web, :app, :db], primary: true
+server "prod", roles: [:web, :app, :db], primary: true
 set :application, 'keeper-crm'
 #set :application, "dev-chuang"
 #set :repo_url, 'git@192.168.0.164:/srv/repo/api-chuang.git'
@@ -14,7 +14,8 @@ set :repo_url, "git@github.com:5mutian/keeper_crm.git"
 # Default deploy_to directory is /var/www/my_app_name
 #set :deploy_to, "/home/server/#{fetch(:application)}"
 
-set :user,            'server'
+# set :user,            'server'
+set :user,            'deploy'
 set :puma_threads,    [4, 16]
 set :puma_workers,    2
 

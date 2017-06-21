@@ -651,6 +651,27 @@
 
       </li>
     
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-8048d0a47743742dc33f83d16352ecbf'>
+          微信
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-8048d0a47743742dc33f83d16352ecbf-auth'>
+                授权
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
   </ul>
 </div>
     
@@ -9932,6 +9953,155 @@
 
           <td>
             msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-8048d0a47743742dc33f83d16352ecbf'>
+    <h2 class='controller-title'>微信</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-8048d0a47743742dc33f83d16352ecbf-auth'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>授权</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/wechat/auth</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>code:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            code
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td>error</td>
+        <td>String</td>
+        <td>错误标识</td>
+      </tr>
+
+      <tr>
+        <td>error_description</td>
+        <td>String</td>
+        <td>错误具体描述</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
 
             
           </td>

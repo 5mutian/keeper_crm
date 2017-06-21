@@ -1,5 +1,7 @@
 # 微信
-class Wechat::AuthController < Wechat::BaseController
+class Api::WechatController < Api::BaseController
+  skip_before_filter :authenticate_user
+  skip_before_filter :valid_permission
 
   # 授权
   # 
@@ -8,7 +10,7 @@ class Wechat::AuthController < Wechat::BaseController
   # Return
   # Error
   #   status: [String] failed
-  def login
+  def auth
     raise '无效的code' unless params[:code]
     ok, result = User.wechat_token(params[:code])
     if ok

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   delete 	'logout' => 'sessions#destroy'
 
   namespace :api do
+    namespace :wechat do
+      post :auth
+    end
     resources :valid_codes, only: [:create] do
       collection do
         patch :valid
@@ -68,12 +71,6 @@ Rails.application.routes.draw do
   resources :payments, only: [] do
     collection do
       get :callback
-    end
-  end
-
-  namespace :wechat do
-    namespace :auth do
-      post :login
     end
   end
 

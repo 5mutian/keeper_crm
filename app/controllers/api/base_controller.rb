@@ -2,8 +2,6 @@ class Api::BaseController < ApplicationController
 	before_filter :authenticate_user
 	before_filter :valid_permission
 
-	skip_before_filter :verify_authenticity_token
-
 	def authenticate_user
 		# @user = User.where(role: 'admin').first
 		@current_user = User.includes(:permissions).find_by_access_token(params[:access_token])

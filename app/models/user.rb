@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
   mount_base64_uploader :avatar, AvatarUploader
 
   ROLES = {
-      admin: %w(customers clues orders stores users strategies accounts),
-      saler: %w(clues orders customers),
-      cs: %w(orders customers stores),
-      acct: %w(orders),
+      admin:  %w(customers clues orders stores users strategies accounts),
+      saler:  %w(clues orders customers),
+      cs:     %w(orders customers stores),
+      acct:   %w(orders),
       saler_director: %w(orders)
     }
 
@@ -81,10 +81,10 @@ class User < ActiveRecord::Base
   # format
   def to_hash
     {
-      id:     id,
-      name:   name,
-      mobile: mobile,
-      role:   role,
+      id:       id,
+      name:     name,
+      mobile:   mobile,
+      role:     role,
       children: children_list
     }
   end
@@ -92,9 +92,9 @@ class User < ActiveRecord::Base
   # role menu
   def right_menu
     {
-      "admin"           => {customers: '客户', clues: '线索', orders: '订单', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌'},
-      "saler"           => {customers: '客户', clues: '线索', orders: '订单'},
-      "saler_director"  => {customers: '客户', clues: '线索', orders: '订单'},
+      "admin"           => {customers: '客户', orders: '订单', clues: '线索', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌'},
+      "saler"           => {customers: '客户', orders: '订单', clues: '线索'},
+      "saler_director"  => {customers: '客户', orders: '订单', clues: '线索'},
       "cs"              => {customers: '客户', orders: '订单', stores: '门店'},
       "acct"            => {orders: '订单'}
     }[role]
@@ -152,6 +152,22 @@ class User < ActiveRecord::Base
   # 登录后给到所有的用户信息
   def infos
     attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar)
+  end
+
+  #获取小程序session_key 和 openid
+  def self.wechat_token(code=nil)
+    logger.info "https://api.weixin.qq.com/sns/jscode2session?appid=#{ENV["wechat_app_id"]}&secret=#{ENV["wechat_app_secret"]}&js_code=#{code}&grant_type=5mutian"
+    url = "https://api.weixin.qq.com/sns/jscode2session?appid=#{ENV["wechat_app_id"]}&secret=#{ENV["wechat_app_secret"]}&js_code=#{code}&grant_type=5mutian"
+    info = RestClient.get(url)
+    options = JSON.parse(info)
+    logger.info "*" * 100
+    logger.info options
+    logger.info "*" * 100
+    if options.has_key?("session_key")
+      return [true, options]
+    else
+      return [false, "无效的code"]
+    end
   end
 
 end

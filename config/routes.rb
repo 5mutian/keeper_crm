@@ -71,4 +71,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :wechat do
+    namespace :auth do
+      post :login
+    end
+  end
+
 end

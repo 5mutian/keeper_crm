@@ -66,4 +66,6 @@ gem 'qiniu-rs'
 
 gem 'figaro'
 
+gem 'weixin_authorize', git: "https://github.com/lanrion/weixin_authorize.git"
+
 gem 'pingpp'

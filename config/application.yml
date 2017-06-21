@@ -21,8 +21,6 @@ wechat_app_secret: '92638679efd96e9033fcbecf62eed460'
 
 
 
-
-
 # CGJ
 # staging
 cgj_host:     'http://192.168.0.164:8080'

@@ -187,6 +187,8 @@ GEM
     rake (12.0.0)
     rdoc (4.3.0)
     redis (3.3.3)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -264,6 +266,7 @@ DEPENDENCIES
   qiniu-rs
   rack-cors
   rails (= 4.2.8)
+  redis-namespace
   rest-client
   roo (~> 2.7.0)
   sass-rails (~> 5.0)

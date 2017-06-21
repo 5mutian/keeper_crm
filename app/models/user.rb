@@ -154,17 +154,14 @@ class User < ActiveRecord::Base
     attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar)
   end
 
-  #获取小程序session_key 和 openid
   def self.wechat_token(code=nil)
-    logger.info "https://api.weixin.qq.com/sns/jscode2session?appid=#{ENV["wechat_app_id"]}&secret=#{ENV["wechat_app_secret"]}&js_code=#{code}&grant_type=5mutian"
-    url = "https://api.weixin.qq.com/sns/jscode2session?appid=#{ENV["wechat_app_id"]}&secret=#{ENV["wechat_app_secret"]}&js_code=#{code}&grant_type=5mutian"
+    url  = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=#{ENV["wechat_app_id"]}&secret=#{ENV["wechat_app_secret"]}&code=#{code}&grant_type=authorization_code"
     info = RestClient.get(url)
-    options = JSON.parse(info)
-    logger.info "*" * 100
-    logger.info options
-    logger.info "*" * 100
-    if options.has_key?("session_key")
-      return [true, options]
+    res  = JSON(info)
+    if res.has_key?("openid")
+      return [true, res]
+      # user_url = "https://api.weixin.qq.com/sns/userinfo?scope=snsapi_userinfo&access_token=#{res["access_token"]}&openid=#{res["openid"]}&lang=zh_CN"
+      # user_info = RestClient.get(user_url)
     else
       return [false, "无效的code"]
     end

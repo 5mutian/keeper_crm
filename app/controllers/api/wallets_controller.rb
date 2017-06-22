@@ -27,8 +27,7 @@ class Api::WalletsController < Api::BaseController
 	# Error
 	#   status: [String] failed
  	def recharge
- 		wlog   = WalletLog.new(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 0, state: 0, amount: params[:amount], total: @current_user.wallet_total + params[:amount].to_f)
- 		
+ 		wlog = WalletLog.new(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 0, state: 0, amount: params[:amount], total: @current_user.wallet_total + params[:amount].to_f)
  		if wlog.save
 	 		charge = wlog.generate_pay
 
@@ -38,8 +37,6 @@ class Api::WalletsController < Api::BaseController
 	 	else
 	 		render json: {status: :failed, msg: '重新提交' }
 	 	end
- 		rescue => e
-      render json: {status: :failed, msg: e.message}
  	end
 
  	# 提现

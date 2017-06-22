@@ -8,7 +8,8 @@ class Api::SessionsController < Api::BaseController
 	# Params
 	#   login: [String] 用户手机
 	#   password: [String] 用户密码
-	# 	open_id: [String] open_id
+	# 	open_id: [String] wechat_open_id
+	#   wx_access_token: [String] wechat_access_token
 	# Return
 	# 	status: [String] success
 	#   current_user: [Hash] current_user infos
@@ -20,7 +21,9 @@ class Api::SessionsController < Api::BaseController
 		user = User.find_by_mobile(params[:login])
     #authenticate是has_secure_password引入的一个方法，用来判断user的密码与页面中传过来的密码是否一致
     if user && user.authenticate(params[:password])
+    	
     	user.update(open_id: params[:open_id]) if params[:open_id]
+    	
     	materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
       render json: {
       	status: :success, 

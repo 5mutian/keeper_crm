@@ -66,6 +66,14 @@ Rails.application.routes.draw do
       end
     end
     resources :pres, only: [:index]
+
+    resources :wallets, only: [] do
+      collection do
+        get  :config
+        post :recharge
+        post :withdraw
+      end
+    end
 	end
 
   resources :payments, only: [] do

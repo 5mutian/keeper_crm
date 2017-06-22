@@ -16,7 +16,7 @@ class WalletLog < ActiveRecord::Base
     3  => 'withdraw'        # 提现
   }
 
-  validates :trade_type, inclusion: {in: [nil, 'alipay', 'wx'], message: '不在所选范围之内'} 
+  validates :trade_type, inclusion: {in: [nil, 'alipay', 'wx_pub'], message: '不在所选范围之内'} 
 
   validates_numericality_of :amount, greater_than_or_equal_to: 0.01, message: "流水金额大于0.01"
   validates_numericality_of :total, greater_than_or_equal_to: 0, message: "帐户总额必须大于等于0"
@@ -40,15 +40,16 @@ class WalletLog < ActiveRecord::Base
       channel:  trade_type,
       amount:   amount * 100,
       currency: "cny",
-      extra:    {success_url: "#{ENV['my_host']}/payments/callback"}
+      
     }
   end
 
   def payment_options(remote_ip="127.0.0.1")
     p_hash.merge(
       subject:   '支付/充值',
-      body:      '',
-      client_ip: remote_ip
+      body:      "充值： #{amount}",
+      client_ip: remote_ip,
+      extra:    {open_id: user.open_id}
     )
   end
 

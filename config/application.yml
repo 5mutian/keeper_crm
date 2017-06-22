@@ -11,15 +11,13 @@ submail_signature: 'e7f6e43d1e4058c46e776d7db306fa75'
 submail_valid_code: 'E7WCe4'
 
 # pingpp
-pingpp_api_key: 'sk_test_zbjvHCrTazPOmD8WH4uLSuLK'
+# pingpp_api_key: 'sk_test_zbjvHCrTazPOmD8WH4uLSuLK'
+pingpp_api_key: 'sk_live_v5Sm5OOinjDGKS0e1CyPifLO'
 pingpp_app_id: 'app_COSav900ynfTjrrn'
 
 # wechat
 wechat_app_id: 'wx1211e96e6c279899'
 wechat_app_secret: '92638679efd96e9033fcbecf62eed460'
-
-
-
 
 # CGJ
 # staging
@@ -36,7 +34,3 @@ redis_namespace: "keeper"
 redis_server: "192.168.0.164"
 redis_port: "6379"
 redis_pass: "157196212"
-
-
-
-   

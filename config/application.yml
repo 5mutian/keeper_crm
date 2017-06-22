@@ -32,10 +32,11 @@ cgj_token:    'fced6613dafb456b8d7000e724c76557'
 # cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiIiLCJ0b2tlbiI6ImU1ZmE1YTIyNDMxNzQ0ZGFhZDhlNDljZjE4NzhlYzA2IiwiZXhwIjoyMTI1OTg0NDgwfQ.yEW0TPjRr6DaGerX-BDA7YmsEFR5HpuSIuPJjBIXBe4'
 # cgj_token: 'e5fa5a22431744daad8e49cf1878ec06'
 
-redis_namespace: "chuang"
+redis_namespace: "keeper"
 redis_server: "192.168.0.164"
 redis_port: "6379"
 redis_pass: "157196212"
+
 
 
    

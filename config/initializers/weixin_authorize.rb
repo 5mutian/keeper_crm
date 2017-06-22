@@ -1,5 +1,5 @@
 namespace = "keeper:weixin_authorize"
-redis = Redis.new(host: "127.0.0.1", port: "6379", db: 15)
+redis = Redis.new(:host => ENV["redis_server"], :port => ENV["redis_port"], :db => 15, password: ENV["redis_pass"])
 
 exist_keys = redis.keys("#{namespace}:*")
 exist_keys.each{|key|redis.del(key)}

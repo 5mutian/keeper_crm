@@ -16,7 +16,7 @@ class Api::CustomersController < Api::BaseController
 	def index
 		customers = @current_user.customers.page(params[:page]).per(params[:per])
 
-		render json: {status: :success, list: customers, total: @current_user.customers.total_count}
+		render json: {status: :success, list: customers, total: customers.total_count}
 	end
 
 	# 创建客户

@@ -4,7 +4,7 @@ class Api::BaseController < ApplicationController
 
 	def authenticate_user
 		# @user = User.where(role: 'admin').first
-		@current_user = User.includes(:permissions).find_by_access_token(params[:access_token])
+		@current_user = User.includes(:account, :permissions).find_by_access_token(params[:access_token])
 		raise '用户不存在' unless @current_user
 		raise '用户已禁用' unless @current_user.is_valid?
 

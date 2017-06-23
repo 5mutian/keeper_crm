@@ -16,7 +16,7 @@ class Api::CluesController < Api::BaseController
 	def index
 		clues = @current_user.clues.order(updated_at: :desc).page(params[:page])
 
-		render json: {status: :success, list: clues, total: @current_user.clues.total_count}
+		render json: {status: :success, list: clues, total: clues.total_count}
 	end
 
 	# 创建线索

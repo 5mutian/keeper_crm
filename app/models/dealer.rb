@@ -9,7 +9,7 @@ class Dealer < Account
   end
 
   def wait_valid
-  	Apply.where(state: 0, user_id: admin.id).map(&:wait_hash)
+  	Apply.includes(:user).where(state: 0, user_id: admin.id).map(&:wait_hash)
   end
 
   def select_companies

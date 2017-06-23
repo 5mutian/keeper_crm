@@ -139,7 +139,33 @@ class Api::AccountsController < Api::BaseController
 	end
 
 
+	# 更新企业资料
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	account[name]: [String] 企业名称
+	# 	account[address]: [String] 企业地址
+	# 	account[logo]: [File] 企业图片
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def update_me
+		if @account.update_attributes(account_params)
+			render json: {status: :success, account: @account, msg: '更新成功'}
+    else
+    	render json: {status: :failed, msg: @account.errors.messages.values.first}
+		end
+	end
+
+
 	private
+
+	def account_params
+		params[:account].permit(:name, :address, :logo)
+	end
 
 	def company_params
 		params[:company].permit(:name, :logo)

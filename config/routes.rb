@@ -63,6 +63,7 @@ Rails.application.routes.draw do
         post :add_company
         post :apply_co_companies
         patch :update_apply
+        patch :update_me
       end
     end
     resources :pres, only: [:index]

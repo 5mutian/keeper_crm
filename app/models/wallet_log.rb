@@ -16,7 +16,7 @@ class WalletLog < ActiveRecord::Base
     3  => 'withdraw'        # 提现
   }
 
-  validates :trade_type, inclusion: {in: [nil, 'alipay', 'wx_pub'], message: '不在所选范围之内'} 
+  validates :trade_type, inclusion: {in: [nil, 'alipay_pc_direct', 'wx_pub'], message: '不在所选范围之内'} 
 
   validates_numericality_of :amount, greater_than_or_equal_to: 0.01, message: "流水金额大于0.01"
   validates_numericality_of :total, greater_than_or_equal_to: 0, message: "帐户总额必须大于等于0"
@@ -49,7 +49,7 @@ class WalletLog < ActiveRecord::Base
       subject:   '支付/充值',
       body:      "充值： #{amount}",
       client_ip: remote_ip,
-      extra:    {open_id: user.open_id}
+      extra:    extra_hash
     )
   end
 
@@ -59,6 +59,16 @@ class WalletLog < ActiveRecord::Base
       recipient:   user.open_id,
       description: "提现到微信"
     )
+  end
+
+  def extra_hash
+    case trade_type
+    when 'wx_pub'
+      {open_id: user.open_id}
+    when 'alipay_pc_direct'
+      # {success_url: "http://#{ENV['my_host']}/payments/callback"}
+      {success_url: "http://api.chuanggj.com/payments/callback"}
+    end
   end
 
 end

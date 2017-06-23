@@ -18,6 +18,8 @@ pingpp_app_id: 'app_COSav900ynfTjrrn'
 # wechat
 wechat_app_id: 'wx1211e96e6c279899'
 wechat_app_secret: '92638679efd96e9033fcbecf62eed460'
+wechat_token: ''
+
 
 # CGJ
 # staging

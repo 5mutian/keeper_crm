@@ -21,7 +21,7 @@ class Api::WalletsController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	#   amount: [Integer] 金额
-	# 	trade_type: [String] 支付方式 wx_pub|alipay
+	# 	trade_type: [String] 支付方式 wx_pub|alipay_pc_direct
 	# Return
 	# 	status: [String] success
 	# Error

@@ -14,13 +14,10 @@ class Api::StrategiesController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		clues = @current_user.account.strategies.order(pound: :desc, updated_at: :desc).page(params[:page])
+		strategies = @current_user.account.strategies.order(pound: :desc, updated_at: :desc).page(params[:page])
 
-		if params[:page].to_i < 2
-			render json: {status: :success, list: clues, total: clues.count, regions: @current_user.account.regions.map(&:select_hash)}
-		else
-			render json: {status: :success, list: clues, total: clues.count}
-		end
+
+		render json: {status: :success, list: strategies, total: strategies.total_count}
 	end
 
 	# 创建策略

@@ -16,7 +16,6 @@ class Api::StrategiesController < Api::BaseController
 	def index
 		strategies = @current_user.account.strategies.order(pound: :desc, updated_at: :desc).page(params[:page])
 
-
 		render json: {status: :success, list: strategies, total: strategies.total_count}
 	end
 

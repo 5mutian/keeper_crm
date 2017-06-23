@@ -23,6 +23,9 @@ class Order < ActiveRecord::Base
 	has_one :introducer, foreign_key: "introducer_id", class_name: 'User'
 	has_one :strategy_result, class_name: 'StrategyResult'
 
+	belongs_to :_region, foreign_key: "region_id", class_name: 'Region'
+	belongs_to :store
+
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
 	after_update :execute_strategy
@@ -115,8 +118,13 @@ def init_attrs
 		}
 	end
 
+	def company
+		Company.find_by_cgj_id cgj_company_id
+	end
+
 	def to_hash
 		{
+			company_name:   company.try(:name),
 			square: 				expected_square,
 			province: 			province,
 			city: 					city,
@@ -134,6 +142,8 @@ def init_attrs
 			id: 						id,
 			customer: 			user_id,
 			region: 				region,
+			region_name:    _region.try(:name),
+			store_name: 		store.try(:name),
 			strategy_result: strategy_result
 		}
 	end

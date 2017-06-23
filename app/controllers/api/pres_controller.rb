@@ -14,7 +14,7 @@ class Api::PresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def index
-		render json: {status: :success, stores_tree: @account.stores_tree, regions: @account.regions}
+		render json: {status: :success, stores_tree: @account.stores_tree, regions: @account.regions, companies: @account.select_companies}
 	end
 
 end

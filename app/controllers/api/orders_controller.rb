@@ -12,7 +12,7 @@ class Api::OrdersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		orders = @current_user.orders.includes(:customer).order(updated_at: :desc).page(params[:page])
+		orders = @current_user.orders.includes(:customer, :_region, :store).order(updated_at: :desc).page(params[:page])
 
 		render json: {status: :success, list: orders.map(&:to_hash), total: orders.total_count}
 	end
@@ -44,6 +44,8 @@ class Api::OrdersController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
 	def create
+		raise '企业用户无法下单' if @current_user.account.type == 'Account'
+		
 		order = Order.new(order_params.merge(owner_params))
 		customer = Customer.find_or_initialize_by(tel: params[:customer][:tel])
 		customer.attributes = customer.new_record? ? customer_params.merge(owner_params) : customer_params.merge(owner_params).merge(id: customer.id)
@@ -59,6 +61,9 @@ class Api::OrdersController < Api::BaseController
 		else
 			render json: {status: :failed, msg: customer.errors.messages.values.first}
 		end 
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	def destroy

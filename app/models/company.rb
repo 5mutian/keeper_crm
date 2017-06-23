@@ -3,14 +3,18 @@ class Company < Account
   belongs_to :parent, class_name: 'Account'
 
   def sync_cgj
-    res = Cgj.create_company(cgj_hash)
+    res = Cgj.create_company(c.cgj_hash)
     _hash = JSON res.body
 
     if _hash["code"] == 200
-      self.update_attributes(cgj_id: _hash["result"]["id"])
-
       manager = _hash["result"]["manager"]
-      self.admin.update_attributes(cgj_user_id: manager["id"]) if manager
+      if manager
+        self.update_attributes(cgj_id: _hash["result"]["id"])
+        self.admin.update_attributes(cgj_user_id: manager["id"])
+      else
+        self.update_attributes(cgj_id: _hash["result"]["company_id"])
+        self.admin.update_attributes(cgj_user_id: _hash["result"]["id"])
+      end
     end
   end
 

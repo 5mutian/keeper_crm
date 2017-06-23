@@ -153,11 +153,14 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
 	def update_me
+		raise '无权操作' unless @current_user != @account.admin
 		if @account.update_attributes(account_params)
 			render json: {status: :success, account: @account, msg: '更新成功'}
     else
     	render json: {status: :failed, msg: @account.errors.messages.values.first}
 		end
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 

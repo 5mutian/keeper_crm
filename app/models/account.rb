@@ -61,6 +61,7 @@ class Account < ActiveRecord::Base
 			name: 				name,
 			admin_name: 	admin.try(:name),
 			admin_mobile: admin.try(:mobile),
+			logo_url:     logo_url,
 			state:        '通过'
 		}
 	end

@@ -52,29 +52,28 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def add_company
-		raise '无权操作'      unless @account.type == 'Account'
-		raise '请输入手机号码' unless admin_params[:mobile]
-		raise '名称已被占用'   if Account.where(name: company_params[:name]).count > 0
- 
-		user    = User.find_or_initialize_by(mobile: admin_params[:mobile])
-		company = Company.find_or_initialize_by(name: company_params[:name], parent_id: @account.id)
+		raise '无权操作'			unless @account.type == 'Account'
+		raise '无效的手机号'		unless admin_params[:mobile].match(/^1[3|4|5|8][0-9]\d{4,8}$/)
+		raise '名称已被占用'		if Account.where(name: company_params[:name]).count > 0
+		raise '手机号已被占用' if User.find_by(mobile: admin_params[:mobile]).try(:account_id).to_i > 0
 
-		company.logo = company_params[:logo]
-		company.save
+		Company.transaction do
+			User.transaction do
+				company      = Company.find_or_initialize_by(name: company_params[:name], parent_id: @account.id)
+				company.logo = company_params[:logo]
+				company.save
 
-		if user.new_record?
-		else
-			raise '手机号已被占用' if user.account != @account
+				user = User.find_or_initialize_by(mobile: admin_params[:mobile])
+				user.name = admin_params[:name]
+				user.password = admin_params[:password]
+				user.role = 'admin'
+				user.account_id = company.id
+				user.save
+				
+				company.sync_cgj
+			end
 		end
 
-		user.name = admin_params[:name]
-		user.password = admin_params[:password]
-		user.role = 'admin'
-		user.account_id = company.id
-		user.save
-		
-		company.sync_cgj
-		
 		render json: {status: :success, msg: '创建成功'}
 
 		rescue => e

@@ -49,8 +49,7 @@ ActiveRecord::Schema.define(version: 20170616071037) do
     t.text     "remark"
     t.integer  "user_id",     null: false
     t.integer  "account_id",  null: false
-    t.integer  "customer_id", null: false
-    t.integer  "clues_id"
+    t.integer  "customer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(version: 20170616071037) do
     t.integer  "customer_id",                                    null: false
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.integer  "ntroducer_id"
     t.string   "introducer_name"
     t.string   "introducer_tel"
     t.integer  "introducer_id"
@@ -221,7 +219,6 @@ ActiveRecord::Schema.define(version: 20170616071037) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "saler_director_id"
-    t.integer  "parent_id"
     t.string   "avatar"
   end
 

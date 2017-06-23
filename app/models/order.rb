@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
 	belongs_to :customer
 
 	has_one :introducer, foreign_key: "introducer_id", class_name: 'User'
+	has_one :strategy_result, class_name: 'StrategyResult'
 
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
@@ -132,7 +133,8 @@ def init_attrs
 			material_id: 		material_id,
 			id: 						id,
 			customer: 			user_id,
-			region: 				region
+			region: 				region,
+			strategy_result: strategy_result
 		}
 	end
 

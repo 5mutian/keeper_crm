@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   ROLES = {
       admin:  %w(customers clues orders stores users strategies accounts),
       saler:  %w(clues orders customers),
-      cs:     %w(orders customers stores),
+      cs:     %w(clues orders customers stores),
       acct:   %w(orders),
-      saler_director: %w(orders)
+      saler_director: %w(clues orders customers)
     }
 
   validates_uniqueness_of :mobile, message: '手机号已被使用'
@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   # ###########################
   # 登录后给到所有的用户信息
   def infos
-    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar)
+    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar, account: account)
   end
 
   def self.wechat_token(code=nil)

@@ -24,7 +24,7 @@ namespace :permissions do
 			saler: %w(clues orders customers),
 			cs: %w(orders customers stores),
 			acct: %w(orders),
-			saler_director: %w(orders)
+			saler_director: %w(clues orders customers)
 		}
 
 		User.where.not(role: 'introducer').each do |u|

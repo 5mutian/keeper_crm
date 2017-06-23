@@ -54,7 +54,8 @@ class Api::AccountsController < Api::BaseController
 	def add_company
 		raise '无权操作'      unless @account.type == 'Account'
 		raise '请输入手机号码' unless admin_params[:mobile]
-
+		raise '名称已被占用'   if Account.where(name: company_params[:name]).count > 0
+ 
 		user    = User.find_or_initialize_by(mobile: admin_params[:mobile])
 		company = Company.find_or_initialize_by(name: company_params[:name], parent_id: @account.id)
 

@@ -13,9 +13,9 @@ class Api::UsersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		users = @current_user.account.users.page(params[:page])
+		users = @current_user.account.users.where(status: 1).page(params[:page])
 
-		render json: {status: :success, list: users.map(&:to_hash), total: users.count}
+		render json: {status: :success, list: users.map(&:to_hash), total: users.total_count}
 	end
 
 	# 用户创建
@@ -34,6 +34,7 @@ class Api::UsersController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
 	def create
+		raise '无效的手机号' unless user_params[:mobile].match(/^1[3|4|5|8][0-9]\d{4,8}$/)
 		user = User.new(user_params)
 		user.password = params[:user][:password]
 		user.account = @current_user.account
@@ -43,6 +44,8 @@ class Api::UsersController < Api::BaseController
     else
     	render json: {status: :failed, msg: user.errors.messages.values.first}
 		end
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 用户更新
@@ -98,11 +101,14 @@ class Api::UsersController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def destroy
+		raise '不能删除自己' if @current_user == @user
 		if @user.update_attributes(status: -1)
 			render json: {status: :success, msg: '更新成功'}
     else
     	render json: {status: :failed, msg: @user.errors.messages.values.first}
 		end
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	private

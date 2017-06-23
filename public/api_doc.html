@@ -173,6 +173,15 @@
               </a>
             </li>
           
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-101a96c16f61117d77e2f8080a168de1-get_saler_directors'>
+                获取企业销售主管信息
+              </a>
+            </li>
+          
         </ul>
 
       </li>
@@ -504,15 +513,6 @@
 
             <li>
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
-              <a href='#action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
-                获取企业销售主管信息
-              </a>
-            </li>
-          
-            
-
-            <li>
-              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-90e2f856c66228f0d33fed3490cd9e31-gen_account_user'>
                 生成企业用户
               </a>
@@ -644,6 +644,36 @@
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-f429bda61462e0a236819d3f9bfaff90-valid'>
                 验证
+              </a>
+            </li>
+          
+        </ul>
+
+      </li>
+    
+      <li>
+        <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+        <a href='#controller-4b8cc15bbc50cbfc1a163c20231e6c56'>
+          钱包
+        </a>
+
+        <ul class='ul-controller'>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-4b8cc15bbc50cbfc1a163c20231e6c56-recharge'>
+                充值
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-4b8cc15bbc50cbfc1a163c20231e6c56-withdraw'>
+                提现
               </a>
             </li>
           
@@ -1483,6 +1513,189 @@
 
           <td>
             更新成功
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
+          id='action-101a96c16f61117d77e2f8080a168de1-get_saler_directors'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>获取企业销售主管信息</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/accounts/get_saler_directors</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>actoken:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            *account code
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            成功
 
             
           </td>
@@ -4828,7 +5041,26 @@
           
 
           <td>
-            open_id
+            wechat_open_id
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>wx_access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            wechat_access_token
 
             
           </td>
@@ -7474,189 +7706,6 @@
       
 
       <div class='action action-odd'
-          id='action-90e2f856c66228f0d33fed3490cd9e31-get_saler_directors'>
-
-        <h4>功能说明</h4>
-        <p class='about text-info'>获取企业销售主管信息</p>
-
-        <h4>请求地址</h4>
-        <p class='about text-info'>/api/sync/accounts/get_saler_directors</p>
-
-        <h4>请求方法</h4>
-        <p class='about text-info'>GET</p>
-
-        <h4>参数说明</h4>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>actoken:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            *account code
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        <h4>正常返回信息</h4>
-        <p class='about text-info'>正常完成时response.status 为 200.</p>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>status:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            success
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>msg:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            成功
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        <h4>出错误时信息</h4>
-        <p class='about text-info'>出错时response.status 为 400.</p>
-        
-<table class='table table-bordered table-striped'>
-  <thead>
-    <th>参数名</th>
-    <th>参数类型</th>
-    <th>描述</th>
-  </thead>
-
-  <tbody>
-    
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>status:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            failed
-
-            
-          </td>
-
-        </tr>
-      
-        
-          
-        
-
-        <tr>
-          
-            <td>msg:</td>
-          
-            <td>String</td>
-          
-
-          <td>
-            msg_infos
-
-            
-          </td>
-
-        </tr>
-      
-    
-  </tbody>
-</table>
-
-
-        
-          
-          
-          
-          
-          
-          
-          
-          <h4>Level</h4>
-          
-            <p>
-              
-                
-              
-            </p>
-          
-        
-          
-        <br /><hr />
-      </div>
-    
-      
-
-      <div class='action action-even'
           id='action-90e2f856c66228f0d33fed3490cd9e31-gen_account_user'>
 
         <h4>功能说明</h4>
@@ -9953,6 +10002,366 @@
 
           <td>
             msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+
+  </div>
+
+  <div class='controller' id='controller-4b8cc15bbc50cbfc1a163c20231e6c56'>
+    <h2 class='controller-title'>钱包</h2>
+
+    <div class='action'>
+      
+        
+    </div>
+    <hr />
+
+    
+      
+
+      <div class='action action-even'
+          id='action-4b8cc15bbc50cbfc1a163c20231e6c56-recharge'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>充值</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/wallets/recharge</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>amount:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            金额
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>trade_type:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            支付方式 wx_pub|alipay_pc_direct
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-odd'
+          id='action-4b8cc15bbc50cbfc1a163c20231e6c56-withdraw'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>提现</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/wallets/withdraw</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>POST</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>amount:</td>
+          
+            <td>Integer</td>
+          
+
+          <td>
+            金额
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
 
             
           </td>

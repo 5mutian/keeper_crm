@@ -31,7 +31,6 @@ Rails.application.routes.draw do
       resources :customers, only: [:create]
       resources :accounts, only: [] do
         collection do
-          get :get_saler_directors
           post :gen_account_user
           post :update_cgj
         end
@@ -59,6 +58,7 @@ Rails.application.routes.draw do
     resources :strategies # 策略管理
     resources :accounts do
       collection do
+        get :get_saler_directors
         get :companies
         post :add_company
         post :apply_co_companies

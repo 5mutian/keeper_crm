@@ -1,6 +1,6 @@
 class Api::BaseController < ApplicationController
 	before_filter :authenticate_user
-	before_filter :valid_permission
+	before_filter :valid_permission, except: [:get_saler_directors]
 
 	def authenticate_user
 		# @user = User.where(role: 'admin').first

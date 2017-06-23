@@ -1,20 +1,6 @@
 # 获取企业信息
 class Api::Sync::AccountsController < Api::Sync::BaseController
 
-	# 获取企业销售主管信息
-	#
-	# Params
-	# 	actoken: [String] *account code
-	# Return
-	# 	status: [String] success
-	# 	msg: [String] 成功
-	# Error
-	#   status: [String] failed
-	#   msg: [String] msg_infos
-	def get_saler_directors
-		render json: {status: :success, list: @account.saler_directors.map(&:to_hash)}
-	end
-
 	# 生成企业用户
 	#
 	# Params

@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
   # ###########################
   # 登录后给到所有的用户信息
   def infos
-    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar, account: account)
+    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar, account: account.attributes.merge(invit_url: account.invit_url))
   end
 
   def self.wechat_token(code=nil)

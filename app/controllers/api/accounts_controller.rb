@@ -1,5 +1,6 @@
 # 品牌商/经销商管理
 class Api::AccountsController < Api::BaseController
+	skip_before_filter :valid_permission, except: [:update_me]
 
 	# 获取企业销售主管信息
 	#

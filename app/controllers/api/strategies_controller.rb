@@ -68,9 +68,9 @@ class Api::StrategiesController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] strategy.errors
 	def update
-		raise 'not update' unless @strategy.state
-		raise 'not update' unless @strategy.start_at
-		raise 'not update' unless DateTime.now < @strategy.start_at
+		raise '策略已失效，无法修改' unless @strategy.state
+		raise '策略已开始，无法修改' unless @strategy.start_at
+		raise '策略已开始，无法修改' unless DateTime.now < @strategy.start_at
 
 		@strategy.update_attributes(strategy_params)
 		

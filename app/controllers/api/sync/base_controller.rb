@@ -1,6 +1,6 @@
 class Api::Sync::BaseController < ApplicationController
 	# before_filter :cgj_user
-	before_filter :valid_account
+	# before_filter :valid_account
 
 	skip_before_filter :verify_authenticity_token
 

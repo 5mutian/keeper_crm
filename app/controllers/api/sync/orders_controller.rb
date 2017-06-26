@@ -14,7 +14,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 
 			unless company
 				company 					= Company.find_or_initialize_by(name: _user["company_name"])
-				company.parent_id = @account.id
+				# company.parent_id = @account.id
 				company.cgj_id 		= _user["company_id"]
 				company.save
 			end
@@ -36,7 +36,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 			end
 
 			customer.user_id 		= user.id
-			customer.account_id = @account.id
+			# customer.account_id = @account.id
 			customer.save
 		end
 
@@ -55,7 +55,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		order.cgj_customer_service_id = _order["customer_service_id"]
 
 		order.user_id 		= user.id
-		order.account_id 	= @account.id
+		order.account_id 	= company.id
 		order.customer_id = customer.id
 
 		order.save

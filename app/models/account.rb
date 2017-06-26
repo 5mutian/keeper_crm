@@ -25,7 +25,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def invit_url
-		"http://10.25.1.126:8081/#/invit?t=#{code}"
+		"http://172.16.0.249:8000/#/invit?t=#{code}"
 	end
 
 	def select_companies

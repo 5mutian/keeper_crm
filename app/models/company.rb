@@ -3,7 +3,7 @@ class Company < Account
   belongs_to :parent, class_name: 'Account'
 
   def sync_cgj
-    res = Cgj.create_company(c.cgj_hash)
+    res = Cgj.create_company(cgj_hash)
     _hash = JSON res.body
 
     if _hash["code"] == 200

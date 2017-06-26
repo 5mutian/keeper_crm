@@ -1,6 +1,6 @@
 # 门店管理
 class Api::StoresController < Api::BaseController
-	before_filter :get_store, only: [:update, :update_products]
+	before_filter :get_store, only: [:update_me, :update_products]
 	# 门店列表
 	# 
 	# Params
@@ -58,7 +58,7 @@ class Api::StoresController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	#   msg: [String] msg_infos
-	def update
+	def update_me
 		if @store.update_attributes(store_params)
 			render json: {status: :success, msg: '更新成功'}
     else

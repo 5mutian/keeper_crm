@@ -48,10 +48,8 @@ Rails.application.routes.draw do
       end
     end
   	resources :stores do # 门店管理
-      member do
-        post :update
-      end
       collection do
+        post :update_me
         post :add_region
         get :get_regions
       end 

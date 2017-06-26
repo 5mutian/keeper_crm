@@ -7,18 +7,21 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 	# Error
 	def update_cgj
 		_user = params["results"].delete("customer_info")
-		user  = User.find_or_initialize_by(mobile: _user["tel"])
 
-		unless user
-			company = Company.find_by_cgj_id(_user["company_id"])
+		user  	= User.find_or_initialize_by(mobile: _user["tel"])
+		company = Company.find_by_cgj_id(_user["company_id"])
 
-			unless company
-				company 					= Company.find_or_initialize_by(name: _user["company_name"])
-				# company.parent_id = @account.id
-				company.cgj_id 		= _user["company_id"]
-				company.save
-			end
+		unless company
+			company 					= Company.find_or_initialize_by(name: _user["company_name"])
+			company.cgj_id 		= _user["company_id"]
+			company.save
+		end
 
+
+		if user
+			user.update(account_id: company.id) unless user.account
+			user.update(cgj_user_id: params["results"]["customer_id"]) unless user.cgj_user_id
+		else
 			user.name   			= _user["real_name"]
 			user.password 		= 'CRM123'
 			user.role 				= 'admin'

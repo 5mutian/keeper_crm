@@ -35,7 +35,16 @@ class Api::RegistrationsController < Api::BaseController
 			user.account = account
 			user.role    = 'admin'
 			if user.save
-				render json: {status: :success, msg: '您已成功注册，请登录'}
+				materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
+	      render json: {
+	      	status: :success, 
+	      	current_user: user.infos, 
+	      	token: user.t_value, 
+	      	menu: user.right_menu, 
+	      	companies: user.account.select_companies, 
+	      	materials: materials
+	      }
+				# render json: {status: :success, msg: '您已成功注册，请登录'}
 			else
 				render json: {status: :failed, msg: user.errors.first.last}
 			end

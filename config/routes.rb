@@ -83,6 +83,7 @@ Rails.application.routes.draw do
 
     resources :wallets, only: [] do
       collection do
+        get :me
         get  :config
         post :recharge
         post :withdraw

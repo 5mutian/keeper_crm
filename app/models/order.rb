@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
 		'installed' 							=> '已安装', 
 		'completed' 							=> '完成交易', 
 		'canceled'								=> '已取消', 
-		'confirm_installed' 			=> '管理员确认安装'
+		'confirm_installed' 			=> '管理员已确认安装'
 	}
 
 	belongs_to :user
@@ -75,11 +75,11 @@ def init_attrs
 			if strategy
 				StrategyResult.create(
 					saler_id: user_id,
-					saler_rate_amount: terminal_count／100*strategy.rate,
+					saler_rate_amount: terminal_count*strategy.rate/100,
 					customer_id: customer_id,
-					customer_discount_amount: terminal_count／100*strategy.discount,
+					customer_discount_amount: terminal_count*strategy.discount/100,
 					introducer_id: introducer_id,
-					introducer_rebate_amount: terminal_count／100*strategy.rebate,
+					introducer_rebate_amount: terminal_count*strategy.rebate/100,
 					order_id: id,
 					strategy_id: strategy.id
 				)

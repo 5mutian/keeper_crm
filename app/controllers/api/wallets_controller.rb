@@ -15,6 +15,18 @@ class Api::WalletsController < Api::BaseController
 			}
 		}
 	end
+
+	# 我的钱包
+	# 
+	# Params
+	# 	access_token: [String] authenication_token
+	# Return
+	# 	status: [String] success
+	# Error
+	#   status: [String] failed
+	def me
+		render json: {status: :success, wallet: @current_user.wallet}
+	end
  	
  	# 充值
 	# 

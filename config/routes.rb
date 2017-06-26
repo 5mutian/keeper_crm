@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
     resources :valid_codes, only: [:create] do
       collection do
-        patch :valid
+        post :valid
       end
     end
   	resources :registrations, only: [:create]
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     namespace :sync do
       resources :orders, only: [] do
         collection do
-          patch :update_cgj
+          post :update_cgj
         end
       end
       resources :customers, only: [:create]
@@ -39,11 +39,18 @@ Rails.application.routes.draw do
 
 	  resources :users do # 用户管理
       collection do
-        patch :update_me
+        post :update_me
       end
     end
-	  resources :clues # 线索管理
+	  resources :clues do # 线索管理
+      member do
+        post :update
+      end
+    end
   	resources :stores do # 门店管理
+      member do
+        post :update
+      end
       collection do
         post :add_region
         get :get_regions
@@ -54,16 +61,24 @@ Rails.application.routes.draw do
         get :get_cgjs
       end
     end
-  	resources :customers # 客户管理
-    resources :strategies # 策略管理
+  	resources :customers do # 客户管理 
+      member do
+        post :update
+      end
+    end
+    resources :strategies do # 策略管理
+      member do
+        post :update
+      end
+    end
     resources :accounts do
       collection do
         get :get_saler_directors
         get :companies
         post :add_company
         post :apply_co_companies
-        patch :update_apply
-        patch :update_me
+        post :update_apply
+        post :update_me
       end
     end
     resources :pres, only: [:index]

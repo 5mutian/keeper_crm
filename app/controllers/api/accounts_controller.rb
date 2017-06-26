@@ -1,6 +1,6 @@
 # 品牌商/经销商管理
 class Api::AccountsController < Api::BaseController
-	skip_before_filter :valid_permission, except: [:update_me]
+	skip_before_filter :valid_permission, only: [:update_me]
 
 	# 获取企业销售主管信息
 	#
@@ -144,9 +144,8 @@ class Api::AccountsController < Api::BaseController
 	#
 	# Params
 	# 	access_token: [String] authenication_token
-	# 	account[name]: [String] 企业名称
 	# 	account[address]: [String] 企业地址
-	# 	account[logo]: [File] 企业图片
+	# 	account[logo]: [File] 企业logo
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 更新成功
@@ -154,7 +153,7 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
 	def update_me
-		raise '无权操作' unless @current_user != @account.admin
+		raise '无权操作' if @current_user != @account.admin
 		if @account.update_attributes(account_params)
 			render json: {status: :success, account: @account, msg: '更新成功'}
     else
@@ -168,7 +167,7 @@ class Api::AccountsController < Api::BaseController
 	private
 
 	def account_params
-		params[:account].permit(:name, :address, :logo)
+		params[:account].permit(:address, :logo)
 	end
 
 	def company_params

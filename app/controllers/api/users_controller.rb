@@ -1,6 +1,6 @@
 # 用户管理
 class Api::UsersController < Api::BaseController
-	skip_before_filter :valid_permission, except: [:update_me]
+	skip_before_filter :valid_permission, only: [:update_me]
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 

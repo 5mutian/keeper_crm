@@ -1,7 +1,6 @@
 # 验证码
 class Api::ValidCodesController < Api::BaseController
-	skip_before_filter :authenticate_user
-	skip_before_filter :valid_permission
+	skip_before_filter :authenticate_user, :valid_permission
 
 	# 获取
 	# 

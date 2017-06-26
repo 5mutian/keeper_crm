@@ -1,7 +1,6 @@
 # 注册
 class Api::RegistrationsController < Api::BaseController
-	skip_before_filter :authenticate_user
-	skip_before_filter :valid_permission
+	skip_before_filter :authenticate_user, :valid_permission
 
 	# 说明
 	# 	

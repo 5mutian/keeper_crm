@@ -13,7 +13,11 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def get_saler_directors
-		account = Account.includes(:admin).find_by_code(params[:t])
+		if params[:access_token]
+			user = User.includes(:account).find_by_access_token(params[:access_token])
+			account = user.account
+		end
+		account = Account.includes(:admin).find_by_code(params[:t]) if params[:t]
 		raise '无效的code' unless account
 		render json: {status: :success, list: account.saler_directors.map(&:to_hash)}
 		rescue => e

@@ -1,5 +1,5 @@
 class Api::BaseController < ApplicationController
-	before_filter :authenticate_user
+	before_filter :authenticate_user, except: [:get_saler_directors]
 	before_filter :valid_permission, except: [:get_saler_directors]
 
 	def authenticate_user

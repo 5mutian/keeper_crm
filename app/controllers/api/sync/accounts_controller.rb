@@ -1,5 +1,6 @@
 # 获取企业信息
 class Api::Sync::AccountsController < Api::Sync::BaseController
+	before_filter :valid_account, only: [:gen_account_user]
 
 	# 生成企业用户
 	#
@@ -22,7 +23,15 @@ class Api::Sync::AccountsController < Api::Sync::BaseController
 		user.account  = @account
 
 		if user.save
-			render json: {status: :success, msg: '创建成功, 请登录'}
+			materials = ApplicationHelper.select_hash JSON(Cgj.fetch_material)["libs"]
+      render json: {
+      	status: :success, 
+      	current_user: user.infos, 
+      	token: user.t_value, 
+      	menu: user.right_menu, 
+      	companies: user.account.select_companies, 
+      	materials: materials
+      }
     else
     	render json: {status: :failed, msg: user.errors.messages.values.first}
 		end

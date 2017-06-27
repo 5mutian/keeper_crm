@@ -5,7 +5,7 @@ class Api::AccountsController < Api::BaseController
 	# 获取企业销售主管信息
 	#
 	# Params
-	# 	actoken: [String] *account code
+	# 	t: [String] *account code
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 成功
@@ -13,7 +13,11 @@ class Api::AccountsController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def get_saler_directors
-		render json: {status: :success, list: @account.saler_directors.map(&:to_hash)}
+		account = Account.includes(:admin).find_by_code(params[:t])
+		raise '无效的code' unless account
+		render json: {status: :success, list: account.saler_directors.map(&:to_hash)}
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 	
 	# 品牌列表

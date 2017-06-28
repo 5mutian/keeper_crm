@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
       saler_director: %w(clues orders customers)
     }
 
+  # cgj_role 0 普通用户，1 品牌商，2 服务商，3 经销商
+  CGJ_ROLES = {
+    'Company' => 1,
+    'Dealer'  => 3
+  }
+
   validates_uniqueness_of :mobile, message: '手机号已被使用'
   validates :status, inclusion: {in: [-1, 0, 1], message: '不在所选范围之内'} 
   validates :role,   inclusion: {in: ['admin', 'cs', 'saler', 'acct', 'saler_director', 'introducer'], message: '不在所选范围之内'} 
@@ -120,7 +126,8 @@ class User < ActiveRecord::Base
       real_name:        name,
       password_digest:  password_digest,
       company_id:       account.cgj_id,
-      region:           'CRM'
+      region:           'CRM',
+      role:             CGJ_ROLES[type],
     }
   end
 

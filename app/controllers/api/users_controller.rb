@@ -106,9 +106,9 @@ class Api::UsersController < Api::BaseController
 	def update_password
 		if @current_user.authenticate(params[:old_password])
 			@current_user.update(password: params[:new_password])
-			render json: {status: :success, current_user: @current_user.infos, msg: '更新成功'}
+			render json: {status: :success, msg: '更新成功'}
     else
-    	render json: {status: :failed, msg: @current_user.errors.messages.values.first}
+    	render json: {status: :failed, msg: '请输入正确的旧密码'}
 		end
 	end
 

@@ -39,7 +39,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 			end
 
 			customer.user_id 		= user.id
-			# customer.account_id = @account.id
+			customer.account_id = user.account_id
 			customer.save
 		end
 

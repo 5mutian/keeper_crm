@@ -22,7 +22,8 @@ class Api::OrdersController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	# 	id: [integer] clue_id
-	# 	order[expected_square]: [String] 面积
+	# 	order[expected_square]: [String] 预估面积
+	# 	order[total]: [String] 预估价格
 	# 	order[booking_date]: [String] 预约测量时间
 	# 	order[cgj_company_id]: [Integer] 品牌商ID
 	# 	order[material]: [String] 材料名称
@@ -72,7 +73,7 @@ class Api::OrdersController < Api::BaseController
 	private
 
 	def order_params
-		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id, :introducer_name, :introducer_tel, :region_id, :store_id)
+		params[:order].permit(:expected_square, :booking_date, :cgj_company_id, :material, :material_id, :introducer_name, :introducer_tel, :region_id, :store_id, :total)
 	end
 
 	def customer_params

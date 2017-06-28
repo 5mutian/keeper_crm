@@ -1,6 +1,6 @@
 # 用户管理
 class Api::UsersController < Api::BaseController
-	skip_before_filter :valid_permission, only: [:update_me]
+	skip_before_filter :valid_permission, only: [:update_me, :update_password]
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 
@@ -27,7 +27,6 @@ class Api::UsersController < Api::BaseController
 	# 	user[mobile]: [String] 用户手机号
 	# 	user[role]: [String] 用户角色(saler_director|saler|cs|acct)
 	# 	user[saler_director_id]: [Integer] 销售主管
-	# 	user[password]: [String] 用户密码
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 创建成功
@@ -37,10 +36,11 @@ class Api::UsersController < Api::BaseController
 	def create
 		raise '无效的手机号' unless user_params[:mobile].match(/^1[3|4|5|8][0-9]\d{4,8}$/)
 		user = User.new(user_params)
-		user.password = params[:user][:password]
+		user.password = ENV['init_ps']
 		user.account = @current_user.account
 
 		if user.save
+			user.send_sms # notice to user
 			render json: {status: :success, msg: '创建成功'}
     else
     	render json: {status: :failed, msg: user.errors.messages.values.first}

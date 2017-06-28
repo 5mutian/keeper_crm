@@ -158,7 +158,11 @@ class User < ActiveRecord::Base
   # ###########################
   # 登录后给到所有的用户信息
   def infos
-    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar, account: account.attributes.merge(invit_url: account.invit_url, logo_url: account.logo_url))
+    attributes.merge(account_type: type, wallet: wallet, avatar_url: _avatar, account: account.attributes.merge(invit_url: account.invit_url, logo_url: account.logo_url, account_name: account_name))
+  end
+
+  def account_name
+    account.type == 'Company' ? "#{account.parent.name}(#{account.name})" : account.name
   end
 
   def self.wechat_token(code=nil)
@@ -172,6 +176,18 @@ class User < ActiveRecord::Base
     else
       return [false, "无效的code"]
     end
+  end
+
+  def sms_hash
+    {
+      to:       mobile,
+      project:  ENV['submail_new_user'],
+      vars:     {url: ENV['my_host'], password: ENV['init_ps']}
+    }
+  end
+
+  def send_sms
+    Submail.send(sms_hash)
   end
 
 end

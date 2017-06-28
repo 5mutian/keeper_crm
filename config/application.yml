@@ -1,4 +1,5 @@
 my_host: 'http://www.salesgj.com'
+init_ps: '123456'
 
 # qiniu 文件服务
 qiniu_ak: 'D2HoWxWkb2MHhZVO5J5902DyeGNA05csQJOomlg0'
@@ -9,6 +10,7 @@ qiniu_domain: 'or2h31bsk.bkt.clouddn.com'
 submail_appid: '14592'
 submail_signature: 'e7f6e43d1e4058c46e776d7db306fa75'
 submail_valid_code: 'E7WCe4'
+submail_new_user: '4Bog44'
 
 # pingpp
 pingpp_api_key: 'sk_test_zbjvHCrTazPOmD8WH4uLSuLK'

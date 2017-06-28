@@ -91,6 +91,28 @@ class Api::UsersController < Api::BaseController
 		end
 	end
 
+	# 更新密码
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	old_password: [String] 旧密码
+	# 	new_password: [String] 新密码
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def update_password
+		if @current_user.authenticate(params[:old_password])
+			@current_user.update(password: params[:new_password])
+			render json: {status: :success, current_user: @current_user.infos, msg: '更新成功'}
+    else
+    	render json: {status: :failed, msg: @current_user.errors.messages.values.first}
+		end
+	end
+
+
 	# 用户删除
 	#
 	# Params

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 	  resources :users do # 用户管理
       collection do
         post :update_me
+        post :update_password
       end
     end
 	  resources :clues do # 线索管理

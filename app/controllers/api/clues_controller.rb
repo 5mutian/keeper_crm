@@ -6,6 +6,7 @@ class Api::CluesController < Api::BaseController
 	# 
 	# Params
 	# 	access_token: [String] authenication_token
+	# 	type: [String] assign被指定
 	#   page: [Integer] 页码
 	# Return
 	# 	status: [String] success
@@ -14,7 +15,11 @@ class Api::CluesController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		clues = @current_user.clues.order(updated_at: :desc).page(params[:page])
+		if params[:type] == 'assign'
+			clues = @current_user.assign_clues.order(updated_at: :desc).page(params[:page])
+		else
+			clues = @current_user.clues.order(updated_at: :desc).page(params[:page])
+		end
 
 		render json: {status: :success, list: clues, total: clues.total_count}
 	end
@@ -77,11 +82,38 @@ class Api::CluesController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def destroy
+		raise '您不是线索所有者，无法删除' if @clue.user != @current_user
 		if @clue.destroy
 			render json: {status: :success, msg: '更新成功'}
     else
     	render json: {status: :failed, msg: @clue.errors.messages.values.first}
 		end
+		rescue => e
+			render json: {status: :failed, msg: e.message}
+	end
+
+	# 分配线索
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	#   clue_ids: [Array] 线索列表
+	# 	assign_user_id: [Integer] 指定用户id
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 删除成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos
+	def assign
+		cludes = Clue.where(id: params[:clue_ids])
+
+		raise '无法进行此操作' if @cludes.map(&:user_id) != @current_user.id
+
+		clues.update_all(assign_user_id: params[:assign_user_id])
+
+		render json: {status: :success, msg: '更新成功'}
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	private

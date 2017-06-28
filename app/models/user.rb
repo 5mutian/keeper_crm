@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
  	belongs_to :account
  	has_one :token
   has_many :clues
+  has_many :assign_clues, class_name: 'Clue', foreign_key: 'assign_user_id'
   has_many :orders
   has_many :customers
   has_and_belongs_to_many :permissions

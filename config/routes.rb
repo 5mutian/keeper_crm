@@ -44,8 +44,9 @@ Rails.application.routes.draw do
       end
     end
 	  resources :clues do # 线索管理
-      member do
-        post :update
+      collection do
+        post :update_me
+        post :assign
       end
     end
   	resources :stores do # 门店管理

@@ -12,4 +12,10 @@ class Clue < ActiveRecord::Base
 		self.customer_id = 0 unless customer_id
 	end
 
+	def to_hash
+		attributes.merge(
+			assign_user_name: assign_user.try(:name)
+		)
+	end
+
 end

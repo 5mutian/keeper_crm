@@ -1,6 +1,7 @@
 # 线索管理
 class Api::CluesController < Api::BaseController
-	before_filter :get_clue, only: [:update, :destroy, :create_order]
+	skip_before_filter :valid_permission, only: [:assign, :update_me]
+	before_filter :get_clue, only: [:update_me, :destroy]
 
 	# 线索列表
 	# 
@@ -18,10 +19,10 @@ class Api::CluesController < Api::BaseController
 		if params[:type] == 'assign'
 			clues = @current_user.assign_clues.order(updated_at: :desc).page(params[:page])
 		else
-			clues = @current_user.clues.order(updated_at: :desc).page(params[:page])
+			clues = @current_user.clues.includes(:assign_user).order(updated_at: :desc).page(params[:page])
 		end
 
-		render json: {status: :success, list: clues, total: clues.total_count}
+		render json: {status: :success, list: clues.map(&:to_hash), total: clues.total_count, assign_users: @account.users.collect{|ele| {id: ele.id, name: ele.name}}}
 	end
 
 	# 创建线索
@@ -39,9 +40,7 @@ class Api::CluesController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
 	def create
-		clue = Clue.new(clue_params)
-		clue.user = @current_user
-		clue.account_id = @current_user.account_id
+		clue = Clue.new(clue_params.merge(owner_params))
 
 		if clue.save
 			render json: {status: :success, msg: '创建成功'}
@@ -54,6 +53,7 @@ class Api::CluesController < Api::BaseController
 	#
 	# Params
 	# 	access_token: [String] authenication_token
+	#   id: [Integer] ID
 	# 	clue[name]: [String] 姓名
 	# 	clue[mobile]: [String] 手机号
 	# 	clue[address]: [String] 地址
@@ -63,7 +63,7 @@ class Api::CluesController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	#   msg: [String] msg_infos	
-	def update
+	def update_me
 		if @clue.update_attributes(clue_params)
 			render json: {status: :success, msg: '更新成功'}
     else
@@ -105,9 +105,9 @@ class Api::CluesController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def assign
-		cludes = Clue.where(id: params[:clue_ids])
+		clues = Clue.where(id: params[:clue_ids])
 
-		raise '无法进行此操作' if @cludes.map(&:user_id) != @current_user.id
+		raise '无法进行此操作' if clues.map(&:user_id).uniq != [@current_user.id]
 
 		clues.update_all(assign_user_id: params[:assign_user_id])
 

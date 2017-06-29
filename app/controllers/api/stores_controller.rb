@@ -34,6 +34,7 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def create
+		raise '门店名称重复，无法添加' if @account.stores.where(name: store_params[:name]).count > 0
 		store = @account.stores.new(store_params)
 
 		if store.save
@@ -41,6 +42,8 @@ class Api::StoresController < Api::BaseController
     else
     	render json: {status: :failed, msg: store.errors.messages.values.first}
 		end
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 更新门店
@@ -98,6 +101,7 @@ class Api::StoresController < Api::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def add_region
+		raise '渠道名称重复，无法添加' if @account.regions.where(name: params[:region_name]).count > 0
 		region = @account.regions.create(name: params[:region_name])
 
 		render json: {status: :success, data: region.to_hash, mesg: '创健成功'}

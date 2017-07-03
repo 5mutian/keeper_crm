@@ -53,6 +53,7 @@ class Api::OrdersController < Api::BaseController
 
 		if customer.save
 			order.customer = customer
+			order.workflow_state = 'new'
 			if order.save
 				order.sync_cgj
 				render json: {status: :success, msg: '创建成功'}

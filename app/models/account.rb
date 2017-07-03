@@ -28,6 +28,12 @@ class Account < ActiveRecord::Base
 		"http://172.16.0.249:8000/#/invit?t=#{code}"
 	end
 
+	def menu
+		{
+      admin: {users: '用户', accounts: '品牌'}
+    }
+	end
+
 	def select_companies
 		children.map(&:select_hash)
 	end
@@ -83,8 +89,7 @@ class Account < ActiveRecord::Base
       id:           cgj_id,
       name:         name,
       address:      address,
-      logo:         logo.url,
-      cgj_id: 			cgj_id
+      logo:         logo.url
     }
   end
 

@@ -5,14 +5,6 @@ class User < ActiveRecord::Base
 
   mount_base64_uploader :avatar, AvatarUploader
 
-  ROLES = {
-      admin:  %w(customers clues orders stores users strategies accounts),
-      saler:  %w(clues orders customers),
-      cs:     %w(clues orders customers stores),
-      acct:   %w(orders),
-      saler_director: %w(clues orders customers)
-    }
-
   # cgj_role 0 普通用户，1 品牌商，2 服务商，3 经销商
   CGJ_ROLES = {
     'Company' => 1,
@@ -45,9 +37,14 @@ class User < ActiveRecord::Base
  	end
 
   def set_permissions
-    _actions = ROLES[self.role.to_sym].map {|val| "%#{val}%"}
+    _actions = right_menu.keys.map {|val| "%#{val}%"}
     self.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
     self.save
+  end
+
+   # role menu
+  def right_menu
+    account.menu[role.to_sym]
   end
 
   def is_valid?
@@ -94,17 +91,6 @@ class User < ActiveRecord::Base
       role:     role,
       children: children_list
     }
-  end
-
-  # role menu
-  def right_menu
-    {
-      "admin"           => {customers: '客户', orders: '订单', clues: '线索', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌'},
-      "saler"           => {customers: '客户', orders: '订单', clues: '线索'},
-      "saler_director"  => {customers: '客户', orders: '订单', clues: '线索'},
-      "cs"              => {customers: '客户', orders: '订单', stores: '门店'},
-      "acct"            => {orders: '订单'}
-    }[role]
   end
 
   def self.get_or_gen_introducer(mobile, name, account_id)
@@ -189,6 +175,15 @@ class User < ActiveRecord::Base
 
   def send_sms
     Submail.send(sms_hash)
+  end
+
+  def company_select
+    case account.type
+    when 'Company'
+      [account.select_hash]
+    when 'Dealer'
+      account.co_companies.includes(:regions, :stores).map(&:select_hash)
+    end
   end
 
 end

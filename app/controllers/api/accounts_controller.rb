@@ -53,7 +53,6 @@ class Api::AccountsController < Api::BaseController
   # 	company[logo]: [File] 品牌logo
   #   admin[name]:   [String] 管理员姓名
   #   admin[mobile]: [String] 管理员手机号
-  #   admin[password]: [String] 管理员密码
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 请求成功，等待审核
@@ -74,12 +73,14 @@ class Api::AccountsController < Api::BaseController
 
 				user = User.find_or_initialize_by(mobile: admin_params[:mobile])
 				user.name = admin_params[:name]
-				user.password = admin_params[:password]
+				# user.password = admin_params[:password]
+				user.password = ENV['init_ps']
 				user.role = 'admin'
 				user.account_id = company.id
 				user.save
 				
 				company.sync_cgj
+				user.send_sms # notice to user
 			end
 		end
 

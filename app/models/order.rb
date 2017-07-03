@@ -30,12 +30,6 @@ class Order < ActiveRecord::Base
 
 	after_update :execute_strategy
 
-	before_create :init_attrs
-
-def init_attrs
-		workflow_state = 'new'
-	end
-
 	def sync_cgj
 		res = Cgj.create_order(cgj_hash)
 		_hash = JSON res.body
@@ -114,7 +108,8 @@ def init_attrs
 			material_id: 		material_id,
 			order_no: 			id,
 			customer_id: 		user.cgj_user_id, # 窗管家用户ID
-			region: 				region
+			region: 				region,
+			remark: 				remark
 		}
 	end
 

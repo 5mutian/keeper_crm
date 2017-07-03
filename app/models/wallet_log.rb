@@ -66,8 +66,7 @@ class WalletLog < ActiveRecord::Base
     when 'wx_pub'
       {open_id: user.open_id}
     when 'alipay_pc_direct'
-      # {success_url: "http://#{ENV['my_host']}/payments/callback"}
-      {success_url: "http://api.chuanggj.com/payments/callback"}
+      {success_url: "http://#{ENV['my_host']}/payments/callback"}
     end
   end
 

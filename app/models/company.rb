@@ -2,6 +2,16 @@ class Company < Account
 
   belongs_to :parent, class_name: 'Account'
 
+  def menu
+    {
+      admin:          {customers: '客户', orders: '订单', clues: '线索', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌'},
+      saler_director: {customers: '客户', orders: '订单', clues: '线索'},
+      saler:          {customers: '客户', orders: '订单', clues: '线索'},
+      cs:             {customers: '客户', orders: '订单', stores: '门店'},
+      acct:           {orders: '订单'}
+    }
+  end
+
   def sync_cgj
     res = Cgj.create_company(cgj_hash)
     _hash = JSON res.body
@@ -29,12 +39,20 @@ class Company < Account
       address:      address,
       account_id:   parent.cgj_id,
       logo:         logo_url,
-      user:         admin.cgj_hash
+      user:         admin.cgj_hash,
+      account:      parent.cgj_hash,
+      _account_user: parent.admin.cgj_hash
     }
   end
 
-  def select_companies
-    [self.select_hash]
+  def select_hash
+    {
+      id: id,
+      name: name,
+      logo: logo_url,
+      cgj_id: cgj_id,
+      stores_tree: stores_tree
+    }
   end
 	
 end

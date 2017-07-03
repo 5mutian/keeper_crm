@@ -25,16 +25,17 @@ wechat_token: ''
 
 # CGJ
 # staging
-cgj_host:     'http://192.168.0.164:8080'
-cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiJDUk0iLCJ0b2tlbiI6ImZjZWQ2NjEzZGFmYjQ1NmI4ZDcwMDBlNzI0Yzc2NTU3IiwiZXhwIjoyMTI2MDU5MzEwfQ.NtvCE4BLQ1Ioyum_TIBSg4jyIMk-Y3GumPdlPYg9GuI'
-cgj_token:    'fced6613dafb456b8d7000e724c76557'
+# cgj_host:     'http://192.168.0.164:8080'
+# cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiJDUk0iLCJ0b2tlbiI6ImZjZWQ2NjEzZGFmYjQ1NmI4ZDcwMDBlNzI0Yzc2NTU3IiwiZXhwIjoyMTI2MDU5MzEwfQ.NtvCE4BLQ1Ioyum_TIBSg4jyIMk-Y3GumPdlPYg9GuI'
+# cgj_token:    'fced6613dafb456b8d7000e724c76557'
 
 # production
-# cgj_host: 'https://api.chuanggj.com'
-# cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiIiLCJ0b2tlbiI6ImU1ZmE1YTIyNDMxNzQ0ZGFhZDhlNDljZjE4NzhlYzA2IiwiZXhwIjoyMTI1OTg0NDgwfQ.yEW0TPjRr6DaGerX-BDA7YmsEFR5HpuSIuPJjBIXBe4'
-# cgj_token: 'e5fa5a22431744daad8e49cf1878ec06'
+cgj_host: 'https://api.chuanggj.com'
+cgj_auth_key: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ1JNIiwiYXBpX3R5cGUiOiIiLCJ0b2tlbiI6ImU1ZmE1YTIyNDMxNzQ0ZGFhZDhlNDljZjE4NzhlYzA2IiwiZXhwIjoyMTI1OTg0NDgwfQ.yEW0TPjRr6DaGerX-BDA7YmsEFR5HpuSIuPJjBIXBe4'
+cgj_token: 'e5fa5a22431744daad8e49cf1878ec06'
 
 redis_namespace: "keeper"
-redis_server: "192.168.0.164"
+# redis_server: "192.168.0.164"
+redis_server: 106.14.17.85
 redis_port: "6379"
 redis_pass: "157196212"

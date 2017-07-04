@@ -53,14 +53,6 @@ class WalletLog < ActiveRecord::Base
     )
   end
 
-  def withdraw_options
-    p_hash.merge(
-      type:        "b2c",
-      recipient:   user.open_id,
-      description: "提现到微信"
-    )
-  end
-
   def extra_hash
     case trade_type
     when 'wx_pub'
@@ -68,6 +60,21 @@ class WalletLog < ActiveRecord::Base
     when 'alipay_pc_direct'
       {success_url: "http://www.salesgj.com/#/app/pay?current=2"}
     end
+  end
+
+  def withdraw_options
+    p_hash.merge(
+      type:        "b2c",
+      recipient:   user.open_id,
+      description: "提现",
+      extra:  _extra_hash   
+    )
+  end
+
+  def _extra_hash
+    {
+      recipient_name: user.name
+    }
   end
 
 end

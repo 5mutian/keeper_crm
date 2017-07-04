@@ -56,6 +56,7 @@ class Api::WalletsController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	#   amount: [Integer] 金额
+	# 	trade_type: [String] 支付方式 wx_pub|alipay
 	# Return
 	# 	status: [String] success
 	# Error
@@ -65,7 +66,7 @@ class Api::WalletsController < Api::BaseController
  		raise '请输入正确的金额' if @current_user.wallet_total < params[:amount].to_f
  		raise '您有一笔金额正在提现中' if @current_user.withdraw_info[:is_withdraw]
 
- 		wlog = WalletLog.create(user_id: @current_user.id, transfer: 3, amount: params[:amount])
+ 		wlog = WalletLog.create(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 3, amount: params[:amount])
     transfer_info = wlog.generate_withdraw.as_json
 
     if transfer_info["status"] == "failed"

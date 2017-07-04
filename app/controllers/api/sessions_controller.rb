@@ -29,7 +29,6 @@ class Api::SessionsController < Api::BaseController
       	current_user: user.infos, 
       	token: user.t_value, 
       	menu: user.right_menu, 
-      	companies: user.account.select_companies, 
       	materials: materials
       }
     else

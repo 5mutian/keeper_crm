@@ -16,7 +16,7 @@ class Api::PresController < Api::BaseController
 	def index
 		render json: {
 			status: :success, 
-			stores_tree: @account.stores_tree, 
+			# stores_tree: @account.stores_tree, 
 			regions: @account.regions, 
 			select_companies: @current_user.company_select
 		}

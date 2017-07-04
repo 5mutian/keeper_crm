@@ -1,5 +1,5 @@
 # my_host: 'http://www.salesgj.com'
-my_host: 'http://192.168.0.164:7200'
+my_host: 'http://192.168.0.164:7201'
 init_ps: '123456'
 
 # qiniu 文件服务

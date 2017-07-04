@@ -4,7 +4,7 @@ class Company < Account
 
   def menu
     {
-      admin:          {customers: '客户', orders: '订单', clues: '线索', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌'},
+      admin:          {customers: '客户', orders: '订单', clues: '线索', stores: '门店', users: '用户', strategies: '策略', accounts: '品牌审核'},
       saler_director: {customers: '客户', orders: '订单', clues: '线索'},
       saler:          {customers: '客户', orders: '订单', clues: '线索'},
       cs:             {customers: '客户', orders: '订单', stores: '门店'},

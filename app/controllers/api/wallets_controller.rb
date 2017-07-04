@@ -66,7 +66,7 @@ class Api::WalletsController < Api::BaseController
  		raise '请输入正确的金额' if @current_user.wallet_total < params[:amount].to_f
  		raise '您有一笔金额正在提现中' if @current_user.withdraw_info[:is_withdraw]
 
- 		wlog = WalletLog.create(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 3, amount: params[:amount])
+ 		wlog = WalletLog.create(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 3, amount: params[:amount], total: @current_user.wallet_total - params[:amount].to_f)
     transfer_info = wlog.generate_withdraw.as_json
 
     if transfer_info["status"] == "failed"

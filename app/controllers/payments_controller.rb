@@ -5,10 +5,10 @@ class PaymentsController < ApplicationController
 		wlog = WalletLog.find_by_id order_no.delete("wallet")
 		case params[:type]
 		when "charge.succeeded"
-       finish_charge(wlog)
+       finish_wlog(wlog)
        render text: "success"
     when "transfer.succeeded"
-    	finish_transfer(wlog)
+    	finish_wlog(wlog)
     	render text: "success"
 		else
 			render text: "failed"
@@ -18,18 +18,10 @@ class PaymentsController < ApplicationController
 
 	private
 
-	def finish_charge(wlog)
+	def finish_wlog(wlog)
 		WalletLog.transaction do
-      # update_deposit_log
-      wlog.update!(state: 1)
+      wlog.update(state: 1)
     end
-	end
-
-	def finish_transfer(wlog)
-		WalletLog.transaction do
-			wlog.update!(state: 1)
-			wlog.user.valid_wlog.update(total: (wlog.user.wallet_total - wlog.amount).round(2))
-		end
 	end
 
 end

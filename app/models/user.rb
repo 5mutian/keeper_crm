@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   end
 
   def last_wlog
-    wallet_logs.where(state: 1).last
+    wallet_logs.last
   end
 
   def wallet_total

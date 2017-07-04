@@ -16,7 +16,7 @@ class WalletLog < ActiveRecord::Base
     3  => 'withdraw'        # 提现
   }
 
-  validates :trade_type, inclusion: {in: [nil, 'alipay_pc_direct', 'wx_pub'], message: '不在所选范围之内'} 
+  validates :trade_type, inclusion: {in: [nil, 'alipay', 'alipay_pc_direct', 'wx_pub'], message: '不在所选范围之内'} 
 
   validates_numericality_of :amount, greater_than_or_equal_to: 0.01, message: "流水金额大于0.01"
   validates_numericality_of :total, greater_than_or_equal_to: 0, message: "帐户总额必须大于等于0"
@@ -65,7 +65,7 @@ class WalletLog < ActiveRecord::Base
   def withdraw_options
     p_hash.merge(
       type:        "b2c",
-      recipient:   user.open_id,
+      recipient:   user.mobile,
       description: "提现",
       extra:  _extra_hash   
     )

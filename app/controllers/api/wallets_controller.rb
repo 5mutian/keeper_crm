@@ -61,6 +61,22 @@ class Api::WalletsController < Api::BaseController
 	# Error
 	#   status: [String] failed
  	def withdraw
+ 		raise '请绑定微信号' unless @current_user.open_id
+ 		raise '请输入正确的金额' if @current_user.wallet_total < params[:amount].to_f
+ 		raise '您有一笔金额正在提现中' if @current_user.withdraw_info[:is_withdraw]
+
+ 		wlog = WalletLog.create(user_id: @current_user.id, transfer: 3, amount: params[:amount])
+    transfer_info = wlog.generate_withdraw.as_json
+
+    if transfer_info["status"] == "failed"
+      wlog.update(state: -1)
+      render json: {status: :failed, msg: "提现失败，请联系客服，谢谢"}
+    else
+      render json: {status: :success, msg: :ok}
+    end
+
+ 		rescue => e
+			render json: {status: :failed, msg: e.message}
  	end
 
 end

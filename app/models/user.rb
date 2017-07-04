@@ -127,8 +127,12 @@ class User < ActiveRecord::Base
     }
   end
 
+  def last_wlog
+    wallet_logs.where(state: 1).last
+  end
+
   def wallet_total
-    wallet_logs.where(state: 1).last.try(:total).to_f.round(2)
+    last_wlog.try(:total).to_f.round(2)
   end
 
   def income
@@ -137,6 +141,15 @@ class User < ActiveRecord::Base
 
   def expend
     wallet_logs.where(state: 1, transfer: 1).map(&:amount).sum.to_f.round(2)
+  end
+
+  def withdraw_info
+    wlog = wallet_logs.where(transfer: 3).last
+
+    {
+      is_withdraw:     wlog.try(:state) == 0 ? true : false,
+      withdraw_amount: wlog.try(:state) == 0 ? wlog.amount : 0
+    }
   end
 
   def _avatar

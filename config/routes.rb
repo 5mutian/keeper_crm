@@ -95,7 +95,7 @@ Rails.application.routes.draw do
 
   resources :payments, only: [] do
     collection do
-      get :callback
+      post :callback
     end
   end
 

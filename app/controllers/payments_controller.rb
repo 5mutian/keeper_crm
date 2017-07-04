@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
 	def finish_reward(wlog)
 		WalletLog.transaction do
       # update_deposit_log
-      wlog.update!(state: 1, total: (wlog.user.wallet_total + wlog.amount).round(2))
+      wlog.update!(state: 1)
     end
 	end
 

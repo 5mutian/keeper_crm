@@ -1,20 +1,15 @@
 class PaymentsController < ApplicationController
 
 	def callback
+		order_no = params[:data]["object"]["order_no"]
+		wlog = WalletLog.find_by_id order_no.delete("wallet")
 		case params[:type]
 		when "charge.succeeded"
-			begin
-        wlog = WalletLog.find_by_id params['order_no'].delete("wallet")
-        finish_charge(wlog) if wlog
-        render text: "success"
-      rescue
-        render text: "fail"
-      end
+       finish_charge(wlog)
+       render text: "success"
     when "transfer.succeeded"
-    	wlog = WalletLog.find_by_id params['order_no'].delete("wallet")
-    	finish_transfer(wlog) if wlog
-    	
-    	###############
+    	finish_transfer(wlog)
+    	render text: "success"
 		else
 			render text: "failed"
 		end

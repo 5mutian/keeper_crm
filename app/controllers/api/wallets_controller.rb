@@ -43,9 +43,7 @@ class Api::WalletsController < Api::BaseController
  		if wlog.save
 	 		charge = wlog.generate_pay
 
-	 		signature = PingxxExtend.signature(charge, 'https://1.iujessica.applinzi.com/weixin_bang.php')
-
-	 		render json: {status: :success, data: {charge: charge, signature: signature}}
+	 		render json: {status: :success, data: {charge: charge}}
 	 	else
 	 		render json: {status: :failed, msg: '重新提交' }
 	 	end

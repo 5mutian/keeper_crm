@@ -15,8 +15,6 @@ class PaymentsController < ApplicationController
 
 	def finish_reward(wlog)
 		WalletLog.transaction do
-      tip = Tip.find_by_id(wlog.transfer_id)
-      raise ActiveRecord::RecordNotFound if tip.nil?
       # update_deposit_log
       wlog.update!(state: 1, total: (wlog.user.wallet_total + wlog.amount).round(2))
     end

@@ -37,9 +37,11 @@ class User < ActiveRecord::Base
  	end
 
   def set_permissions
-    _actions = right_menu.keys.map {|val| "%#{val}%"}
-    self.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
-    self.save
+    unless role == 'introducer'
+      _actions = right_menu.keys.map {|val| "%#{val}%"}
+      self.permissions = Permission.where("_controller_action ILIKE ANY ( array[?] )", _actions)
+      self.save
+    end
   end
 
    # role menu

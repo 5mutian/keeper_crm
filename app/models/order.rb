@@ -62,7 +62,7 @@ class Order < ActiveRecord::Base
 	def execute_strategy
 		if completed?
 			# 介绍人生成，执行介绍人反利，销售提成
-			gen_introducer if introducer_tel
+			gen_introducer unless introducer_tel.blank?
 			# 获取策略
 			strategy = account.get_valid_strategy(province, city, area)
 

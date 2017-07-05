@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
 
   mount_base64_uploader :avatar, AvatarUploader
 
-  # cgj_role 0 普通用户，1 品牌商，2 服务商，3 经销商
+  # cgj_role 0 普通用户，1 品牌商，2 服务商，2 经销商
   CGJ_ROLES = {
     'Company' => 1,
-    'Dealer'  => 3
+    'Dealer'  => 2
   }
 
   validates_uniqueness_of :mobile, message: '手机号已被使用'

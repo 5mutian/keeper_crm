@@ -60,7 +60,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		order.cgj_customer_service_id = _order["customer_service_id"]
 
 		order.user_id 		= user.id
-		order.account_id 	= company.id
+		order.account_id 	= user.account_id
 		order.customer_id = customer.id
 
 		order.save

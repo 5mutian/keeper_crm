@@ -117,6 +117,7 @@ class User < ActiveRecord::Base
       company_id:       account.cgj_id,
       region:           'CRM',
       role:             CGJ_ROLES[type],
+      user_type:        type == 'Dealer' ? 'dealer' : 'user'
     }
   end
 

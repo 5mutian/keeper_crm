@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :permissions
   has_many :wallet_logs
   has_many :applies
-
+  has_many :bank_cards
   has_many :children, foreign_key: "saler_director_id", class_name: 'User'
 
  	delegate :t_value, to: :token

@@ -64,8 +64,8 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		order.save
 
 		render json: {status: :success, msg: 'updated successfully'}
-		rescue => e
-			render json: {status: :failed, msg: e.message}
+		# rescue => e
+		# 	render json: {status: :failed, msg: e.message}
 	end
 
 end

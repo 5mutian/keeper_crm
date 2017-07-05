@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root 'home#index'
   # sign_up 
   post    'sign_up' => "registrations#create" 
   # sign_in
@@ -41,6 +43,8 @@ Rails.application.routes.draw do
       collection do
         post :update_me
         post :update_password
+        post :add_bank_card
+        post :update_bank_card
       end
     end
 	  resources :clues do # 线索管理

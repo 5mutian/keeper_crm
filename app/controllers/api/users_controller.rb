@@ -1,6 +1,6 @@
 # 用户管理
 class Api::UsersController < Api::BaseController
-	skip_before_filter :valid_permission, only: [:update_me, :update_password]
+	skip_before_filter :valid_permission, only: [:update_me, :update_password, :add_bank_card, :update_bank_card]
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 
@@ -112,6 +112,60 @@ class Api::UsersController < Api::BaseController
 		end
 	end
 
+	# 添加银行卡
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	#   bank_card[code]: [String] 银行卡号
+	# 	bank_card[account]: [String] 开户行
+	# 	bank_card[branch]: [String] 支行
+	# 	bank_card[name]: [String] 开户人
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 添加成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def add_bank_card
+		bank_card = @current_user.bank_cards.new(bank_card_params)
+		if bank_card.save
+			render json: {status: :success, msg: '添加成功'}
+    else
+    	render json: {status: :failed, msg: bank_card.errors.messages.values.first}
+		end
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
+	end
+
+	# 更新银行卡
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# 	id: [Integer] 银行卡ID
+	#   bank_card[code]: [String] 银行卡号
+	# 	bank_card[account]: [String] 开户行
+	# 	bank_card[branch]: [String] 支行
+	# 	bank_card[name]: [String] 开户人
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def update_bank_card
+		bank_card = @current_user.bank_cards.find(params[:id])
+		raise '没有找到相应的银行卡' unless bank_card
+		if bank_card.update_attributes(bank_card_params)
+			render json: {status: :success, msg: '添加成功'}
+    else
+    	render json: {status: :failed, msg: bank_card.errors.messages.values.first}
+		end
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
+	end
+
 
 	# 用户删除
 	#
@@ -135,6 +189,10 @@ class Api::UsersController < Api::BaseController
 	end
 
 	private
+
+	def bank_card_params
+		params[:bank_card].permit(:code, :account, :branch, :name)
+	end
 
 	def user_params
 	 params[:user].permit(:name, :mobile, :role, :saler_director_id)

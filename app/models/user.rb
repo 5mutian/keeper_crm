@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
   end
 
   def income
-    wallet_logs.where(state: 1)., transfer: 2).map(&:amount).sum.to_f.round(2)
+    wallet_logs.where(state: 1, transfer: 2).map(&:amount).sum.to_f.round(2)
   end
 
   def expend

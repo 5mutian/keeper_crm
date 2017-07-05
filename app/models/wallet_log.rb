@@ -13,7 +13,8 @@ class WalletLog < ActiveRecord::Base
     0  => 'deposit',        # 存进
     1  => 'spend',          # 支出
     2  => 'receipt',        # 收入
-    3  => 'withdraw'        # 提现
+    3  => 'withdraw',       # 提现
+    4  => 'withdrawed'      # 提现后
   }
 
   validates :trade_type, inclusion: {in: [nil, 'alipay', 'alipay_pc_direct', 'wx_pub'], message: '不在所选范围之内'} 

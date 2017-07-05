@@ -54,26 +54,41 @@ class Api::WalletsController < Api::BaseController
 	# Params
 	# 	access_token: [String] authenication_token
 	#   amount: [Integer] 金额
-	# 	trade_type: [String] 支付方式 wx_pub|alipay
+	# 	bank_card_id: [Integer] 银行卡
 	# Return
 	# 	status: [String] success
 	# Error
 	#   status: [String] failed
  	def withdraw
- 		raise '请绑定微信号' unless @current_user.open_id
- 		raise '请输入正确的金额' if @current_user.wallet_total < params[:amount].to_f
- 		raise '您有一笔金额正在提现中' if @current_user.withdraw_info[:is_withdraw]
+ 		bank_card = @current_user.bank_cards.find_by_id params[:bank_card_id]
 
- 		wlog = WalletLog.create(trade_type: params[:trade_type], user_id: @current_user.id, transfer: 3, amount: params[:amount], total: @current_user.wallet_total - params[:amount].to_f, state: 0)
-    transfer_info = wlog.generate_withdraw.as_json
+ 		raise '请绑定有效银行卡' 				unless bank_card
+ 		raise '请输入正确的金额' 				if @current_user.wallet_total < params[:amount].to_f
+ 		raise '您有一笔金额正在提现中' 	if @current_user.withdraw_info[:is_withdraw]
 
-    if transfer_info["status"] == "failed"
-      wlog.update(state: -1)
-      render json: {status: :failed, msg: "提现失败，请联系客服，谢谢"}
-    else
-      render json: {status: :success, msg: :ok}
-    end
-
+ 		WalletLog.transaction do
+	 		WalletLog.create(
+	 			user_id: 	@current_user.id, 
+	 			transfer: 3, 
+	 			amount: 	params[:amount], 
+	 			total: 		@current_user.wallet_total - params[:amount].to_f, 
+	 			state: 		0,
+	 			# bank_card
+	 			account_number: bank_card.code,
+	 			account_bank:   bank_card.account,
+	 			account_branch: bank_card.branch,
+	 			account_name:   bank_card.name
+	 		)
+	    
+	    WalletLog.create(
+	    	user_id: 	@current_user.id,
+	    	transfer: 4,
+	    	amount: 	0.01,
+	    	total: 		@current_user.wallet_total - params[:amount].to_f,
+	    	state: 		1
+	    )
+	  end
+    render json: {status: :success, msg: '提现审请已提交，将在三个工作日内处理完成。'}
  		rescue => e
 			render json: {status: :failed, msg: e.message}
  	end

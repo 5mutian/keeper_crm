@@ -17,7 +17,7 @@ class Company < Account
     _hash = JSON res.body
 
     if _hash["code"] == 200
-      manager = _hash["result"]["manager"]
+      manager = _hash["result"]["manager_info"]
       if manager
         self.update_attributes(cgj_id: _hash["result"]["id"])
         self.admin.update_attributes(cgj_user_id: manager["id"])
@@ -34,14 +34,14 @@ class Company < Account
 
   def cgj_hash
     {
-      id:           cgj_id,
-      name:         name,
-      address:      address,
-      account_id:   parent.cgj_id,
-      logo:         logo_url,
-      user:         admin.cgj_hash,
-      # account:      parent.cgj_hash,
-      # _account_user: parent.admin.cgj_hash
+      id:            cgj_id,
+      name:          name,
+      address:       address,
+      account_id:    parent.cgj_id,
+      logo:          logo_url,
+      user:          admin.cgj_hash,
+      account:       parent.cgj_hash,
+      _account_user: parent.admin.cgj_hash
     }
   end
 

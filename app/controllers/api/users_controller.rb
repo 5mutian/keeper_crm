@@ -1,6 +1,6 @@
 # 用户管理
 class Api::UsersController < Api::BaseController
-	skip_before_filter :valid_permission, only: [:update_me, :update_password, :add_bank_card, :update_bank_card]
+	skip_before_filter :valid_permission, only: [:update_me, :update_password, :add_bank_card, :update_bank_card, :bank_cards]
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 
@@ -110,6 +110,23 @@ class Api::UsersController < Api::BaseController
     else
     	render json: {status: :failed, msg: '请输入正确的旧密码'}
 		end
+	end
+
+	# 我的银行卡列表
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# Return
+	# 	status: [String] success
+	# 	list: [hash] 成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def bank_cards
+		render json: {status: :success, list: @current_user.bank_cards}
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 添加银行卡

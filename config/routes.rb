@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       collection do
         post :update_me
         post :update_password
+        get  :bank_cards
         post :add_bank_card
         post :update_bank_card
       end

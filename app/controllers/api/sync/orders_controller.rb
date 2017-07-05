@@ -11,10 +11,12 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		user  	= User.find_or_initialize_by(mobile: _user["tel"])
 		company = Company.find_by_cgj_id(_user["company_id"])
 
-		unless company
-			company 					= Company.find_or_initialize_by(name: _user["company_name"])
-			company.cgj_id 		= _user["company_id"]
-			company.save
+		if user.type != 'Dealer'
+			unless company
+				company 					= Company.find_or_initialize_by(name: _user["company_name"])
+				company.cgj_id 		= _user["company_id"]
+				company.save
+			end
 		end
 
 

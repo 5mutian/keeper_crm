@@ -30,7 +30,11 @@ class Account < ActiveRecord::Base
 
 	def menu
 		{
-      admin: {users: '用户', accounts: '品牌'}
+      admin: {users: '用户', accounts: '品牌'},
+      saler_director: {},
+      saler:          {},
+      cs:             {},
+      acct:           {}
     }
 	end
 

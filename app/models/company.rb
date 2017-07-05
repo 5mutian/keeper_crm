@@ -40,8 +40,8 @@ class Company < Account
       account_id:   parent.cgj_id,
       logo:         logo_url,
       user:         admin.cgj_hash,
-      account:      parent.cgj_hash,
-      _account_user: parent.admin.cgj_hash
+      # account:      parent.cgj_hash,
+      # _account_user: parent.admin.cgj_hash
     }
   end
 

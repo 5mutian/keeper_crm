@@ -20,15 +20,15 @@ class Api::Sync::CustomersController < Api::Sync::BaseController
 	#   status: [String] failed
 	#   msg: [String] msg_infos
 	def create
-		customer = Customer.find_or_initialize_by(tel: customer_params[:tel], account_id: @account.id)
-		customer.attributes = customer_params
-		customer.user = @account.admin
+		# customer = Customer.find_or_initialize_by(tel: customer_params[:tel], account_id: @account.id)
+		# customer.attributes = customer_params
+		# customer.user = @account.admin
 
-		if customer.save
-			render json: {status: :success, msg: '创建成功'}
-    else
-    	render json: {status: :failed, msg: customer.errors.messages.values.first}
-		end
+		# if customer.save
+		# 	render json: {status: :success, msg: '创建成功'}
+  #   else
+  #   	render json: {status: :failed, msg: customer.errors.messages.values.first}
+		# end
 	end
 
 	private

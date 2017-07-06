@@ -29,6 +29,7 @@ class Api::Sync::CustomersController < Api::Sync::BaseController
   #   else
   #   	render json: {status: :failed, msg: customer.errors.messages.values.first}
 		# end
+		render json: {status: :success, msg: '创建成功'}
 	end
 
 	private

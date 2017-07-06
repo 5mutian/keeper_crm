@@ -12,7 +12,7 @@ class Api::OrdersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		orders = @current_user.orders.includes(:customer, :_region, :store).order(updated_at: :desc).page(params[:page])
+		orders = @current_user.orders.includes(:customer, :_region, :store, :strategy_result).order(updated_at: :desc).page(params[:page])
 
 		render json: {status: :success, list: orders.map(&:to_hash), total: orders.total_count}
 	end

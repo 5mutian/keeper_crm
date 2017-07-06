@@ -65,7 +65,10 @@ class Order < ActiveRecord::Base
 	def execute_strategy
 		if completed?
 			# 介绍人生成，执行介绍人反利，销售提成
-			gen_introducer unless introducer_tel.blank?
+			unless introducer_tel.blank?
+				introducer = User.get_or_gen_introducer(introducer_tel, introducer_name, account_id)
+				self.update_attributes(introducer_id: introducer.id)
+			end
 			# 获取策略
 			strategy = account.get_valid_strategy(province, city, area)
 
@@ -83,12 +86,6 @@ class Order < ActiveRecord::Base
 			end
 		end
 	end
-
-	def gen_introducer
-		introducer = User.get_or_gen_introducer(introducer_tel, introducer_name, account_id)
-		self.update_attributes(introducer_id: introducer.id)
-	end
-
 
 	def completed?
 		workflow_state == 'completed'

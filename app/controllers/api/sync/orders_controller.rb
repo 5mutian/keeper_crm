@@ -35,16 +35,15 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 		customer = Customer.find_or_initialize_by(tel: params["results"]["tel"])
 
 		if customer.new_record?
-
-			%w(name province city area street address longitude latitude).each do |ele|
-				customer.send("#{ele}=", params["results"][ele])
-			end
-
 			customer.user_id 		= user.id
 			customer.account_id = user.account_id
-			customer.save
 		end
 
+		%w(name province city area street address longitude latitude).each do |ele|
+			customer.send("#{ele}=", params["results"][ele])
+		end
+
+		customer.save
 
 		order = Order.find_or_initialize_by(serial_number: params["results"]["serial_number"])
 

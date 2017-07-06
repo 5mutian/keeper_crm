@@ -55,7 +55,7 @@ class Api::OrdersController < Api::BaseController
 			order.customer = customer
 			order.workflow_state = 'new'
 			if order.save
-				order.sync_cgj
+				order.sync_cgj if @current_user.cgj_user_id
 				render json: {status: :success, msg: '创建成功'}
 			else
 				render json: {status: :failed, msg: order.errors.messages.values.first}

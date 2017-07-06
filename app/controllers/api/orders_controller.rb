@@ -50,7 +50,13 @@ class Api::OrdersController < Api::BaseController
 		order = Order.new(order_params.merge(owner_params))
 		customer = Customer.find_or_initialize_by(tel: params[:customer][:tel])
 		customer.attributes = customer.new_record? ? customer_params.merge(owner_params) : customer_params.merge(owner_params).merge(id: customer.id)
-
+	  
+	  # 介绍人生成，执行介绍人反利，销售提成
+		unless order.introducer_tel.blank?
+			introducer = User.get_or_gen_introducer(order.introducer_tel, order.introducer_name, order.account_id)
+			order.introducer_id = introducer.id
+		end
+		
 		if customer.save
 			order.customer = customer
 			order.workflow_state = 'new'

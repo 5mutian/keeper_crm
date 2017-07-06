@@ -130,7 +130,7 @@ class Order < ActiveRecord::Base
 			street: 				street,
 			tel: 						tel,
 			name: 					name,
-			booking_date: 	booking_date.getlocal.strftime("%F %T"),
+			booking_date: 	booking_date.strftime("%F %T"), #.getlocal
 			workflow_state: STATE[workflow_state],
 			mount_order: 		mount_order,
 			total: 					total,

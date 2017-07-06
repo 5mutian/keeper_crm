@@ -44,6 +44,9 @@ class Order < ActiveRecord::Base
 			self.cgj_facilitator_id 			= _order["facilitator_id"]
 			self.cgj_customer_service_id  = _order["customer_service_id"]
 			self.save
+			Rails.logger.info "#" * 100
+			Rails.logger.info self.attributes
+			Rails.logger.info "#" * 100
 
 			self.customer.update_attributes({
 				longitude: 	_order["longitude"],

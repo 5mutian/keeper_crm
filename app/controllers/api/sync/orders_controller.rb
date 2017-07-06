@@ -6,7 +6,7 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 	# Return
 	# Error
 	def update_cgj
-		render json: {msg: "非管家快销的单子不同步", code: 422} and return unless params["result"]["region"] == 'CRM'
+		render json: {msg: "非管家快销的单子不同步", code: 422} and return unless params["results"]["region"] == 'CRM'
 		_user = params["results"].delete("customer_info")
 
 		user  	= User.find_or_initialize_by(mobile: _user["tel"])

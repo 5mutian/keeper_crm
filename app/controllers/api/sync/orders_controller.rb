@@ -48,6 +48,10 @@ class Api::Sync::OrdersController < Api::Sync::BaseController
 
 		order = Order.find_or_initialize_by(serial_number: params["results"]["serial_number"])
 
+		Rails.logger.info "*" * 100
+		Rails.logger.info order.attributes
+		Rails.logger.info "*" * 100
+
 		_order = params["results"].except("id", "created_at", "updated_at", "customer_id")
 
 		(order.attributes.keys & _order.keys).each do |ele|

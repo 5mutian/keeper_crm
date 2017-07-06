@@ -14,7 +14,7 @@ class Api::UsersController < Api::BaseController
 	# Error
 	#   status: [String] failed
 	def index
-		users = @account.users.includes(:children).where(status: 1).page(params[:page])
+		users = @account.users.includes(:children).where(status: 1, role: ['admin', 'cs', 'saler', 'acct', 'saler_director']).page(params[:page])
 
 		render json: {status: :success, list: users.map(&:to_hash), total: users.total_count}
 	end

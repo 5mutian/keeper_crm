@@ -25,7 +25,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def invit_url
-		"http://172.16.0.249:8000/#/invit?t=#{code}"
+		"http://www.salesgj.com/#/invit?t=#{code}"
 	end
 
 	def menu

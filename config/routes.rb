@@ -46,6 +46,7 @@ Rails.application.routes.draw do
         get  :bank_cards
         post :add_bank_card
         post :update_bank_card
+        get  :statistics
       end
     end
 	  resources :clues do # 线索管理

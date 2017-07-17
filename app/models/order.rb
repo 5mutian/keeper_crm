@@ -28,6 +28,8 @@ class Order < ActiveRecord::Base
 
 	delegate :province, :city, :area, :street, :tel, :name, to: :customer
 
+	scope :last_week, -> { where('workflow_state = ? and updated_at >= ?', 'completed', 1.week.ago) }
+
 	after_update :execute_strategy
 
 	def sync_cgj

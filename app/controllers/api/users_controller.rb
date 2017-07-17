@@ -1,6 +1,6 @@
 # 用户管理
 class Api::UsersController < Api::BaseController
-	skip_before_filter :valid_permission, only: [:update_me, :update_password, :add_bank_card, :update_bank_card, :bank_cards]
+	skip_before_filter :valid_permission, only: [:update_me, :update_password, :add_bank_card, :update_bank_card, :bank_cards, :statistics]
 	before_filter :get_user, only: [:update, :destroy]
 	# 用户列表
 	# 
@@ -110,6 +110,32 @@ class Api::UsersController < Api::BaseController
     else
     	render json: {status: :failed, msg: '请输入正确的旧密码'}
 		end
+	end
+
+
+	# 订单统计
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	# Return
+	# 	status: [String] success
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def statistics
+		_array = @current_user.orders.last_week.map(&:updated_at).collect{|ele| ele.strftime('%F')}
+		_time  = 1.week.ago
+		order  = []
+
+		while _time < Time.now
+			order << {month: _time.strftime('%m-%d'), temperature: _array.count(_time.strftime('%F'))}
+			_time = _time.since(1.day)
+		end
+
+		render json: {status: :success, order: order}
+
+		rescue => e
+			render json: {status: :failed, msg: e.message}
 	end
 
 	# 我的银行卡列表

@@ -37,6 +37,7 @@ cgj_token: 'e5fa5a22431744daad8e49cf1878ec06'
 
 redis_namespace: "keeper"
 # redis_server: "192.168.0.164"
+# redis_server: '127.0.0.1'
 redis_server: 106.14.17.85
 redis_port: "6379"
 redis_pass: "157196212"

@@ -621,6 +621,15 @@
 
             <li>
               <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
+              <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-statistics'>
+                订单统计
+              </a>
+            </li>
+          
+            
+
+            <li>
+              <input type='checkbox' class='no_print no_opacity print_selector' checked=1 />
               <a href='#action-edd0ba4c04c9ea27e2411f5b53cc0d95-destroy'>
                 用户删除
               </a>
@@ -9759,6 +9768,170 @@
       
 
       <div class='action action-odd'
+          id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-statistics'>
+
+        <h4>功能说明</h4>
+        <p class='about text-info'>订单统计</p>
+
+        <h4>请求地址</h4>
+        <p class='about text-info'>/api/users/statistics</p>
+
+        <h4>请求方法</h4>
+        <p class='about text-info'>GET</p>
+
+        <h4>参数说明</h4>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>access_token:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            authenication_token
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>正常返回信息</h4>
+        <p class='about text-info'>正常完成时response.status 为 200.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            success
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        <h4>出错误时信息</h4>
+        <p class='about text-info'>出错时response.status 为 400.</p>
+        
+<table class='table table-bordered table-striped'>
+  <thead>
+    <th>参数名</th>
+    <th>参数类型</th>
+    <th>描述</th>
+  </thead>
+
+  <tbody>
+    
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>status:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            failed
+
+            
+          </td>
+
+        </tr>
+      
+        
+          
+        
+
+        <tr>
+          
+            <td>msg:</td>
+          
+            <td>String</td>
+          
+
+          <td>
+            msg_infos
+
+            
+          </td>
+
+        </tr>
+      
+    
+  </tbody>
+</table>
+
+
+        
+          
+          
+          
+          
+          
+          
+          
+          <h4>Level</h4>
+          
+            <p>
+              
+                
+              
+            </p>
+          
+        
+          
+        <br /><hr />
+      </div>
+    
+      
+
+      <div class='action action-even'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-destroy'>
 
         <h4>功能说明</h4>
@@ -9941,7 +10114,7 @@
     
       
 
-      <div class='action action-even'
+      <div class='action action-odd'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-update_me'>
 
         <h4>功能说明</h4>
@@ -10162,7 +10335,7 @@
     
       
 
-      <div class='action action-odd'
+      <div class='action action-even'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-update_password'>
 
         <h4>功能说明</h4>
@@ -10383,7 +10556,7 @@
     
       
 
-      <div class='action action-even'
+      <div class='action action-odd'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-bank_cards'>
 
         <h4>功能说明</h4>
@@ -10566,7 +10739,7 @@
     
       
 
-      <div class='action action-odd'
+      <div class='action action-even'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-add_bank_card'>
 
         <h4>功能说明</h4>
@@ -10825,7 +10998,7 @@
     
       
 
-      <div class='action action-even'
+      <div class='action action-odd'
           id='action-edd0ba4c04c9ea27e2411f5b53cc0d95-update_bank_card'>
 
         <h4>功能说明</h4>

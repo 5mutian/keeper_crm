@@ -1,7 +1,7 @@
 # 线索管理
 class Api::CluesController < Api::BaseController
-	skip_before_filter :valid_permission, only: [:assign, :update_me]
-	before_filter :get_clue, only: [:update_me, :destroy]
+	skip_before_filter :valid_permission, only: [:assign, :update_me, :add_remark]
+	before_filter :get_clue, only: [:update_me, :destroy, :add_remark]
 
 	# 线索列表
 	# 
@@ -65,6 +65,27 @@ class Api::CluesController < Api::BaseController
 	#   msg: [String] msg_infos	
 	def update_me
 		if @clue.update_attributes(clue_params)
+			render json: {status: :success, msg: '更新成功'}
+    else
+    	render json: {status: :failed, msg: @clue.errors.messages.values.first}
+		end
+	end
+
+	# 备注
+	#
+	# Params
+	# 	access_token: [String] authenication_token
+	#   id: [Integer] ID
+	# 	remark: [String] 备注内容
+	# Return
+	# 	status: [String] success
+	# 	msg: [String] 更新成功
+	# Error
+	#   status: [String] failed
+	#   msg: [String] msg_infos	
+	def add_remark
+		@clue.remark += params[:remark]
+		if @clue.save
 			render json: {status: :success, msg: '更新成功'}
     else
     	render json: {status: :failed, msg: @clue.errors.messages.values.first}

@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       collection do
         post :update_me
         post :assign
+        post :add_remark
       end
     end
   	resources :stores do # 门店管理

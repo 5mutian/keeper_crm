@@ -17,9 +17,9 @@ class Api::CluesController < Api::BaseController
 	#   status: [String] failed
 	def index
 		if params[:type] == 'assign'
-			clues = @current_user.assign_clues.order(updated_at: :desc).page(params[:page])
+			clues = @current_user.assign_clues.order(pound: :desc, updated_at: :desc).page(params[:page])
 		else
-			clues = @current_user.clues.includes(:assign_user).order(updated_at: :desc).page(params[:page])
+			clues = @current_user.clues.includes(:assign_user).order(pound: :desc, updated_at: :desc).page(params[:page])
 		end
 
 		render json: {status: :success, list: clues.map(&:to_hash), total: clues.total_count, assign_users: @account.users.collect{|ele| {id: ele.id, name: ele.name}}}
@@ -32,6 +32,7 @@ class Api::CluesController < Api::BaseController
 	# 	clue[name]: [String] 姓名
 	# 	clue[mobile]: [String] 手机号
 	# 	clue[address]: [String] 地址
+	#   clue[pound]: [Integer] 优先级
 	# 	clue[remark]: [String] 备注
 	# Return
 	# 	status: [String] success
@@ -57,6 +58,7 @@ class Api::CluesController < Api::BaseController
 	# 	clue[name]: [String] 姓名
 	# 	clue[mobile]: [String] 手机号
 	# 	clue[address]: [String] 地址
+	#   clue[pound]: [Integer] 优先级
 	# Return
 	# 	status: [String] success
 	# 	msg: [String] 更新成功
@@ -140,7 +142,7 @@ class Api::CluesController < Api::BaseController
 	private
 
 	def clue_params
-		params[:clue].permit(:name, :mobile, :address, :remark)
+		params[:clue].permit(:name, :mobile, :address, :pound, :remark)
 	end
 
 	def order_params

@@ -7,7 +7,7 @@ server "staging", roles: [:web, :app, :db], primary: true
 set :application, 'keeper-crm'
 #set :application, "dev-chuang"
 #set :repo_url, 'git@192.168.0.164:/srv/repo/api-chuang.git'
-set :repo_url, "git@github.com:5mutian/keeper_crm.git"
+set :repo_url, "git@git.oschina.net:fivemutian/keeper_crm.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

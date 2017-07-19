@@ -12,21 +12,21 @@ test:
   <<: *default
   database: keeper_crm_test
 
-# production:
-#   <<: *default
-#   host:     192.168.0.164
-#   port:     5432
-#   database: keeper_crm_production
-#   username: crm_db
-#   password: evan123456
-
 production:
   <<: *default
-  host:     rm-uf6e1zh3vt88drhm8.pg.rds.aliyuncs.com
-  port:     3433
-  database: keeper_crm_prod
-  username: keeper_crm
-  password: Crm123456
+  host:     192.168.0.164
+  port:     5432
+  database: keeper_crm_production
+  username: crm_db
+  password: evan123456
+
+# production:
+#   <<: *default
+#   host:     rm-uf6e1zh3vt88drhm8.pg.rds.aliyuncs.com
+#   port:     3433
+#   database: keeper_crm_prod
+#   username: keeper_crm
+#   password: Crm123456
 
 
 
